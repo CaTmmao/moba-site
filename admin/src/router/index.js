@@ -6,8 +6,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'main',
-    component: () => import('@/views/Main'),
+    name: 'home',
+    component: () => import('@/views/home'),
     children: [
       {
         path: 'category/create',
