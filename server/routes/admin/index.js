@@ -14,6 +14,12 @@ module.exports = app => {
     res.send(model)
   })
 
+  //获取分类列表
+  router.get('/category', async (req, res) => {
+    const list = await Category.find().limit(10)
+    res.send(list)
+  })
+
 
   //把子路由挂载上去
   app.use('/admin/api', router)
