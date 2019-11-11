@@ -4,6 +4,12 @@ const express = require('express')
 //创建express实例
 const app = express()
 
+//引用跨域模块
+app.use(require('cors')())
+
+//对post请求体进行解析
+app.use(express.json())
+
 //引入后端路由
 require('./routes/admin')(app)
 
@@ -11,7 +17,6 @@ require('./routes/admin')(app)
 require('./plugins/db')(app)
 
 //会在3000端口启动，启动后会调用回调函数
-app.listen(3000, () => {
-    console.log('asd');
+app.listen(3001, () => {
 })
 

@@ -23,7 +23,11 @@ export default {
     };
   },
   methods: {
-    save() {}
+    async save() {
+      let res = await this.$.post('category', this.model)
+      console.log(res)
+      this.$router.push('/category/list')
+    }
   }
 };
 </script>
