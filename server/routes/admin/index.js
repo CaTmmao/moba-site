@@ -32,6 +32,12 @@ module.exports = app => {
     res.send(model)
   })
 
+  //删除分类
+  router.delete('/category/:id', async (req, res) => {
+    await Category.findOneAndDelete(req.params.id)
+    res.send()
+  })
+
 
   //把子路由挂载上去
   app.use('/admin/api', router)
