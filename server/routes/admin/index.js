@@ -16,7 +16,7 @@ module.exports = app => {
 
   //获取分类列表
   router.get('/category', async (req, res) => {
-    const list = await Category.find().limit(10)
+    const list = await Category.find().populate('parent').limit(10)
     res.send(list)
   })
 

@@ -12,7 +12,7 @@ const routes = [
       {
         path: 'category/create',
         name: 'create',
-        component: () => import('@/views/category/create')
+        component: () => import('@/views/category/edit')
       },
       {
         path: 'category/list',

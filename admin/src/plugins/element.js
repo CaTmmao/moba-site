@@ -2,12 +2,14 @@ import Vue from 'vue'
 import {
     Button, Container, Aside, Menu, Submenu, MenuItemGroup, MenuItem,
     Header, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Main,
-    Form, FormItem, Input, MessageBox, Message
+    Form, FormItem, Input, MessageBox, Message, Select, Option
 } from 'element-ui'
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.use(Button)
+Vue.use(Option)
+Vue.use(Select)
 Vue.use(Container)
 Vue.use(Aside)
 Vue.use(Menu)
