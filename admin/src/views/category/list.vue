@@ -29,7 +29,7 @@ export default {
   methods: {
 		//获取分类列表
     async getCategoryList() {
-      let res = await this.$.get("category");
+      let res = await this.$.get("rest/category");
       this.list = res.data;
     },
     //编辑
@@ -43,7 +43,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-				await this.$.delete(`/category/${id}`)
+				await this.$.delete(`rest/category/${id}`)
 				this.$message({
           type: "success",
           message: "删除成功!"

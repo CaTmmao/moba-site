@@ -42,19 +42,19 @@ export default {
   methods: {
     //初始化上级分类
     async getParents() {
-      let res = await this.$.get(`/category`);
+      let res = await this.$.get(`rest/category`);
       this.parents = res.data;
     },
     //获取分类信息
     async getInfo() {
-      let res = await this.$.get(`/category/${this.id}`);
+      let res = await this.$.get(`rest/category/${this.id}`);
       this.info = res.data;
     },
     async save() {
       if (this.id) {
-        await this.$.put(`/category/${this.id}`, this.info);
+        await this.$.put(`rest/category/${this.id}`, this.info);
       } else {
-        await this.$.post("category", this.info);
+        await this.$.post("rest/category", this.info);
       }
       this.$router.push("/category/list");
     }
