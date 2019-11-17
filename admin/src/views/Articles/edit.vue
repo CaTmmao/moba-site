@@ -2,6 +2,16 @@
   <div class="item-container">
     <h1>{{id ? '编辑' : '新建'}}文章</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
+      <el-form-item label="所属分类">
+        <el-select v-model="article.categories" multiple>
+          <el-option
+            v-for="item in categories"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="article.title"></el-input>
       </el-form-item>
@@ -23,10 +33,14 @@ export default {
       //文章信息
       article: {
         title: ""
-      }
+      },
+      //文章分类
+      categories: []
     };
   },
   created() {
+    this.getCategories();
+
     //&&代表满足前面的条件之后才执行后面的函数
     this.id && this.getInfo();
   },
@@ -35,6 +49,11 @@ export default {
     async getInfo() {
       let res = await this.$.get(`rest/article/${this.id}`);
       this.info = res.data;
+    },
+    //获取文章分类
+    async getCategories() {
+      let res = await this.$.get(`rest/category`);
+      this.categories = res.data;
     },
     async save() {
       if (this.id) {
