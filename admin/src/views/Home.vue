@@ -2,21 +2,15 @@
   <div>
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu router :default-openeds="['1', '3']">
-          <el-submenu index="1">
+        <el-menu router :default-openeds="['1']" :default-active="$route.path">
+          <el-submenu v-for="(submenu, index) in menu" :index="String(++index)">
             <template slot="title">
-              <i class="el-icon-message"></i>
-              内容管理
+              <i :class="submenu.icon"></i>
+              {{submenu.title}}
             </template>
-            <el-menu-item-group>
-              <template slot="title">分类</template>
-              <el-menu-item index="/category/create">新建分类</el-menu-item>
-              <el-menu-item index="/category/list">分类列表</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
-              <template slot="title">物品</template>
-              <el-menu-item index="/item/create">新建物品</el-menu-item>
-              <el-menu-item index="/item/list">物品列表</el-menu-item>
+            <el-menu-item-group v-for="(items, index) in submenu.itemsGroup">
+              <template slot="title">{{items.itemsTitle}}</template>
+              <el-menu-item v-for="(item, index) in items.items" :index="item.path">{{item.itemName}}</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -47,10 +41,44 @@
 export default {
   name: "home",
   data() {
-		return {
-			
-		}
-	}
+    return {
+      //子菜单
+      menu: [
+        {
+          title: "内容管理",
+          icon: "el-icon-message",
+          itemsGroup: [
+            {
+              itemsTitle: "分类",
+              items: [
+                {
+                  itemName: "新建分类",
+                  path: "/category/create"
+                },
+                {
+                  itemName: "分类列表",
+                  path: "/category/list"
+                }
+              ]
+            },
+            {
+              itemsTitle: "物品",
+              items: [
+                {
+                  itemName: "新建物品",
+                  path: "/item/create"
+                },
+                {
+                  itemName: "物品列表",
+                  path: "/item/list"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  }
 };
 </script>
 
