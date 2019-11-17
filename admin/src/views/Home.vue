@@ -10,7 +10,10 @@
             </template>
             <el-menu-item-group v-for="(items, index) in submenu.itemsGroup">
               <template slot="title">{{items.itemsTitle}}</template>
-              <el-menu-item v-for="(item, index) in items.items" :index="item.path">{{item.itemName}}</el-menu-item>
+              <el-menu-item
+                v-for="(item, index) in items.items"
+                :index="item.path"
+              >{{item.itemName}}</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -84,6 +87,19 @@ export default {
                 {
                   itemName: "英雄列表",
                   path: "/hero/list"
+                }
+              ]
+            },
+            {
+              itemsTitle: "文章",
+              items: [
+                {
+                  itemName: "新建文章",
+                  path: "/article/create"
+                },
+                {
+                  itemName: "文章列表",
+                  path: "/article/list"
                 }
               ]
             }
