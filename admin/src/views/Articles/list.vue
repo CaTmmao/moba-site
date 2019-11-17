@@ -3,7 +3,7 @@
     <h1>文章列表</h1>
     <el-table :data="articleList" style="width: 100%">
       <el-table-column prop="_id" label="id"></el-table-column>
-      <el-table-column prop="name" label="标题"></el-table-column>
+      <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="edit(scope.row._id)">编辑</el-button>
@@ -20,21 +20,28 @@ export default {
   data() {
     return {
       //文章列表
-      articleList: []
+      articleList: [
+        {
+          title: '',
+          body: '',
+          categories: []
+        }
+      ]
     };
   },
   created() {
     this.getArticleList();
   },
   methods: {
-    //获取物品列表
+    //获取文章列表
     async getArticleList() {
       let res = await this.$.get("rest/article");
       this.articleList = res.data;
+      console.log(this.articleList)
     },
     //编辑
     edit(id) {
-      this.$router.push(`/item/article/${id}`);
+      this.$router.push(`/article/edit/${id}`);
     },
     //删除
     del(id) {

@@ -15,6 +15,9 @@
       <el-form-item label="标题">
         <el-input v-model="article.title"></el-input>
       </el-form-item>
+      <el-form-item label="正文">
+        <el-input v-model="article.body"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
@@ -32,7 +35,9 @@ export default {
     return {
       //文章信息
       article: {
-        title: ""
+        title: "",
+        body: '',
+        categories: []
       },
       //文章分类
       categories: []
@@ -48,7 +53,7 @@ export default {
     //获取文章信息
     async getInfo() {
       let res = await this.$.get(`rest/article/${this.id}`);
-      this.info = res.data;
+      this.article = res.data;
     },
     //获取文章分类
     async getCategories() {
@@ -57,9 +62,9 @@ export default {
     },
     async save() {
       if (this.id) {
-        await this.$.put(`rest/article/${this.id}`, this.info);
+        await this.$.put(`rest/article/${this.id}`, this.article);
       } else {
-        await this.$.post("rest/article", this.info);
+        await this.$.post("rest/article", this.article);
       }
       this.$router.push("/article/list");
     }
