@@ -2,7 +2,8 @@ import Vue from 'vue'
 import {
     Button, Container, Aside, Menu, Submenu, MenuItemGroup, MenuItem,
     Header, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Main,
-    Form, FormItem, Input, MessageBox, Message, Select, Option, Upload, Rate
+    Form, FormItem, Input, MessageBox, Message, Select, Option, Upload, Rate, Tabs,
+    TabPane
 } from 'element-ui'
 
 Vue.prototype.$message = Message
@@ -28,3 +29,5 @@ Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Upload)
 Vue.use(Rate)
+Vue.use(Tabs)
+Vue.use(TabPane)
