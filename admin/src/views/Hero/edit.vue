@@ -5,14 +5,14 @@
       <el-form-item label="名称">
         <el-input v-model="info.name"></el-input>
       </el-form-item>
-      <el-form-item label="图标">
+      <el-form-item label="头像">
         <el-upload
           class="avatar-uploader"
           :action="`${$.defaults.baseURL}upload`"
           :on-success="uploadSuccess"
           :show-file-list="false"
         >
-          <img v-if="info.icon" :src="info.icon" class="icon" />
+          <img v-if="info.avatar" :src="info.avatar" class="icon" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -33,7 +33,7 @@ export default {
     return {
       info: {
         name: "",
-        icon: ""
+        avatar: ""
       }
     };
   },
@@ -57,7 +57,7 @@ export default {
     },
     //图片上传完成
     uploadSuccess(res) {
-      this.info.icon = res.url;
+      this.info.avatar = res.url;
     }
   }
 };
