@@ -73,12 +73,39 @@
             <el-input type="textarea" v-model="info.teamTips"></el-input>
           </el-form-item>
         </el-tab-pane>
-        <el-tab-pane label="xx">xx</el-tab-pane>
+        <el-tab-pane label="技能">
+          <el-button type="text" @click="addSkill">
+            <i class="el-icon-plus"></i> 添加技能
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col style="margin-top: 20px;" :md="12" v-for="(item, index) in info.skills" :key="index">
+              <el-form-item label="名称">
+                <el-input v-model="item.name"></el-input>
+              </el-form-item>
+              <el-form-item label="图标">
+                <el-upload
+                  :action="`${$.defaults.baseURL}upload`"
+                  :on-success="uploadSkillIcon"
+                  :show-file-list="false"
+                >
+                  <img v-if="item.icon" :src="item.icon" class="icon" />
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input  type="textarea" v-model="item.description"></el-input>
+              </el-form-item>
+              <el-form-item label="小提示">
+                <el-input v-model="item.tips"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
         <el-tab-pane label="xx">x</el-tab-pane>
         <el-tab-pane label="xx">x</el-tab-pane>
       </el-tabs>
 
-      <el-form-item>
+      <el-form-item style="margin-top: 1rem;">
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
     </el-form>
@@ -119,7 +146,9 @@ export default {
         //对抗技巧
         battleTips: "",
         //团战思路
-        teamTips: ""
+        teamTips: "",
+        //技能
+        skills: []
       },
       //英雄分类
       categories: [],
@@ -160,6 +189,15 @@ export default {
     //图片上传完成
     uploadSuccess(res) {
       this.info.avatar = res.url;
+    },
+    //添加技能
+    addSkill() {
+      this.info.skills.push({});
+    },
+    //上传技能图标
+    uploadSkillIcon(res, index) {
+     console.log(res) 
+     console.log(index) 
     }
   }
 };
