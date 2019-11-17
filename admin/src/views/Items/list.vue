@@ -21,18 +21,18 @@
 
 <script>
 export default {
-  name: "list",
+  name: "itemList",
   data() {
     return {
       list: []
     };
   },
   created() {
-    this.getCategoryList();
+    this.getItemsList();
   },
   methods: {
-    //获取分类列表
-    async getCategoryList() {
+    //获取物品列表
+    async getItemsList() {
       let res = await this.$.get("rest/item");
       this.list = res.data;
     },
@@ -52,7 +52,7 @@ export default {
           type: "success",
           message: "删除成功!"
         });
-        this.getCategoryList();
+        this.getItemsList();
       });
     }
   }

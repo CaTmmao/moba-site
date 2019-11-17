@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "edit",
+  name: "categoryCreate",
   props: {
     id: {}
   },

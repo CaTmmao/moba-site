@@ -21,10 +21,11 @@ const routes = [
       },
       {
         path: 'category/edit/:id',
-        name: 'categoryEdit',
+        name: 'categoryCreate',
         component: () => import('@/views/category/edit'),
         props: true
       },
+
       {
         path: 'item/create',
         name: 'itemCreate',
@@ -37,7 +38,7 @@ const routes = [
       },
       {
         path: 'item/edit/:id',
-        name: 'itemEdit',
+        name: 'itemCreate',
         component: () => import('@/views/Items/edit'),
         props: true
       },

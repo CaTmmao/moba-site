@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "list",
+  name: "categoryList",
   data() {
     return {
       list: []
