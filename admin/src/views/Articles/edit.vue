@@ -16,7 +16,7 @@
         <el-input v-model="article.title"></el-input>
       </el-form-item>
       <el-form-item label="正文">
-        <vue-editor v-model="article.body"></vue-editor>
+        <vue-editor useCustomImageHandler @image-added="handleImageAdded" v-model="article.body"></vue-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -73,6 +73,15 @@ export default {
         await this.$.post("rest/article", this.article);
       }
       this.$router.push("/article/list");
+    },
+    //富文本编辑器上传图片
+    async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+      let data = new FormData();
+      data.append("file", file);
+
+      let res = await this.$.post("upload", data);
+      Editor.insertEmbed(cursorLocation, "image", res.data.url);
+      resetUploader();
     }
   }
 };
