@@ -7,6 +7,9 @@ import './plugins/element.js'
 import axios from './api'
 Vue.prototype.$ = axios
 
+//公用scss
+import '@/assets/scss/common.scss'
+
 Vue.config.productionTip = false
 
 new Vue({

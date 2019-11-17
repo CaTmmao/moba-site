@@ -1,5 +1,5 @@
 <template>
-  <div class="item-container">
+  <div class="container">
     <h1>{{id ? '编辑' : '新建'}}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-tabs type="border-card">
@@ -210,32 +210,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.item-container {
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    width: 5rem;
-    height: 5rem;
-  }
-  .avatar-uploader .el-upload:hover {
-    width: 5rem;
-    height: 5rem;
-    border-color: #409eff;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    line-height: 5rem;
-    color: #8c939d;
-    text-align: center;
-  }
-
-  .icon {
-    width: 100%;
-  }
-}
-</style>

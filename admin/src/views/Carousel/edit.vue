@@ -1,25 +1,27 @@
 <template>
-  <div class="item-container">
-    <h1>{{id ? '编辑' : '新建'}}首页轮播图</h1>
-    <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="跳转链接">
-        <el-input v-model="carousel.path"></el-input>
-      </el-form-item>
-      <el-form-item label="图片">
-        <el-upload
-          class="avatar-uploader"
-          :action="`${$.defaults.baseURL}upload`"
-          :on-success="uploadSuccess"
-          :show-file-list="false"
-        >
-          <img v-if="carousel.imgUrl" :src="carousel.imgUrl" class="icon" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" native-type="submit">保存</el-button>
-      </el-form-item>
-    </el-form>
+  <div class="container">
+    <div class="carousel-container">
+      <h1>{{id ? '编辑' : '新建'}}首页轮播图</h1>
+      <el-form label-width="120px" @submit.native.prevent="save">
+        <el-form-item label="跳转链接">
+          <el-input v-model="carousel.path"></el-input>
+        </el-form-item>
+        <el-form-item label="图片">
+          <el-upload
+            class="avatar-uploader"
+            :action="`${$.defaults.baseURL}upload`"
+            :on-success="uploadSuccess"
+            :show-file-list="false"
+          >
+            <img v-if="carousel.imgUrl" :src="carousel.imgUrl" class="icon" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" native-type="submit">保存</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -66,29 +68,24 @@ export default {
 </script>
 
 <style lang="scss">
-.item-container {
+.carousel-container {
   .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    width: 350px;
+    height: 200px;
+    border-radius: 0;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #409eff;
+    width: 350px;
+    height: 200px;
   }
   .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
+    line-height: 200px;
   }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+
+  .icon {
+    width: 350px;
+    height: 200px;
+    width: 100%;
   }
 }
 </style>

@@ -1,0 +1,29 @@
+
+  .container {
+    .avatar-uploader .el-upload {
+      border: 1px dashed #d9d9d9;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      width: 5rem;
+      height: 5rem;
+    }
+    .avatar-uploader .el-upload:hover {
+      width: 5rem;
+      height: 5rem;
+      border-color: #409eff;
+    }
+    .avatar-uploader-icon {
+      font-size: 28px;
+      line-height: 5rem;
+      color: #8c939d;
+      text-align: center;
+  }
+  
+  .icon {
+    width: 5rem;
+    height: 5rem;
+    width: 100%;
+  }
+}
