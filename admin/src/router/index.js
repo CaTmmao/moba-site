@@ -12,17 +12,17 @@ const routes = [
       {
         path: 'category/create',
         name: 'categoryCreate',
-        component: () => import('@/views/category/edit')
+        component: () => import('@/views/Categories/edit')
       },
       {
         path: 'category/list',
         name: 'categoryList',
-        component: () => import('@/views/category/list')
+        component: () => import('@/views/Categories/list')
       },
       {
         path: 'category/edit/:id',
         name: 'categoryCreate',
-        component: () => import('@/views/category/edit'),
+        component: () => import('@/views/Categories/edit'),
         props: true
       },
 
@@ -46,17 +46,17 @@ const routes = [
       {
         path: 'hero/create',
         name: 'heroCreate',
-        component: () => import('@/views/Hero/edit')
+        component: () => import('@/views/Heros/edit')
       },
       {
         path: 'hero/list',
         name: 'heroList',
-        component: () => import('@/views/Hero/list')
+        component: () => import('@/views/Heros/list')
       },
       {
         path: 'hero/edit/:id',
         name: 'heroCreate',
-        component: () => import('@/views/Hero/edit'),
+        component: () => import('@/views/Heros/edit'),
         props: true
       },
 
