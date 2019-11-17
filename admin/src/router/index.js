@@ -11,33 +11,33 @@ const routes = [
     children: [
       {
         path: 'category/create',
-        name: 'create',
+        name: 'categoryCreate',
         component: () => import('@/views/category/edit')
       },
       {
         path: 'category/list',
-        name: 'list',
+        name: 'categoryList',
         component: () => import('@/views/category/list')
       },
       {
         path: 'category/edit/:id',
-        name: 'edit',
+        name: 'categoryEdit',
         component: () => import('@/views/category/edit'),
         props: true
       },
       {
         path: 'item/create',
-        name: 'create',
+        name: 'itemCreate',
         component: () => import('@/views/Items/edit')
       },
       {
         path: 'item/list',
-        name: 'list',
+        name: 'itemList',
         component: () => import('@/views/Items/list')
       },
       {
         path: 'item/edit/:id',
-        name: 'edit',
+        name: 'itemEdit',
         component: () => import('@/views/Items/edit'),
         props: true
       }
