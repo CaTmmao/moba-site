@@ -16,7 +16,7 @@
         <el-input v-model="article.title"></el-input>
       </el-form-item>
       <el-form-item label="正文">
-        <el-input v-model="article.body"></el-input>
+        <vue-editor v-model="article.body"></vue-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -26,17 +26,23 @@
 </template>
 
 <script>
+//富文本编辑器库
+import { VueEditor } from "vue2-editor";
+
 export default {
   name: "articleCreate",
   props: {
     id: {}
+  },
+  components: {
+    VueEditor
   },
   data() {
     return {
       //文章信息
       article: {
         title: "",
-        body: '',
+        body: "",
         categories: []
       },
       //文章分类
