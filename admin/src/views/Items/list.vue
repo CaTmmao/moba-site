@@ -4,7 +4,11 @@
     <el-table :data="list" style="width: 100%">
       <el-table-column prop="_id" label="id"></el-table-column>
       <el-table-column prop="name" label="物品名称"></el-table-column>
-      <el-table-column prop="icon" label="图标"></el-table-column>
+      <el-table-column prop="icon" label="图标">
+        <template slot-scope="scope">
+          <img :src="scope.row.icon" />
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="edit(scope.row._id)">编辑</el-button>
@@ -27,7 +31,7 @@ export default {
     this.getCategoryList();
   },
   methods: {
-		//获取分类列表
+    //获取分类列表
     async getCategoryList() {
       let res = await this.$.get("rest/item");
       this.list = res.data;
@@ -43,12 +47,12 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-				await this.$.delete(`rest/item/${id}`)
-				this.$message({
+        await this.$.delete(`rest/item/${id}`);
+        this.$message({
           type: "success",
           message: "删除成功!"
-				});
-				this.getCategoryList()
+        });
+        this.getCategoryList();
       });
     }
   }

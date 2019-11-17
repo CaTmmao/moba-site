@@ -62,4 +62,15 @@ module.exports = app => {
     req.Model = model
     next()
   }, router)
+
+  const multer = require('multer')
+  const upload = multer({ dest: `${__dirname}/../../upload` })
+  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+    //之所以可以用req.file获取到文件数据，是因为用multer库的upload.single('file')将file参数赋值到req上
+    const file = req.file
+
+    //给file里面添加一个url属性，作为前端展示图片的一个地址，需要用上面已有的file对象内的属性拼接出来
+    file.url = `http://localhost:3001/upload/${file.filename}`
+    res.send(file)
+  })
 }
