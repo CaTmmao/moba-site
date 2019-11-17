@@ -76,6 +76,23 @@ const routes = [
         component: () => import('@/views/Articles/edit'),
         props: true
       },
+      
+      {
+        path: 'carousel/create',
+        name: 'carouselCreate',
+        component: () => import('@/views/Carousel/edit')
+      },
+      {
+        path: 'carousel/list',
+        name: 'carouselList',
+        component: () => import('@/views/Carousel/list')
+      },
+      {
+        path: 'carousel/edit/:id',
+        name: 'carouselCreate',
+        component: () => import('@/views/Carousel/edit'),
+        props: true
+      },
     ]
   },
 ]

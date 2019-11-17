@@ -102,6 +102,19 @@ export default {
                   path: "/article/list"
                 }
               ]
+            },
+            {
+              itemsTitle: "首页轮播图",
+              items: [
+                {
+                  itemName: "添加轮播图",
+                  path: "/carousel/create"
+                },
+                {
+                  itemName: "轮播图列表",
+                  path: "/carousel/list"
+                }
+              ]
             }
           ]
         }
