@@ -40,6 +40,23 @@ const routes = [
         name: 'itemEdit',
         component: () => import('@/views/Items/edit'),
         props: true
+      },
+
+      {
+        path: 'hero/create',
+        name: 'heroCreate',
+        component: () => import('@/views/Hero/edit')
+      },
+      {
+        path: 'hero/list',
+        name: 'heroList',
+        component: () => import('@/views/Hero/list')
+      },
+      {
+        path: 'hero/edit/:id',
+        name: 'heroCreate',
+        component: () => import('@/views/Hero/edit'),
+        props: true
       }
     ]
   },

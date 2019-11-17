@@ -73,6 +73,19 @@ export default {
                   path: "/item/list"
                 }
               ]
+            },
+            {
+              itemsTitle: "英雄",
+              items: [
+                {
+                  itemName: "新建英雄",
+                  path: "/hero/create"
+                },
+                {
+                  itemName: "英雄列表",
+                  path: "/hero/list"
+                }
+              ]
             }
           ]
         }
