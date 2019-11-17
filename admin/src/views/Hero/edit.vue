@@ -78,14 +78,20 @@
             <i class="el-icon-plus"></i> 添加技能
           </el-button>
           <el-row type="flex" style="flex-wrap: wrap">
-            <el-col style="margin-top: 20px;" :md="12" v-for="(item, index) in info.skills" :key="index">
+            <el-col
+              style="margin-top: 20px;"
+              :md="12"
+              v-for="(item, index) in info.skills"
+              :key="index"
+            >
               <el-form-item label="名称">
                 <el-input v-model="item.name"></el-input>
               </el-form-item>
               <el-form-item label="图标">
                 <el-upload
+                  class="avatar-uploader"
                   :action="`${$.defaults.baseURL}upload`"
-                  :on-success="uploadSkillIcon"
+                  :on-success="res => $set(item, 'icon', res.url)"
                   :show-file-list="false"
                 >
                   <img v-if="item.icon" :src="item.icon" class="icon" />
@@ -93,10 +99,13 @@
                 </el-upload>
               </el-form-item>
               <el-form-item label="描述">
-                <el-input  type="textarea" v-model="item.description"></el-input>
+                <el-input type="textarea" v-model="item.description"></el-input>
               </el-form-item>
               <el-form-item label="小提示">
                 <el-input v-model="item.tips"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" @click="delSkill(index)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -194,10 +203,9 @@ export default {
     addSkill() {
       this.info.skills.push({});
     },
-    //上传技能图标
-    uploadSkillIcon(res, index) {
-     console.log(res) 
-     console.log(index) 
+    //删除技能
+    delSkill(index) {
+      this.info.skills.splice(index, 1)
     }
   }
 };
@@ -207,26 +215,27 @@ export default {
 .item-container {
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
-    border-radius: 6px;
+    border-radius: 50%;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    width: 5rem;
+    height: 5rem;
   }
   .avatar-uploader .el-upload:hover {
+    width: 5rem;
+    height: 5rem;
     border-color: #409eff;
   }
   .avatar-uploader-icon {
     font-size: 28px;
+    line-height: 5rem;
     color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
     text-align: center;
   }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+
+  .icon {
+    width: 100%;
   }
 }
 </style>
