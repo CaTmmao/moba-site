@@ -9,6 +9,7 @@ const routes = [
     name: 'home',
     component: () => import('@/views/Home'),
     children: [
+      //分类管理
       {
         path: 'category/create',
         name: 'categoryCreate',
@@ -26,6 +27,7 @@ const routes = [
         props: true
       },
 
+      //物品管理
       {
         path: 'item/create',
         name: 'itemCreate',
@@ -43,6 +45,7 @@ const routes = [
         props: true
       },
 
+      //英雄管理
       {
         path: 'hero/create',
         name: 'heroCreate',
@@ -60,6 +63,7 @@ const routes = [
         props: true
       },
 
+      //文章管理
       {
         path: 'article/create',
         name: 'articleCreate',
@@ -76,7 +80,8 @@ const routes = [
         component: () => import('@/views/Articles/edit'),
         props: true
       },
-      
+
+      //首页轮播图管理
       {
         path: 'carousel/create',
         name: 'carouselCreate',
@@ -94,6 +99,7 @@ const routes = [
         props: true
       },
 
+      //管理员管理
       {
         path: 'admin/create',
         name: 'adminCreate',
