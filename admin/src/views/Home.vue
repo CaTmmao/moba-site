@@ -2,7 +2,7 @@
   <div>
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu router :default-openeds="['1']" :default-active="$route.path">
+        <el-menu router :default-openeds="['1', '2']" :default-active="$route.path">
           <el-submenu v-for="(submenu, index) in menu" :index="String(++index)">
             <template slot="title">
               <i :class="submenu.icon"></i>
@@ -113,6 +113,25 @@ export default {
                 {
                   itemName: "轮播图列表",
                   path: "/carousel/list"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          title: "系统管理",
+          icon: "el-icon-message",
+          itemsGroup: [
+            {
+              itemsTitle: "权限",
+              items: [
+                {
+                  itemName: "新建管理员",
+                  path: "/admin/create"
+                },
+                {
+                  itemName: "管理员列表",
+                  path: "/admin/list"
                 }
               ]
             }

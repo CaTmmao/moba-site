@@ -93,6 +93,23 @@ const routes = [
         component: () => import('@/views/Carousel/edit'),
         props: true
       },
+
+      {
+        path: 'admin/create',
+        name: 'adminCreate',
+        component: () => import('@/views/Admin/edit')
+      },
+      {
+        path: 'admin/list',
+        name: 'adminList',
+        component: () => import('@/views/Admin/list')
+      },
+      {
+        path: 'admin/edit/:id',
+        name: 'adminCreate',
+        component: () => import('@/views/Admin/edit'),
+        props: true
+      },
     ]
   },
 ]
