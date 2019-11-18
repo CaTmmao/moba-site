@@ -6,7 +6,7 @@
         <el-input v-model="info.username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="info.password"></el-input>
+        <el-input v-model="info.password" placeholder="密码不会以明文显示，如需修改，直接输入内容保存"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
