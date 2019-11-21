@@ -3,7 +3,7 @@ import {
     Button, Container, Aside, Menu, Submenu, MenuItemGroup, MenuItem,
     Header, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Main,
     Form, FormItem, Input, MessageBox, Message, Select, Option, Upload, Rate, Tabs,
-    TabPane, Row, Col,
+    TabPane, Row, Col, Card
 } from 'element-ui'
 
 Vue.prototype.$message = Message
@@ -33,3 +33,4 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Card)

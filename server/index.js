@@ -4,6 +4,9 @@ const express = require('express')
 //创建express实例
 const app = express()
 
+//生成这个密钥生成token，一般这个存储在环境变量中，这里简便处理
+app.set('secret', 'ssdasdad')
+
 //引用跨域模块
 app.use(require('cors')())
 
