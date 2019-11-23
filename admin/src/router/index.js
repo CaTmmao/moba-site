@@ -8,7 +8,10 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Login')
+    component: () => import('@/views/Login'),
+    meta: {
+      isPublic: true
+    }
   },
   {
     path: '/',
@@ -126,9 +129,24 @@ const routes = [
   },
 ]
 
-const router = new VueRouter({
+let router = new VueRouter({
   base: process.env.BASE_URL,
   routes
+})
+
+//检查是否登录
+router.beforeEach((to, from, next) => {
+  //没有登录去登录页
+  if (!to.meta.isPublic && !localStorage.token) {
+    next('/login')
+  }
+
+  //登录了不准去登录页
+  if (to.meta.isPublic && localStorage.token) {
+    router.go(-1)
+  }
+
+  next()
 })
 
 export default router
