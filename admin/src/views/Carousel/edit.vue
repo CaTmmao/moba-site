@@ -9,7 +9,8 @@
         <el-form-item label="图片">
           <el-upload
             class="avatar-uploader"
-            :action="`${$.defaults.baseURL}upload`"
+            :action="uploadUrl"
+            :headers="getAuthorization()"
             :on-success="uploadSuccess"
             :show-file-list="false"
           >

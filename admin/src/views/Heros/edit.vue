@@ -13,7 +13,8 @@
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
-              :action="`${$.defaults.baseURL}upload`"
+              :action="uploadUrl"
+              :headers="getAuthorization()"
               :on-success="uploadSuccess"
               :show-file-list="false"
             >
@@ -90,7 +91,8 @@
               <el-form-item label="图标">
                 <el-upload
                   class="avatar-uploader"
-                  :action="`${$.defaults.baseURL}upload`"
+                  :action="uploadUrl"
+                  :headers="getAuthorization()"
                   :on-success="res => $set(item, 'icon', res.url)"
                   :show-file-list="false"
                 >
@@ -205,7 +207,7 @@ export default {
     },
     //删除技能
     delSkill(index) {
-      this.info.skills.splice(index, 1)
+      this.info.skills.splice(index, 1);
     }
   }
 };

@@ -8,9 +8,10 @@
       <el-form-item label="图标">
         <el-upload
           class="avatar-uploader"
-          :action="`${$.defaults.baseURL}upload`"
+          :action="uploadUrl"
           :on-success="uploadSuccess"
           :show-file-list="false"
+          :headers="getAuthorization()"
         >
           <img v-if="info.icon" :src="info.icon" class="icon" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
