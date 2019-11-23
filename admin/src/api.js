@@ -19,8 +19,9 @@ http.interceptors.response.use((res) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     const { code } = res.data
 
-    if (code !== 0) {
+    if (code !== 1) {
         const { msg } = res.data
+        
         if (msg) {
             Message.error(msg)
         }
