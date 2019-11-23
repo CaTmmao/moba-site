@@ -1,6 +1,5 @@
 module.exports = app => {
   const express = require('express')
-  const jwt = require('jsonwebtoken')
 
   //定义一个路由（这个是express的子路由）
   const router = express.Router({
@@ -10,57 +9,18 @@ module.exports = app => {
     mergeParams: true
   })
 
-  //引入Admin模型
   const Admin = require('../../models/Admin')
+  const jwt = require('jsonwebtoken')
 
   //验证中间件
-  const authMiddleware = async (req, res, next) => {
-    //获取token
-    let token = ''
-    if (req.headers.authorization) {
-      token = String(req.headers.authorization).split(' ').pop()
-    }
-
-    //没有token告知用户先登录
-    if (!token) {
-      res.send({
-        code: 110,
-        msg: '请先登录'
-      })
-    }
-
-    //通过从前端获取的token解密出是哪个id生成的
-    const { id } = jwt.verify(token, app.get('secret'))
-
-    //查询出这个user挂载到req中
-    req.user = await Admin.findById(id)
-
-    if (!req.user) {
-      res.send({
-        code: 110,
-        msg: '请先登录'
-      })
-    }
-
-    next()
-  }
+  const authMiddleware = require('../../middleware/auth')
 
   //资源中间件
-  const resourceMiddleware = async (req, res, next) => {
-    /**获取resource字段是接口的名称，如category，由于接口名称和模型名称是一样的，除了模型名称
-    * 的首字母需要大写。后面需要操作模型，因为需要获取接口地址把接口地址的首字母转成大写
-   */
-    let model = req.params.resource
-    //把首字母换成大写的，这样就获取到了模型名称
-    model = model.charAt(0).toUpperCase() + model.slice(1)
-    model = require(`../../models/${model}`)
-    req.Model = model
-    next()
-  }
+  const resourceMiddleware = require('../../middleware/resource')
 
 
   //把子路由挂载上去 (rest代表的是通用的接口；resource用来动态获取接口地址，如category)
-  app.use('/admin/api/rest/:resource', authMiddleware, resourceMiddleware, router)
+  app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
 
   //增加 
   router.post('/', async (req, res) => {
@@ -105,13 +65,12 @@ module.exports = app => {
   //登录
   app.post('/admin/api/login', async (req, res) => {
     const { username, password } = req.body
-
+    
     /**
      * 由于在Admin模型中设置了password字段默认不被查出来（select:false），如果想要查询
      * password这个字段，用select('+password')表示增加查询password这个字段
      */
     const user = await Admin.findOne({ username }).select('+password')
-
     //1.查询不到用户
     if (!user) {
       res.send({
@@ -147,7 +106,7 @@ module.exports = app => {
   //上传图片
   const multer = require('multer')
   const upload = multer({ dest: `${__dirname}/../../upload` })
-  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+  app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
     //之所以可以用req.file获取到文件数据，是因为用multer库的upload.single('file')将file参数赋值到req上
     const file = req.file
 
