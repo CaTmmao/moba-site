@@ -1,5 +1,6 @@
 module.exports = app => {
   const express = require('express')
+  const jwt = require('jsonwebtoken')
 
   //定义一个路由（这个是express的子路由）
   const router = express.Router({
@@ -9,9 +10,12 @@ module.exports = app => {
     mergeParams: true
   })
 
+  //引入Admin模型
+  const Admin = require('../../models/Admin')
 
   //子路由上加一个post方法，接口地址是category
   router.post('/', async (req, res) => {
+
     //把客户端传递过来的数据存储在数据库中
     const data = await req.Model.create(req.body)
     res.send(data)
@@ -52,6 +56,35 @@ module.exports = app => {
 
   //把子路由挂载上去 (rest代表的是通用的接口；resource用来动态获取接口地址，如category)
   app.use('/admin/api/rest/:resource', async (req, res, next) => {
+    //获取token
+    let token = ''
+    if (req.headers.authorization) {
+      token = String(req.headers.authorization).split(' ').pop()
+    }
+
+    //没有token告知用户先登录
+    if (!token) {
+      res.send({
+        code: 110,
+        msg: '请先登录'
+      })
+    }
+
+    //通过从前端获取的token解密出是哪个id生成的
+    const { id } = jwt.verify(token, app.get('secret'))
+
+    //查询出这个user挂载到req中
+    req.user = await Admin.findById(id)
+
+    if (!req.user) {
+      res.send({
+        code: 110,
+        msg: '请先登录'
+      })
+    }
+
+    next()
+  }, async (req, res, next) => {
     /**获取resource字段是接口的名称，如category，由于接口名称和模型名称是一样的，除了模型名称
     * 的首字母需要大写。后面需要操作模型，因为需要获取接口地址把接口地址的首字母转成大写
    */
@@ -78,9 +111,6 @@ module.exports = app => {
   //登录接口
   app.post('/admin/api/login', async (req, res) => {
     const { username, password } = req.body
-
-    //根据用户名找用户
-    const Admin = require('../../models/Admin')
 
     /**
      * 由于在Admin模型中设置了password字段默认不被查出来（select:false），如果想要查询
@@ -109,7 +139,6 @@ module.exports = app => {
     }
 
     //3.返回token
-    const jwt = require('jsonwebtoken')
     //生成token
     const token = jwt.sign({
       id: user._id
