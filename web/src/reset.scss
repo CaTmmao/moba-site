@@ -148,6 +148,7 @@ $spacing-sizes: (
   }
 
   /*
+  左右边距
   .mx-3 {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -157,6 +158,20 @@ $spacing-sizes: (
     .#{$typeKey}x-#{$sizeKey} {
       #{$type}-left: $size * $spacing-base-size;
       #{$type}-right: $size * $spacing-base-size;
+    }
+  }
+
+  /*
+  上下边距
+  .my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  */
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
     }
   }
 
