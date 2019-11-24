@@ -18,3 +18,52 @@ a {
   color: #999;
   text-decoration: none;
 }
+
+//颜色变量
+$colors: (
+  "primary": #db9e3f,
+  "white": #fff,
+  "light": #f9f9f9,
+  "grey": #999,
+  "font": #343440,
+  "dark": #222,
+  "black": #000
+);
+
+//文字颜色 & 元素背景色
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+
+  .bg-#{$colorKey} {
+    background: $color;
+  }
+}
+
+//字体大小变量
+$base-font-size: 1rem;
+$font-sizes: (
+  //最小
+    xs: 0.7692,
+  //10px
+    //小
+    sm: 0.9231,
+  //12px
+    //中等
+    md: 1,
+  //13px
+    //稍大
+    lg: 1.0769,
+  //14px
+    //更大
+    xl: 1.2308,
+  //16px
+);
+
+//字体大小
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
