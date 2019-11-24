@@ -25,8 +25,9 @@ $colors: (
   "white": #fff,
   "light": #f9f9f9,
   "grey": #999,
-  "font": #343440,
-  "dark": #222,
+  "666": #666,
+  "dark-1": #343440,
+  "dark-2": #222,
   "black": #000
 );
 
@@ -45,20 +46,23 @@ $colors: (
 $base-font-size: 1rem;
 $font-sizes: (
   //最小
+    //8px
+    xxs: 0.6154,
+  //小
+    //10px
     xs: 0.7692,
-  //10px
-    //小
+  //稍小
+    //12px
     sm: 0.9231,
-  //12px
-    //中等
+  //中等
+    //13px
     md: 1,
-  //13px
-    //稍大
+  //稍大
+    //14px
     lg: 1.0769,
-  //14px
-    //更大
-    xl: 1.2308,
-  //16px
+  //更大
+    //16px
+    xl: 1.2308
 );
 
 //字体大小
@@ -68,9 +72,25 @@ $font-sizes: (
   }
 }
 
+//字体粗细
+$font-weight: (
+  thin: thin,
+  bold: bold
+);
+
+@each $weightKey, $weight in $font-weight {
+  .fw-#{$weightKey} {
+    font-weight: $weight;
+  }
+}
+
 //flex布局
 .flex {
   display: flex;
+}
+
+.fg-1 {
+  flex-grow: 1;
 }
 
 //column
@@ -84,7 +104,7 @@ $flex-jc: (
   "end": flex-end,
   "center": center,
   "between": space-between,
-  "round": space-around
+  "around": space-around
 );
 
 //justify-content
@@ -185,6 +205,26 @@ $spacing-sizes: (
       .#{$typeKey}#{$directionKey}-#{$sizeKey} {
         #{$type}-#{$direction}: $size * $spacing-base-size;
       }
+    }
+  }
+}
+
+//button
+.btn {
+  border: none;
+  font-size: map-get($font-sizes, "md");
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+//nav
+.nav {
+  .nav-item {
+    border-bottom: 3px solid transparent;
+    
+    &.active {
+      border-bottom: 3px solid #fff;
     }
   }
 }
