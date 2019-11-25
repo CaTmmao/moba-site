@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="flex px-4 py-3 bg-black ai-center">
-      <img src="@/assets/logo.png" class="mr-3" height="35" />
+    <div class="flex px-3 py-2 bg-black ai-center">
+      <img src="@/assets/logo.png" class="my-1 mr-3" height="35" />
       <div class="fg-1">
-        <p class="text-white my-1">王者荣耀</p>
-        <p class="text-666 fs-xs my-1">团队成就更多</p>
+        <p class="text-white my-0 fs-lg">王者荣耀</p>
+        <p class="text-666 fs-xs my-0 mt-1">团队成就更多</p>
       </div>
       <button type="button" class="btn bg-primary p-2 fw-bold">立即下载</button>
     </div>
