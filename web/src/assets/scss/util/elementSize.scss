@@ -1,0 +1,13 @@
+$element-length: (
+  100p: 100%
+);
+
+@each $lengthKey, $length in $element-length {
+  .width-#{$lengthKey} {
+    width: $length;
+  }
+
+  .height-#{$lengthKey} {
+    height: $length;
+  }
+}

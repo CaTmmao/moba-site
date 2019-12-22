@@ -1,0 +1,22 @@
+//颜色变量
+$colors: (
+  "primary": #db9e3f,
+  "white": #fff,
+  "light": #f9f9f9,
+  "grey": #999,
+  "666": #666,
+  "dark-1": #343440,
+  "dark-2": #222,
+  "black": #000
+);
+
+//文字颜色 & 元素背景色
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+
+  .bg-#{$colorKey} {
+    background: $color;
+  }
+} 

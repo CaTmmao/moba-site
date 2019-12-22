@@ -1,0 +1,45 @@
+//flex布局
+.flex {
+  display: flex;
+}
+
+.fg-1 {
+  flex-grow: 1;
+}
+
+//column
+.fd-column {
+  flex-direction: column;
+}
+
+//justify-content变量
+$flex-jc: (
+  "start": flex-start,
+  "end": flex-end,
+  "center": center,
+  "between": space-between,
+  "around": space-around
+);
+
+//justify-content
+@each $jcKey, $value in $flex-jc {
+  .jc-#{$jcKey} {
+    justify-content: $value;
+  }
+}
+
+//align-items变量
+$flex-ai: (
+  "start": flex-start,
+  "end": flex-end,
+  "center": center,
+  "between": space-between,
+  "round": space-around
+);
+
+//align-items
+@each $aiKey, $value in $flex-ai {
+  .ai-#{$aiKey} {
+    align-items: $value;
+  }
+}

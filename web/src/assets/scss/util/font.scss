@@ -1,0 +1,41 @@
+//字体大小变量
+$base-font-size: 1rem;
+$font-sizes: (
+  //最小
+    //8px
+    xxs: 0.6154,
+  //小
+    //10px
+    xs: 0.7692,
+  //稍小
+    //12px
+    sm: 0.9231,
+  //中等
+    //13px
+    md: 1,
+  //稍大
+    //14px
+    lg: 1.0769,
+  //更大
+    //16px
+    xl: 1.2308
+);
+
+//字体大小
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+//字体粗细
+$font-weight: (
+  thin: thin,
+  bold: bold
+);
+
+@each $weightKey, $weight in $font-weight {
+  .fw-#{$weightKey} {
+    font-weight: $weight;
+  }
+}

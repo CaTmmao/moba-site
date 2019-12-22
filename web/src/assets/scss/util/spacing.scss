@@ -1,0 +1,78 @@
+//边距类型
+$spacing-types: (
+  "m": margin,
+  "p": padding
+);
+
+//边距方向
+$spacing-directions: (
+  t: top,
+  l: left,
+  r: right,
+  b: bottom
+);
+
+//边距尺寸
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+  0: 0,
+  1: 0.25,
+  2: 0.5,
+  3: 1,
+  4: 1.5,
+  5: 3
+);
+
+@each $typeKey, $type in $spacing-types {
+  /**
+    .m-3 {
+      margin: 1rem;
+    }
+  */
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+
+  /*
+  左右边距
+  .mx-3 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  */
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+  }
+
+  /*
+  上下边距
+  .my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  */
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+
+  /*
+  .mt-1 {
+    margin-top: 1rem;
+  }
+  */
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+}
