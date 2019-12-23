@@ -8,7 +8,7 @@
       </div>
       <button type="button" class="btn bg-primary p-2 fw-bold">立即下载</button>
     </div>
-    <div class="nav flex jc-around bg-primary py-2 pt-3">
+    <div class="nav jc-around inverse bg-primary py-2 pt-3">
       <div
         class="nav-item pb-1 mb-1"
         v-for="(item, index) in routes"

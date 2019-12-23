@@ -3,7 +3,7 @@
 }
 
 html {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 body {
@@ -36,11 +36,23 @@ a {
 
 //nav
 .nav {
+  display: flex;
   .nav-item {
+
     border-bottom: 3px solid transparent;
 
     &.active {
-      border-bottom: 3px solid #fff;
+      border-bottom-color: map-get($colors, "primary");
+      color: map-get($colors, "primary");
+    }
+  }
+
+  &.inverse {
+    .nav-item {
+      &.active {
+        border-bottom-color: #fff;
+        color: #fff;
+      }
     }
   }
 }

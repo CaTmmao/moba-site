@@ -7,12 +7,12 @@ const routes = [
   {
     path: '/',
     name: 'Main',
-    component: () => import('@/views/Main/index'),
+    component: () => import('@/views/index'),
     children: [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/Main/Home/index')
+        component: () => import('@/views/Home/index')
       }
     ]
   },
