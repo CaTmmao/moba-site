@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex px-3 py-2 bg-black ai-center">
+    <div class="topbar flex px-3 py-2 bg-black ai-center">
       <img src="@/assets/logo.png" class="my-1 mr-3" height="35" />
       <div class="fg-1">
         <p class="text-white my-0 fs-lg">王者荣耀</p>
@@ -46,5 +46,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
 </style>
