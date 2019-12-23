@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+server/upload/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -59,3 +60,19 @@ typings/
 
 # next.js build output
 .next
+server/upload/0c1d32c4f6629e2919a1dc9bfbf6c9de
+server/upload/10a3f9ad6f842a96e0fded45fe153d66
+server/upload/139ac864dd41df9478e5ef4cac867d7d
+server/upload/14570abe7f676a6a2ca1defdcd7dbea6
+server/upload/24c804c4b8816994e9289817773ec67d
+server/upload/3d7d7b17ba9e4183873066134bae8717
+server/upload/42145d6b9daccf4e2e713eae96ac5969
+server/upload/8b23cf773465994dda24c9cd7846c3e0
+server/upload/8f6bfcdcceb9660a34173d14f9d5d9d4
+server/upload/991f08623a6e5b64b9f21f076e0743c3
+server/upload/c838c9cff72cd81de9dee3849926d892
+server/upload/d85e4c57d80305cb7ab34d33820d9257
+server/upload/e6a79bc3fa14ca9eb07fe18c083a0aa2
+server/upload/999f3bee042e3e956983ee7d4e47b677
+server/package-lock.json
+server/package-lock.json
