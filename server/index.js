@@ -16,8 +16,10 @@ app.use(express.json())
 //托管静态文件，使该目录里的文件可以被客户端通过 /upload 这个地址访问
 app.use('/upload', express.static(`${__dirname}/upload`))
 
-//引入后端路由
+//引入后端路由（后台管理系统）
 require('./routes/admin')(app)
+// 引入移动端路由
+require('./routes/web')(app)
 
 //引入数据库配置
 require('./plugins/db')(app)
