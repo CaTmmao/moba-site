@@ -41,6 +41,58 @@ module.exports = (app) => {
     res.send(news)
   })
 
+  // 获取新闻资讯分类列表
+  router.get('/news/list', async (req, res) => {
+    // 顶级分类
+    const parent = await Category.findOne({
+      name: '新闻资讯'
+    })
+
+    // 聚合查询
+    const categories = await Category.aggregate([
+      { $match: { parent: parent._id } },
+      {
+        // 类似于关系数据库里的 join 做外连接查另外一个集合
+        $lookup: {
+          // 关联哪个表/集合（集合的名字和模型名一一对应，默认情况下，是小写+复数形式，如 模型名：Article，集合名：articles）
+          from: 'articles',
+          // localField 对应 foreignField
+          localField: '_id',
+          foreignField: 'categories',
+          // 起名为
+          as: 'newsList'
+        }
+      },
+      {
+        $addFields: {
+          // 修改 newsList 数据
+          newsList: {
+            // newsList 中的数据最多 5 个
+            $slice: ['$newsList', 5]
+          }
+        }
+      }
+    ])
+
+    const subCategories = categories.map(item => item._id)
+    categories.unshift({
+      name: '热门',
+      newsList: await Article.find().where({
+        categories: { $in: subCategories }
+      }).populate('categories').limit(5).lean()
+    })
+
+    categories.map(category => {
+      category.newsList.map(item => {
+        item.categoryName = category.name === '热门' ? item.categories[0].name : category.name
+        return item
+      })
+      return category
+    })
+
+    res.send(categories)
+  })
+
   // 接口通用前缀
   app.use('/web/api', router)
 
