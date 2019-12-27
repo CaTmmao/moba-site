@@ -34,17 +34,17 @@
       <div class="card-body mt-3">
         <div class="nav jc-between pt-10">
           <div
-            class="nav-item"
+            class="nav-item pb-1"
             v-for="(category, index) in categories"
             :key="index"
-            @click="active = index"
+            @click="$refs.slide.swiper.slideTo(index)"
             :class="{'active': active === index}"
           >
             <div class="nav-link">{{category.name}}</div>
           </div>
         </div>
 
-        <swiper class="mt-2">
+        <swiper ref="slide" class="mt-2" @slide-change="active = $refs.slide.swiper.realIndex">
           <swiper-slide v-for="(category, index) in categories" :key="index">
             <slot name="items" :category="category"></slot>
           </swiper-slide>

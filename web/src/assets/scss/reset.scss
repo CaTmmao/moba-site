@@ -34,6 +34,15 @@ a {
   cursor: pointer;
 }
 
+.ws-nowrap {
+  white-space: nowrap;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 //nav
 .nav {
   display: flex;
