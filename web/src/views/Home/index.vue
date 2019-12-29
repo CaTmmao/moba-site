@@ -12,6 +12,16 @@
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
+    <siteCard title="新闻资讯" :categories="newsList">
+      <template #items="{category}">
+        <div v-for="(item, index) in category.newsList" :key="index" class="py-2 flex ai-center">
+          <span class="text-grey ws-nowrap">[{{item.categoryName}}]</span>
+          <span class="px-1">|</span>
+          <span class="ws-nowrap overflow-ellipsis mr-2">{{item.title}}</span>
+          <span class="text-666 fs-sm">{{item.createdAt | date}}</span>
+        </div>
+      </template>
+    </siteCard>
     <siteCard title="新闻" :categories="newsList">
       <template #items="{category}">
         <div v-for="(item, index) in category.newsList" :key="index" class="py-2 flex ai-center">
