@@ -47,7 +47,7 @@ module.exports = (app) => {
   router.get('/news/list', async (req, res) => {
     // 顶级分类
     const parent = await Category.findOne({
-      name: '新闻资讯'
+      name: '新闻分类'
     })
 
     // 聚合查询
