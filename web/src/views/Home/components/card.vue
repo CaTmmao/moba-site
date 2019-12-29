@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <swiper ref="slide" class="mt-2" @slide-change="active = $refs.slide.swiper.realIndex">
+        <swiper ref="slide" class="mt-2" :options="{autoHeight: true}" @slide-change="active = $refs.slide.swiper.realIndex">
           <swiper-slide v-for="(category, index) in categories" :key="index">
             <slot name="items" :category="category"></slot>
           </swiper-slide>

@@ -22,13 +22,13 @@
         </div>
       </template>
     </siteCard>
-    <siteCard title="新闻" :categories="newsList">
+    <siteCard title="英雄列表" :categories="heroList">
       <template #items="{category}">
-        <div v-for="(item, index) in category.newsList" :key="index" class="py-2 flex ai-center">
-          <span class="text-grey ws-nowrap">[{{item.categoryName}}]</span>
-          <span class="px-1">|</span>
-          <span class="ws-nowrap overflow-ellipsis mr-2">{{item.title}}</span>
-          <span class="text-666 fs-sm">{{item.createdAt | date}}</span>
+        <div class="flex flex-wrap"> 
+          <div v-for="(hero, index) in category.heroList" :key="index" class="width-20p p-1">
+            <img :src="hero.avatar" class="width-100p"/>
+            <span>{{hero.name}}</span>
+          </div>
         </div>
       </template>
     </siteCard>
@@ -43,7 +43,9 @@ export default {
   data() {
     return {
       // 新闻资讯列表
-      newsList: []
+      newsList: [],
+      // 英雄分类列表
+      heroList: []
     };
   },
   components: {
@@ -51,6 +53,7 @@ export default {
   },
   mounted() {
     this.getNewsList();
+    this.getHeroList();
   },
   filters: {
     // 日期
@@ -64,6 +67,14 @@ export default {
       let url = this.API_CONFIG.getNewsCategories;
       this.$.get(url).then(res => {
         this.newsList = res.data;
+      });
+    },
+    // 获取英雄列表
+    getHeroList() {
+      let url = this.API_CONFIG.getHeroList;
+      this.$.get(url).then(res => {
+        this.heroList = res.data;
+        console.log(res.data);
       });
     }
   }

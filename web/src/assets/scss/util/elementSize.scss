@@ -1,5 +1,7 @@
 $element-length: (
-  100p: 100%
+  20p: 20%,
+  100p: 100%,
+  100: 100px
 );
 
 @each $lengthKey, $length in $element-length {

@@ -121,6 +121,43 @@ module.exports = (app) => {
     res.send(await Hero.find())
   })
 
+  // 获取英雄列表
+  router.get('/heroes/list', async (req, res) => {
+    // 查找英雄分类
+    const parent = await Category.findOne({
+      name: '英雄分类'
+    })
+
+    // 聚合查询
+    const categories = await Category.aggregate([
+      // 查找 parent id 为英雄分类的分类
+      { $match: { parent: parent._id } },
+      {
+        // 类似于关系数据库里的 join 做外连接查另外一个集合
+        $lookup: {
+          // 关联哪个表/集合（集合的名字和模型名一一对应，默认情况下，是小写+复数形式，如 模型名：Article，集合名：articles）
+          from: 'heroes',
+          // 本地字段也就是 category 模型里字段是 _id
+          localField: '_id',
+          // 外键字段是 heroes 里的 categories 
+          foreignField: 'categories',
+          // 起名为
+          as: 'heroList'
+        }
+      }
+    ])
+
+    const subCategories = categories.map(item => item._id)
+    categories.unshift({
+      name: '热门',
+      heroList: await Hero.find().where({
+        categories: { $in: subCategories }
+      }).limit(10).lean()
+    })
+
+    res.send(categories)
+  })
+
 
   // 接口通用前缀
   app.use('/web/api', router)
