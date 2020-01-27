@@ -18,8 +18,7 @@
           <span class="text-grey ws-nowrap">[{{item.categoryName}}]</span>
           <span class="px-1">|</span>
           <span class="ws-nowrap overflow-ellipsis mr-2">{{item.title}}</span>
-          <span class="text-666 fs-sm">{{item.createdAt | date}}</span>
-        </div>
+          <span class="text-666 fs-sm">{{item.createdAt | convertDate}}</span>
       </template>
     </siteCard>
     <siteCard title="英雄列表" :categories="heroList">
@@ -36,7 +35,6 @@
 </template>
 
 <script>
-import utils from "../../util/common";
 import siteCard from "./components/card";
 export default {
   name: "home",
@@ -54,12 +52,6 @@ export default {
   mounted() {
     this.getNewsList();
     this.getHeroList();
-  },
-  filters: {
-    // 日期
-    date(value) {
-      return utils.convertDate(value);
-    }
   },
   methods: {
     // 获取新闻资讯

@@ -5,6 +5,14 @@ import store from './store'
 
 import '@/assets/scss/reset.scss'
 
+// 全局过滤器
+import * as filters from './util/common'
+Object.keys(filters).forEach(filter => {
+  console.log(filter);
+  
+  Vue.filter(filter, filters[filter])
+})
+
 //引入 swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
