@@ -10,6 +10,18 @@
           <el-form-item label="称号">
             <el-input v-model="info.title"></el-input>
           </el-form-item>
+          <el-form-item label="背景图">
+            <el-upload
+              class="avatar-uploader banner"
+              :action="uploadUrl"
+              :headers="getAuthorization()"
+              :on-success="res => $set(info, 'banner', res.url)"
+              :show-file-list="false"
+            >
+              <img v-if="info.banner" :src="info.banner" class="icon" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
@@ -137,6 +149,8 @@ export default {
         name: "",
         //称号
         title: "",
+        // 背景图
+        banner: "",
         //头像
         avatar: "",
         //分类

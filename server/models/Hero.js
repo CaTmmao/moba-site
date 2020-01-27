@@ -5,6 +5,8 @@ const schema = new mongoose.Schema({
   name: {
     type: String
   },
+  // 背景图
+  banner: { type: String },
   //头像
   avatar: {
     type: String
@@ -66,9 +68,9 @@ const schema = new mongoose.Schema({
   partners: [
     {
       //关联英雄模型
-      hero: {type: mongoose.SchemaTypes.ObjectId, ref: 'Hero'},
+      hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Hero' },
       //描述
-      description: {type: String}
+      description: { type: String }
     }
   ]
 })

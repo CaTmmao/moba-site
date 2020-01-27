@@ -1,6 +1,6 @@
-
-  .container {
-    .avatar-uploader .el-upload {
+.container {
+  .avatar-uploader {
+    .el-upload {
       border: 1px dashed #d9d9d9;
       border-radius: 50%;
       cursor: pointer;
@@ -8,22 +8,33 @@
       overflow: hidden;
       width: 5rem;
       height: 5rem;
+
+      &:hover {
+        border-color: #409eff;
+      }
+
+      .icon {
+        height: 5rem;
+        width: 100%;
+      }
     }
-    .avatar-uploader .el-upload:hover {
-      width: 5rem;
-      height: 5rem;
-      border-color: #409eff;
+
+    &.banner .el-upload {
+      width: 360px;
+      height: 183px;
+      border-radius: 0;
+
+      .icon {
+        height: 100%;
+        width: 100%;
+      }
     }
-    .avatar-uploader-icon {
-      font-size: 28px;
-      line-height: 5rem;
-      color: #8c939d;
-      text-align: center;
   }
-  
-  .icon {
-    width: 5rem;
-    height: 5rem;
-    width: 100%;
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    line-height: 5rem;
+    color: #8c939d;
+    text-align: center;
   }
 }
