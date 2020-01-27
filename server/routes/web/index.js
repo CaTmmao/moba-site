@@ -158,6 +158,19 @@ module.exports = (app) => {
     res.send(categories)
   })
 
+  // 获取文章详情
+  router.get('/articles/:id', async (req, res) => {
+    let data = await Article.findById(req.params.id)
+    // 查找两条分类一样的文章作为推荐文章
+    let related = await Article.find().where({
+      categories: { $in: data.categories }
+    }).limit(2)
+    res.send({
+      data, 
+      related
+    })
+  })
+
 
   // 接口通用前缀
   app.use('/web/api', router)

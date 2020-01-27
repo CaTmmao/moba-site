@@ -14,11 +14,18 @@
     </swiper>
     <siteCard title="新闻资讯" :categories="newsList">
       <template #items="{category}">
-        <div v-for="(item, index) in category.newsList" :key="index" class="py-2 flex ai-center">
+        <router-link
+          tag="div"
+          :to="`article/${item._id}`"
+          v-for="(item, index) in category.newsList"
+          :key="index"
+          class="py-2 flex ai-center"
+        >
           <span class="text-grey ws-nowrap">[{{item.categoryName}}]</span>
           <span class="px-1">|</span>
-          <span class="ws-nowrap overflow-ellipsis mr-2">{{item.title}}</span>
-          <span class="text-666 fs-sm">{{item.createdAt | convertDate}}</span>
+          <span class="ws-nowrap overflow-ellipsis">{{item.title}}</span>
+          <span class="text-666">{{item.createdAt | convertDate}}</span>
+        </router-link>
       </template>
     </siteCard>
     <siteCard title="英雄列表" :categories="heroList">
