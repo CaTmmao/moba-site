@@ -8,8 +8,6 @@ import '@/assets/scss/reset.scss'
 // 全局过滤器
 import * as filters from './util/common'
 Object.keys(filters).forEach(filter => {
-  console.log(filter);
-  
   Vue.filter(filter, filters[filter])
 })
 
