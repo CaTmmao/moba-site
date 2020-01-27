@@ -6,19 +6,18 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Main',
-    component: () => import('@/views/index'),
+    component: () => import('@/views/Main/index'),
     children: [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/Home/index')
+        component: () => import('@/views/Main/Home/index')
       },
       // 文章详情页
       {
         path: '/article/:id',
         name: 'articles',
-        component: () => import('@/views/Home/Article'),
+        component: () => import('@/views/Main/Article/index'),
         props: true        
       }
     ]
