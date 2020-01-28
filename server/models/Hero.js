@@ -46,6 +46,10 @@ const schema = new mongoose.Schema({
     {
       //技能图标
       icon: { type: String },
+      //冷却值
+      delay: { type: String },
+      //消耗
+      cost: { type: String },
       //技能名称
       name: { type: String },
       //描述
