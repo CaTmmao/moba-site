@@ -25,6 +25,7 @@
 
       .icon {
         height: 100%;
+
         width: 100%;
       }
     }
@@ -32,8 +33,10 @@
 
   .avatar-uploader-icon {
     font-size: 28px;
-    line-height: 5rem;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
     color: #8c939d;
-    text-align: center;
   }
 }
