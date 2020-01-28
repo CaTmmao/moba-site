@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 
-import axios from './api'
+import axios from './ajax'
 Vue.prototype.$ = axios
 
 //所有组件都应用

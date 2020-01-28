@@ -3,6 +3,7 @@
     <h1>{{id ? '编辑' : '新建'}}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-tabs type="border-card">
+        <!-- 基本信息 -->
         <el-tab-pane label="基本信息">
           <el-form-item label="名称">
             <el-input v-model="info.name"></el-input>
@@ -86,6 +87,8 @@
             <el-input type="textarea" v-model="info.teamTips"></el-input>
           </el-form-item>
         </el-tab-pane>
+
+        <!-- 技能 -->
         <el-tab-pane label="技能">
           <el-button type="text" @click="addSkill">
             <i class="el-icon-plus"></i> 添加技能
@@ -99,6 +102,12 @@
             >
               <el-form-item label="名称">
                 <el-input v-model="item.name"></el-input>
+              </el-form-item>
+              <el-form-item label="冷却值">
+                <el-input v-model="item.delay"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input v-model="item.cost"></el-input>
               </el-form-item>
               <el-form-item label="图标">
                 <el-upload
@@ -124,7 +133,38 @@
             </el-col>
           </el-row>
         </el-tab-pane>
-        <el-tab-pane label="xx">x</el-tab-pane>
+
+        <!-- 最佳搭档 -->
+        <el-tab-pane label="最佳搭档">
+          <el-button type="text" @click="addPartner">
+            <i class="el-icon-plus"></i> 添加搭档
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col
+              style="margin-top: 20px;"
+              :md="12"
+              v-for="(item, index) in info.partners"
+              :key="index"
+            >
+              <el-form-item label="英雄">
+                <el-select v-model="item.hero" filterable placeholder="请选择英雄">
+                  <el-option
+                    v-for="item in heroList"
+                    :key="item._id"
+                    :label="item.name"
+                    :value="item._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="item.description"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" @click="delPartners(index)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
         <el-tab-pane label="xx">x</el-tab-pane>
       </el-tabs>
 
@@ -173,7 +213,9 @@ export default {
         //团战思路
         teamTips: "",
         //技能
-        skills: []
+        skills: [],
+        // 最佳搭档
+        partners: []
       },
       //英雄分类
       categories: [],
@@ -186,6 +228,7 @@ export default {
     this.getCategories();
     //&&代表满足前面的条件之后才执行后面的函数
     this.id && this.getInfo();
+    this.getHeroesList();
   },
   methods: {
     //获取英雄信息
@@ -222,6 +265,32 @@ export default {
     //删除技能
     delSkill(index) {
       this.info.skills.splice(index, 1);
+    },
+    /**
+     * 添加最佳搭档
+     */
+    addPartner() {
+      this.info.partners.push({});
+    },
+    /**
+     * 删除最佳搭档
+     * @param {number} index 删除对象所在索引
+     */
+    delPartners(index) {
+      this.$confirm("请确认是否删除？", "提示", {
+        type: "error"
+      }).then(() => {
+        this.info.partners.splice(index, 1);
+      });
+    },
+    /**
+     * 获取英雄列表
+     */
+    getHeroesList() {
+      let url = this.API_CONFIG.getHeroesList;
+      this.$.get(url).then(res => {
+        this.heroList = res.data;
+      });
     }
   }
 };
