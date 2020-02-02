@@ -72,7 +72,7 @@ const schema = new mongoose.Schema({
   battleTips: { type: String },
   //团战思路
   teamTips: { type: String },
-  //英雄关系
+  //最佳搭档
   partners: [
     {
       //关联英雄模型

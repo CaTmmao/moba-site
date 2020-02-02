@@ -31,10 +31,16 @@
     <siteCard title="英雄列表" :categories="heroList">
       <template #items="{category}">
         <div class="flex flex-wrap">
-          <div v-for="(hero, index) in category.heroList" :key="index" class="width-20p p-1">
+          <router-link
+            tag="div"
+            :to="`/heroes/${hero._id}`"
+            v-for="(hero, index) in category.heroList"
+            :key="index"
+            class="width-20p p-1"
+          >
             <img :src="hero.avatar" class="width-100p" />
             <span>{{hero.name}}</span>
-          </div>
+          </router-link>
         </div>
       </template>
     </siteCard>

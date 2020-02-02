@@ -7,6 +7,10 @@ import './plugins/element.js'
 import axios from './ajax'
 Vue.prototype.$ = axios
 
+// api 配置
+import API_CONFIG from './api/index'
+Vue.prototype.API_CONFIG = API_CONFIG
+
 //所有组件都应用
 Vue.mixin({
   computed: {

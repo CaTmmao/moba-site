@@ -18,10 +18,17 @@ const routes = [
         path: '/article/:id',
         name: 'articles',
         component: () => import('@/views/Main/Article/index'),
-        props: true        
+        props: true
       }
     ]
   },
+  // 英雄详情页
+  {
+    path: '/heroes/:id',
+    name: 'heroes',
+    component: () => import('@/views/Hero/index'),
+    props: true
+  }
 ]
 
 const router = new VueRouter({

@@ -7,7 +7,12 @@ $colors: (
   "666": #666,
   "dark-1": #343440,
   "dark-2": #222,
-  "black": #000
+  "black": #000,
+  // 下面4个用于英雄详情页面的分数颜色
+    "difficult": #805300,
+  "skills": #1f3695,
+  "attack": #791a16,
+  "survive": #55554f
 );
 
 //文字颜色 & 元素背景色
@@ -19,4 +24,4 @@ $colors: (
   .bg-#{$colorKey} {
     background: $color;
   }
-} 
+}

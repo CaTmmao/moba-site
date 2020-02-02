@@ -158,6 +158,12 @@ module.exports = (app) => {
     res.send(categories)
   })
 
+  // 获取英雄详细信息
+  router.get('/heroes/info/:id', async (req, res) => {
+    const data = await Hero.findById(req.params.id).populate('categories')
+    res.send(data)
+  })
+
   // 获取文章详情
   router.get('/articles/:id', async (req, res) => {
     let data = await Article.findById(req.params.id)
@@ -166,7 +172,7 @@ module.exports = (app) => {
       categories: { $in: data.categories }
     }).limit(2)
     res.send({
-      data, 
+      data,
       related
     })
   })
