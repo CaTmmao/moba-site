@@ -26,19 +26,23 @@ const schema = new mongoose.Schema({
   scores: {
     //难度
     difficult: {
-      type: Number
+      type: Number,
+      default: 0
     },
     //技能
     skills: {
-      type: Number
+      type: Number,
+      default: 0
     },
     //攻击
     attack: {
-      type: Number
+      type: Number,
+      default: 0
     },
     //生存
     survive: {
-      type: Number
+      type: Number,
+      default: 0
     },
   },
   //技能
