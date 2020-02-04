@@ -13,6 +13,10 @@ app.use(require('cors')())
 //对post请求体进行解析
 app.use(express.json())
 
+// 前端页面
+app.use('/', express.static(`${__dirname}/web`))
+// 后台管理系统页面
+app.use('/admin', express.static(`${__dirname}/admin`))
 //托管静态文件，使该目录里的文件可以被客户端通过 /upload 这个地址访问
 app.use('/upload', express.static(`${__dirname}/upload`))
 
