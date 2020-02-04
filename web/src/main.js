@@ -22,7 +22,7 @@ Vue.prototype.API_CONFIG = API_CONFIG
 
 import axios from 'axios'
 Vue.prototype.$ = axios.create({
-  baseURL: 'http://localhost:3001/web/api/'
+  baseURL: process.env.VUE_APP_BASE_URL || '/web/api'
 })
 
 import utils from './util/common'
