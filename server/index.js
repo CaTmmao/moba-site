@@ -30,5 +30,7 @@ require('./plugins/db')(app)
 
 //会在3000端口启动，启动后会调用回调函数
 app.listen(3001, () => {
+  console.log('listening 3001');
+  
 })
 
