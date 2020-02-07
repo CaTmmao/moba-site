@@ -111,7 +111,7 @@ module.exports = app => {
     const file = req.file
 
     //给file里面添加一个url属性，作为前端展示图片的一个地址，需要用上面已有的file对象内的属性拼接出来
-    file.url = `http://localhost:3001/upload/${file.filename}`
+    file.url = `http://122.51.186.16/upload/${file.filename}`
     res.send(file)
   })
 }
