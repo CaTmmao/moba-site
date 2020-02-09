@@ -121,9 +121,14 @@ const routes = [
         name: 'adminCreate',
         component: () => import('@/views/Admin/edit'),
         props: true
-      },
+      }
     ]
   },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('@/views/404')
+  }
 ]
 
 let router = new VueRouter({
@@ -134,7 +139,7 @@ let router = new VueRouter({
 //检查是否登录
 router.beforeEach((to, from, next) => {
   let { token } = localStorage
-  
+
   // 未登录去登录页
   if (!token) {
     next('/login')
