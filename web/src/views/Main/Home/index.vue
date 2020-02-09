@@ -39,7 +39,7 @@
             class="width-20p p-1"
           >
             <img :src="hero.avatar" class="width-100p" />
-            <span>{{hero.name}}</span>
+            <p class="flex jc-center">{{hero.name}}</p>
           </router-link>
         </div>
       </template>
