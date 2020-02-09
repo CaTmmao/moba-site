@@ -264,7 +264,13 @@ export default {
     },
     //删除技能
     delSkill(index) {
-      this.info.skills.splice(index, 1);
+      this.$confirm("确认删除吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(async () => {
+        this.info.skills.splice(index, 1);
+      });
     },
     /**
      * 添加最佳搭档
