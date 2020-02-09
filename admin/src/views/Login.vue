@@ -3,10 +3,10 @@
     <el-card header="请先登录" class="login-card">
       <el-form>
         <el-form-item label="用户名">
-          <el-input v-model="info.username"></el-input>
+          <el-input v-model="info.username" @keyup.enter.native="login"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="info.password">></el-input>
+          <el-input v-model="info.password" @keyup.enter.native="login"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="login">登录</el-button>
@@ -33,7 +33,7 @@ export default {
       let { username, password } = this.info;
 
       if (!username || !password) {
-        this.$message("请填写完整");
+        this.$message.warning("请填写完整");
         return;
       }
 
@@ -42,7 +42,7 @@ export default {
         if (code === 1) {
           const { token } = res.data;
           localStorage.token = token;
-          this.$message("登录成功");
+          this.$message.success("登录成功");
           this.$router.push("/");
         }
       });
