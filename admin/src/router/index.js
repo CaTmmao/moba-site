@@ -12,6 +12,7 @@ const routes = [
   },
   {
     path: '/',
+    redirect: '/category/create',
     name: 'home',
     component: () => import('@/views/Home'),
     children: [
