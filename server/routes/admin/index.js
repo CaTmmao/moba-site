@@ -65,7 +65,7 @@ module.exports = app => {
   //登录
   app.post('/admin/api/login', async (req, res) => {
     const { username, password } = req.body
-    
+
     /**
      * 由于在Admin模型中设置了password字段默认不被查出来（select:false），如果想要查询
      * password这个字段，用select('+password')表示增加查询password这个字段
@@ -105,13 +105,23 @@ module.exports = app => {
 
   //上传图片
   const multer = require('multer')
-  const upload = multer({ dest: `${__dirname}/../../upload` })
+  // 阿里云oss
+  const MAO = require('multer-aliyun-oss');
+
+  const upload = multer({
+    storage: MAO({
+      config: {
+        // oss 区域
+        region: 'oss-cn-chengdu',
+        accessKeyId: 'LTAI4Fo4m1YWfkrxyPwByE8E',
+        accessKeySecret: 'bIHgV933z0w5KGoRnSl59LGcVthXGB',
+        bucket: 'node-moba-site'
+      }
+    })
+  })
   app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
     //之所以可以用req.file获取到文件数据，是因为用multer库的upload.single('file')将file参数赋值到req上
     const file = req.file
-
-    //给file里面添加一个url属性，作为前端展示图片的一个地址，需要用上面已有的file对象内的属性拼接出来
-    file.url = `http://122.51.186.16/upload/${file.filename}`
     res.send(file)
   })
 }
