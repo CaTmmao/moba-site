@@ -2,7 +2,6 @@
   <div class="main">
     <h1>首页轮播图列表</h1>
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="_id" label="id"></el-table-column>
       <el-table-column prop="path" label="跳转链接"></el-table-column>
       <el-table-column prop="imgUrl" label="图片">
         <template slot-scope="scope">

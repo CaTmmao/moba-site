@@ -2,7 +2,6 @@
   <div>
     <h1>文章列表</h1>
     <el-table :data="articleList" style="width: 100%">
-      <el-table-column prop="_id" label="id"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">

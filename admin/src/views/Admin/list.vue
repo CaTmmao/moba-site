@@ -2,7 +2,6 @@
   <div>
     <h1>管理员列表</h1>
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="_id" label="id"></el-table-column>
       <el-table-column prop="username" label="管理员"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">

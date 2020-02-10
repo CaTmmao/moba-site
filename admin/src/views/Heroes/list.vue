@@ -2,7 +2,6 @@
   <div>
     <h1>英雄列表</h1>
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="_id" label="id"></el-table-column>
       <el-table-column prop="name" label="英雄名称"></el-table-column>
       <el-table-column prop="icon" label="头像">
         <template slot-scope="scope">
