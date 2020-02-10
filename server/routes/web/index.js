@@ -129,6 +129,12 @@ module.exports = (app) => {
     res.send(await Hero.find())
   })
 
+  // 获取最新英雄
+  router.get('/heroes/newest', async (req, res) => {
+    const data = await Hero.find().populate('categories').sort({ createdAt: -1 }).limit(1)
+    res.send(data[0])
+  })
+
   // 获取英雄列表
   router.get('/heroes/list', async (req, res) => {
     // 查找英雄分类
