@@ -10,7 +10,7 @@ const API_CONFIG = {
   getArticleDetail: 'articles',
   // 获取英雄详细信息 GET
   getHeroDetail: 'heroes/info',
-  // 获取首页轮播图
+  // 获取首页轮播图 GET
   getCarousel: 'home/carousel'
 }
 
