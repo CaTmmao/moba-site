@@ -1,14 +1,10 @@
 <template>
   <div class="home">
     <swiper ref="mySwiper">
-      <swiper-slide>
-        <img src="@/assets/imgs/a.jpeg" class="width-100p" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="@/assets/imgs/b.jpeg" class="width-100p" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="@/assets/imgs/c.jpeg" class="width-100p" />
+      <swiper-slide v-for="item in carouselList">
+        <a :href="item.path || '#'">
+          <img :src="item.imgUrl" class="width-100p" />
+        </a>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -56,7 +52,9 @@ export default {
       // 新闻资讯列表
       newsList: [],
       // 英雄分类列表
-      heroList: []
+      heroList: [],
+      // 轮播图列表
+      carouselList: []
     };
   },
   components: {
@@ -65,6 +63,7 @@ export default {
   mounted() {
     this.getNewsList();
     this.getHeroList();
+    this.getCarousel();
   },
   methods: {
     // 获取新闻资讯
@@ -80,6 +79,13 @@ export default {
       this.$.get(url).then(res => {
         this.heroList = res.data;
       });
+    },
+    // 获取轮播图
+    getCarousel() {
+      let url = this.API_CONFIG.getCarousel;
+      this.$.get(url).then(res => {
+        this.carouselList = res.data;
+      });
     }
   }
 };
@@ -87,6 +93,6 @@ export default {
 
 <style lang="scss">
 .swiper-wrapper {
-  height: auto!important;
+  height: auto !important;
 }
 </style>
