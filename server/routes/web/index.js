@@ -8,6 +8,14 @@ module.exports = (app) => {
   const Article = require('../../models/Article')
   // 引入 Hero 模型
   const Hero = require('../../models/Hero')
+  // 引入 Carousel 模型
+  const Carousel = require('../../models/Carousel')
+
+  // 获取首页轮播图
+  router.get('/home/carousel', async (req, res) => {
+    const data = await Carousel.find()
+    res.send(data)
+  })
 
   // 给文章列表生成数据作为初始化数据
   router.get('/news/init', async (req, res) => {
@@ -176,7 +184,6 @@ module.exports = (app) => {
       related
     })
   })
-
 
   // 接口通用前缀
   app.use('/web/api', router)
