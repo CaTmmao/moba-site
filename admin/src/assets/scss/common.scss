@@ -1,3 +1,10 @@
+@import "../../../../web/src/assets/scss/util/color.scss";
+@import "../../../../web/src/assets/scss/util/elementSize.scss";
+@import "../../../../web/src/assets/scss/util/flex.scss";
+@import "../../../../web/src/assets/scss/util/font.scss";
+@import "../../../../web/src/assets/scss/util/spacing.scss";
+@import "../../../../web/src/assets/scss/util//border.scss";
+
 .container {
   .avatar-uploader {
     .el-upload {
