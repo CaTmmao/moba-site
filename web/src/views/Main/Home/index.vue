@@ -36,10 +36,10 @@
             :to="`/heroes/${hero._id}`"
             v-for="(hero, index) in category.heroList"
             :key="index"
-            class="width-20p p-1"
+            class="width-20p"
           >
-            <img :src="hero.avatar" class="width-100p" />
-            <p class="flex jc-center">{{hero.name}}</p>
+            <img :src="hero.avatar" class="width-55" />
+            <p class="flex jc-center width-55">{{hero.name}}</p>
           </router-link>
         </div>
       </template>
@@ -84,3 +84,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.swiper-wrapper {
+  height: auto!important;
+}
+</style>
