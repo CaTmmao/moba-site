@@ -81,6 +81,8 @@ const schema = new mongoose.Schema({
       description: { type: String }
     }
   ]
-})
+},
+  // 自动添加 创建时间 和 更新时间 字段 
+  { timestamps: true })
 
 module.exports = mongoose.model('Hero', schema, 'heroes')
