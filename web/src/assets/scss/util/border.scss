@@ -1,6 +1,7 @@
 // 边框颜色变量
 $colors: (
-  "grey": #c9c9c9
+  "grey": #c9c9c9,
+  "d4d9de": #d4d9de
 );
 
 @each $direction in (left, right, top, bottom) {
@@ -9,7 +10,7 @@ $colors: (
     .border-top-red {
       border-top: 1px solid red;
     }
-    */ 
+    */
     .border-#{$direction}-#{$colorKey} {
       border-#{$direction}: 1px solid $color;
     }

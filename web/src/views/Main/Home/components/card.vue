@@ -1,6 +1,5 @@
 <template>
-  <div class="wrapper">
-    <!-- 新闻资讯 -->
+  <div class="wrapper border-bottom-d4d9de">
     <div class="card-wrapper bg-white mt-2 px-4 pb-4">
       <div class="card-header mb-2 flex ai-center jc-between">
         <p class="fs-xl">{{title}}</p>
@@ -46,7 +45,12 @@
           </div>
         </div>
 
-        <swiper ref="slide" class="mt-2" :options="{autoHeight: true}" @slide-change="active = $refs.slide.swiper.realIndex">
+        <swiper
+          ref="slide"
+          class="mt-2"
+          :options="{autoHeight: true}"
+          @slide-change="active = $refs.slide.swiper.realIndex"
+        >
           <swiper-slide v-for="(category, index) in categories" :key="index">
             <slot name="items" :category="category"></slot>
           </swiper-slide>
@@ -81,10 +85,9 @@ export default {
 
 <style lang="scss">
 .wrapper {
-  border-bottom: 1px #d4d9de solid;
   .card-wrapper {
-    .card-header {
-      border-bottom: 1px #d4d9de solid;
+    .card-body {
+      padding-top: 1.24rem;
     }
   }
 }
