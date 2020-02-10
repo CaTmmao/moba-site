@@ -24,7 +24,21 @@
         </router-link>
       </template>
     </siteCard>
+
+    <!-- 英雄列表模块 -->
     <siteCard title="英雄列表" :categories="heroList">
+      <template v-slot:header>
+        <router-link :to="`/heroes/${newestHero._id}`">
+          <div class="newestHero width-100p position-re height-110">
+            <img :src="newestHero.banner" class="width-100p" />
+            <div class="fs-sm position-ab position-l-1 position-t-30p text-white">
+              <h3 class="fs-lg mb-2">最新英雄：{{newestHero.name}}</h3>
+              <p v-if="newestHero.categories" class="mb-3">职业定位：{{newestHero.categories[0].name}}</p>
+              <p class="mt-1">上线时间：{{newestHero.createdAt | convertDate}}</p>
+            </div>
+          </div>
+        </router-link>
+      </template>
       <template #items="{category}">
         <div class="flex flex-wrap">
           <router-link
@@ -53,6 +67,8 @@ export default {
       newsList: [],
       // 英雄分类列表
       heroList: [],
+      // 最新英雄
+      newestHero: {},
       // 轮播图列表
       carouselList: []
     };
@@ -64,6 +80,7 @@ export default {
     this.getNewsList();
     this.getHeroList();
     this.getCarousel();
+    this.getNewestHero();
   },
   methods: {
     // 获取新闻资讯
@@ -71,6 +88,14 @@ export default {
       let url = this.API_CONFIG.getNewsCategories;
       this.$.get(url).then(res => {
         this.newsList = res.data;
+      });
+    },
+    // 获取最新英雄
+    getNewestHero() {
+      let url = this.API_CONFIG.getNewestHero;
+      this.$.get(url).then(res => {
+        this.newestHero = res.data;
+        console.log(this.newestHero);
       });
     },
     // 获取英雄列表
@@ -94,5 +119,20 @@ export default {
 <style lang="scss">
 .swiper-wrapper {
   height: auto !important;
+}
+</style>
+
+<style lang="scss" scoped>
+.newestHero {
+  overflow: hidden;
+  z-index: 10000000;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  img {
+    z-index: -1100;
+  }
+
+  > div {
+    opacity: 0.8;
+  }
 }
 </style>

@@ -31,7 +31,9 @@
           />
         </svg>
       </div>
-      <div class="card-body mt-3">
+      <slot name="header"></slot>
+
+      <div class="card-body mt-3 border-top-d4d9de">
         <div class="nav jc-between pt-10">
           <div
             class="nav-item pb-1"

@@ -27,7 +27,9 @@ $position-directions: (
 
 //定位位置
 $position-sizes: (
-  0: 0
+  0: 0,
+  1: 1rem,
+  30p: 30%
 );
 
 @each $directionKey, $direction in $position-directions {
