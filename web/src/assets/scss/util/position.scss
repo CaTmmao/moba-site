@@ -1,0 +1,44 @@
+//position定位
+//定位类型
+$position-types: (
+  re: relative,
+  ab: absolute,
+  fixed: fixed
+);
+
+@each $typeKey, $type in $position-types {
+  /* 
+  .position-re {
+    position: relative;
+  }
+  */
+  .position-#{$typeKey} {
+    position: $type;
+  }
+}
+
+//定位方向
+$position-directions: (
+  t: top,
+  l: left,
+  b: bottom,
+  r: right
+);
+
+//定位位置
+$position-sizes: (
+  0: 0
+);
+
+@each $directionKey, $direction in $position-directions {
+  @each $sizeKey, $size in $position-sizes {
+    /* 
+    .position-t-0 {
+      top: 0;
+    }
+  */
+    .position-#{$directionKey}-#{$sizeKey} {
+      #{$direction}: $size;
+    }
+  }
+}
