@@ -8,13 +8,13 @@
         </el-form-item>
         <el-form-item label="图片">
           <el-upload
-            class="avatar-uploader"
+            class="avatar-uploader carousel"
             :action="uploadUrl"
             :headers="getAuthorization()"
             :on-success="uploadSuccess"
             :show-file-list="false"
           >
-            <img v-if="carousel.imgUrl" :src="carousel.imgUrl" class="icon" />
+            <img v-if="carousel.imgUrl" :src="carousel.imgUrl" class="width-100p height-100p" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>

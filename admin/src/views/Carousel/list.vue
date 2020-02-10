@@ -5,7 +5,7 @@
       <el-table-column prop="path" label="跳转链接"></el-table-column>
       <el-table-column prop="imgUrl" label="图片">
         <template slot-scope="scope">
-          <img class="carousel-img" :src="scope.row.imgUrl" />
+          <img class="carousel-img width-350" :src="scope.row.imgUrl" />
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
@@ -59,12 +59,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.main {
-  .carousel-img {
-    width: 350px;
-    height: 200px;
-   
-  }
-}
-</style>

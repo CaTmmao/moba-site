@@ -25,6 +25,11 @@
       }
     }
 
+    // 轮播图单独设置样式
+    &.carousel .el-upload {
+      height: 150px !important;
+    }
+
     &.banner .el-upload {
       width: 360px;
       height: 183px;
@@ -32,7 +37,6 @@
 
       .icon {
         height: 100%;
-
         width: 100%;
       }
     }
