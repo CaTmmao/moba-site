@@ -132,14 +132,9 @@ export default {
       ]
     };
   },
-  mounted() {
-    console.log("ssss");
-  },
   methods: {
     // 退出账号
     logout() {
-      console.log("ss");
-
       localStorage.token = "";
       this.$router.push("/login");
     }
