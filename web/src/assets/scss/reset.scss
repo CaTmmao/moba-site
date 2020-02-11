@@ -54,8 +54,8 @@ a {
     border-bottom: 3px solid transparent;
 
     &.active {
-      border-bottom-color: map-get($colors, "primary");
-      color: map-get($colors, "primary");
+      border-bottom-color: #db9e3f;
+      color: #db9e3f;
     }
   }
 
