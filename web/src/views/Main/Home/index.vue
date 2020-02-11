@@ -1,13 +1,16 @@
 <template>
-  <div class="home">
-    <swiper ref="mySwiper">
+  <div class="web-home">
+    <!-- 顶部轮播图 -->
+    <swiper ref="mySwiper" :options="swiperOption">
       <swiper-slide v-for="item in carouselList">
         <a :href="item.path || '#'">
-          <img :src="item.imgUrl" class="width-100p" />
+          <img :src="item.imgUrl" class="width-100p height-192" />
         </a>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
+
+    <!-- 新闻资讯模块 -->
     <siteCard title="新闻资讯" :categories="newsList">
       <template #items="{category}">
         <router-link
@@ -70,7 +73,13 @@ export default {
       // 最新英雄
       newestHero: {},
       // 轮播图列表
-      carouselList: []
+      carouselList: [],
+      swiperOption: {
+        pagination: {
+          el: ".swiper-pagination"
+        },
+        autoplay: true
+      }
     };
   },
   components: {
@@ -123,16 +132,42 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-.newestHero {
-  overflow: hidden;
-  z-index: 10000000;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-  img {
-    z-index: -1100;
-  }
+.web-home {
+  .newestHero {
+    overflow: hidden;
+    z-index: 10000000;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    img {
+      z-index: -1100;
+    }
 
-  > div {
-    opacity: 0.8;
+    > div {
+      opacity: 0.8;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.web-home {
+  .swiper-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    
+    .swiper-pagination-bullet {
+      background: #fff;
+      opacity: 1;
+      width: 0.17rem;
+      height: 0.17rem;
+      border-radius: 2px;
+
+      &.swiper-pagination-bullet-active {
+        background: #4b67af;
+      }
+    }
   }
 }
 </style>
