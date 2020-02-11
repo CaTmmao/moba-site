@@ -1,48 +1,23 @@
 <template>
   <div>
-    <div class="topbar flex px-3 py-2 bg-black ai-center">
-      <img src="@/assets/logo.png" class="my-1 mr-3" height="35" />
-      <div class="fg-1">
-        <p class="text-white my-0 fs-lg">王者荣耀</p>
-        <p class="text-666 fs-xs my-0 mt-1">团队成就更多</p>
+    <div class="topbar flex bg-black ai-center height-d9">
+      <img src="@/assets/logo.png" class="ml-d3 width-d7" />
+      <div class="fg-1 pl-d2 height-d7 flex fd-column jc-start">
+        <p class="text-white fs-d26 pb-dd3">王者荣耀</p>
+        <p class="text-666 fs-d16 ">团队成就更多</p>
       </div>
-      <button type="button" class="btn bg-primary p-2 fw-bold">立即下载</button>
+      <button type="button" class="btn bg-primary width-1d2 height-d48 mr-d3">
+        <a class="text-333 fw-bold" href="https://pvp.qq.com/zlkdatasys/mct/d/play.shtml">立即下载</a>
+      </button>
     </div>
-    <div class="nav jc-around inverse bg-primary py-2 pt-3">
-      <div
-        class="nav-item pb-1 mb-1"
-        v-for="(item, index) in routes"
-        :key="index"
-        :class="$route.path === item.path ? 'active' : ''"
-      >
-        <router-link :to="item.path" class="text-white">{{item.label}}</router-link>
-      </div>
-    </div>
+    <div class="bg-primary height-d84"></div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Main",
-  data() {
-    return {
-      routes: [
-        {
-          path: "/home",
-          label: "首页"
-        },
-        {
-          path: "/a",
-          label: "攻略中心"
-        },
-        {
-          path: "/b",
-          label: "赛事中心"
-        }
-      ]
-    };
-  }
+  name: "Main"
 };
 </script>
 

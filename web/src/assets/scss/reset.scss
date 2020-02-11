@@ -5,12 +5,7 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 12px;
-}
-
 body {
-  line-height: 1.2em;
   font-family: "Helvetica Neue", Helvetica, STHeiTi, 微软雅黑, sans-serif;
   background: #f1f1f1;
 }
@@ -45,26 +40,4 @@ a {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}
-
-//nav
-.nav {
-  display: flex;
-  .nav-item {
-    border-bottom: 3px solid transparent;
-
-    &.active {
-      border-bottom-color: #db9e3f;
-      color: #db9e3f;
-    }
-  }
-
-  &.inverse {
-    .nav-item {
-      &.active {
-        border-bottom-color: #fff;
-        color: #fff;
-      }
-    }
-  }
 }
