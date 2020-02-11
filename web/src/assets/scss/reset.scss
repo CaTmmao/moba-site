@@ -41,3 +41,15 @@ a {
   overflow: hidden;
   white-space: nowrap;
 }
+
+.nav {
+  display: flex;
+  .nav-item {
+    border-bottom: 3px solid transparent;
+
+    &.active {
+      border-bottom-color: #db9e3f;
+      color: #db9e3f;
+    }
+  }
+}

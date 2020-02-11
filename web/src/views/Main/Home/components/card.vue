@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper border-bottom-d4d9de">
-    <div class="card-wrapper bg-white mt-2 px-4 pb-4">
-      <div class="card-header mb-2 flex ai-center jc-between">
-        <p class="fs-xl">{{title}}</p>
+    <div class="card-wrapper px-d34 bg-white mt-d25">
+      <div class="card-header flex ai-center jc-between">
+        <p class="fs-d32 py-d3">{{title}}</p>
         <svg
           t="1576241587951"
           class="icon"
@@ -32,22 +32,21 @@
       </div>
       <slot name="header"></slot>
 
-      <div class="card-body mt-3 border-top-d4d9de">
-        <div class="nav jc-between pt-10">
+      <div class="card-body pb-d2 border-top-d4d9de">
+        <div class="nav flex jc-between py-d3">
           <div
-            class="nav-item pb-1"
+            class="nav-item"
             v-for="(category, index) in categories"
             :key="index"
             @click="$refs.slide.swiper.slideTo(index)"
             :class="{'active': active === index}"
           >
-            <div class="nav-link">{{category.name}}</div>
+            <div class="nav-link fs-d26">{{category.name}}</div>
           </div>
         </div>
 
         <swiper
           ref="slide"
-          class="mt-2"
           :options="{autoHeight: true}"
           @slide-change="active = $refs.slide.swiper.realIndex"
         >
@@ -82,13 +81,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.wrapper {
-  .card-wrapper {
-    .card-body {
-      padding-top: 1.24rem;
-    }
-  }
-}
-</style>

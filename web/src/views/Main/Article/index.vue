@@ -1,24 +1,18 @@
 <template>
   <div id="article-wrapper">
-    <div class="header py-3 flex jc-between">
-      <div class="flex width-90p text-dark-1">
-        <span class="px-2 arrow" @click="home"><</span>
-        <strong class="overflow-ellipsis fs-md">{{data.title}}</strong>
+    <div class="header flex jc-between height-d75 mb-d24">
+      <div class="flex ai-center text-dark-1">
+        <span class="arrow fs-d4 mx-d2" @click="home"><</span>
+        <strong class="overflow-ellipsis fs-d26">{{data.title}}</strong>
       </div>
-      <span class="text-grey">{{data.createdAt | convertDate}}</span>
+      <span class="text-grey fs-d22 flex ai-center pr-d1">{{data.createdAt | convertDate}}</span>
     </div>
-    <div class="p-3 fs-lg" v-html="data.body"></div>
-    <div class="mt-5 mb-3 border-top-grey pt-3">
-      <div class="px-2 mb-2">
-        <strong>相关资讯</strong>
-      </div>
-      <router-link
-        :to="`/article/${item._id}`"
-        v-for="item in related"
-        class="flex py-1 px-2 jc-between"
-      >
-        <span class="text-dark-1 overflow-ellipsis fs-md">{{item.title}}</span>
-        <span class="text-grey">{{item.createdAt | convertDate}}</span>
+    <div v-html="data.body" class="fs-d32 article"></div>
+    <div class="border-top-grey relevant my-d3">
+      <strong class="fs-d26">相关资讯</strong>
+      <router-link :to="`/article/${item._id}`" v-for="item in related" class="flex jc-between">
+        <span class="text-dark-1 overflow-ellipsis fs-d26">{{item.title}}</span>
+        <span class="text-grey fs-d22">{{item.createdAt | convertDate}}</span>
       </router-link>
     </div>
   </div>
@@ -67,7 +61,7 @@ export default {
 <style lang="scss">
 #article-wrapper {
   p {
-    line-height: 2rem;
+    line-height: 0.6rem;
   }
 
   img {
@@ -84,6 +78,11 @@ export default {
   }
   .arrow {
     transform: scaleY(1.5);
+  }
+
+  .article,
+  .relevant {
+    padding: 0 5%;
   }
 }
 </style>
