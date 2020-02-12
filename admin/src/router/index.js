@@ -52,6 +52,24 @@ const routes = [
         props: true
       },
 
+      //铭文管理
+      {
+        path: 'rune/create',
+        name: 'runeCreate',
+        component: () => import('@/views/Rune/edit')
+      },
+      {
+        path: 'rune/list',
+        name: 'runeList',
+        component: () => import('@/views/Rune/list')
+      },
+      {
+        path: 'rune/edit/:id',
+        name: 'runeCreate',
+        component: () => import('@/views/Rune/edit'),
+        props: true
+      },
+
       //英雄管理
       {
         path: 'hero/create',

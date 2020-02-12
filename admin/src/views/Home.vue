@@ -70,6 +70,18 @@ export default {
               ]
             },
             {
+              items: [
+                {
+                  itemName: "新建铭文",
+                  path: "/rune/create"
+                },
+                {
+                  itemName: "铭文列表",
+                  path: "/rune/list"
+                }
+              ]
+            },
+            {
               itemsTitle: "英雄",
               items: [
                 {
