@@ -51,6 +51,7 @@ export default {
       let { id, info } = this;
       let method;
       let url = "rest/admin";
+      let data = info
 
       if (id) {
         method = "put";
@@ -62,7 +63,7 @@ export default {
       this.$({
         method,
         url,
-        info
+        data
       }).then(res => {
         if (res.data.code === 1) {
           this.$router.push("/admin/list");

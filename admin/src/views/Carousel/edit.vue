@@ -62,6 +62,7 @@ export default {
       let { id, carousel } = this;
       let url = "rest/carousel";
       let method;
+      let data = info
 
       if (id) {
         url = `${url}/${id}`;
@@ -73,7 +74,7 @@ export default {
       this.$({
         method,
         url,
-        carousel
+        data
       }).then(res => {
         res.data.code === 1 && this.$router.push("/carousel/list");
       });

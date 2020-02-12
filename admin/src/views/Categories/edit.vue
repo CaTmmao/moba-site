@@ -65,6 +65,7 @@ export default {
       let { id, info } = this;
       let url = "rest/category";
       let method;
+      let data = info
 
       if (id) {
         url = `${url}/${id}`;
@@ -76,7 +77,7 @@ export default {
       this.$({
         url,
         method,
-        info
+        data
       }).then(res => {
         res.data.code === 1 && this.$router.push("/category/list");
       });
