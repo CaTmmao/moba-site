@@ -64,7 +64,7 @@ export default {
         url,
         info
       }).then(res => {
-        if (res.code === 1) {
+        if (res.data.code === 1) {
           this.$router.push("/admin/list");
         }
       });

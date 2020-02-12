@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     //获取物品信息
-    async getInfo() {
+    getInfo() {
       let url = `rest/item/${this.id}`;
       this.$.get(url).then(res => {
         let { code, data } = res.data;
@@ -54,7 +54,7 @@ export default {
       });
     },
     //保存信息
-    async save() {
+    save() {
       let { id, info } = this;
       let url = "rest/item";
       let method;
@@ -71,7 +71,7 @@ export default {
         method,
         info
       }).then(res => {
-        res.code === 1 && this.$router.push("/item/list");
+        res.data.code === 1 && this.$router.push("/item/list");
       });
     },
     //图片上传完成

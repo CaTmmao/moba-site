@@ -55,7 +55,7 @@ export default {
       }).then(() => {
         let url = `rest/article/${id}`;
         this.$.delete(url).then(res => {
-          res.code === 1 && this.getArticleList();
+          res.data.code === 1 && this.getArticleList();
         });
       });
     }

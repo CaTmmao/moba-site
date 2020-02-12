@@ -55,7 +55,7 @@ export default {
       }).then(() => {
         let url = `rest/carousel/${id}`;
         this.$.delete(url).then(res => {
-          res.code === 1 && this.getCarouselList();
+          res.data.code === 1 && this.getCarouselList();
         });
       });
     }

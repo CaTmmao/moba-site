@@ -56,7 +56,7 @@ export default {
         let url = `rest/hero/${id}`;
 
         this.$.delete(url).then(res => {
-          res.code === 1 && this.getHeroList();
+          res.data.code === 1 && this.getHeroList();
         });
       });
     }

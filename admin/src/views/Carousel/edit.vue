@@ -75,7 +75,7 @@ export default {
         url,
         carousel
       }).then(res => {
-        res.code === 1 && this.$router.push("/carousel/list");
+        res.data.code === 1 && this.$router.push("/carousel/list");
       });
     },
     //图片上传完成

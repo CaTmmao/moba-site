@@ -52,7 +52,7 @@ export default {
       }).then(async () => {
         let url = `rest/category/${id}`;
         this.$.delete(url).then(res => {
-          res.code === 1 && this.getCategoryList();
+          res.data.code === 1 && this.getCategoryList();
         });
       });
     }

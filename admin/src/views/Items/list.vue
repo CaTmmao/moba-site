@@ -53,7 +53,7 @@ export default {
       }).then(() => {
         let url = `rest/item/${id}`;
         this.$.delete(url).then(res => {
-          res.code === 1 && this.getItemsList();
+          res.data.code === 1 && this.getItemsList();
         });
       });
     }

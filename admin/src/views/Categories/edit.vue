@@ -78,7 +78,7 @@ export default {
         method,
         info
       }).then(res => {
-        res.code === 1 && this.$router.push("/category/list");
+        res.data.code === 1 && this.$router.push("/category/list");
       });
     }
   }
