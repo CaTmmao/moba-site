@@ -37,17 +37,37 @@ export default {
   },
   methods: {
     //获取管理员信息
-    async getInfo() {
-      let res = await this.$.get(`rest/admin/${this.id}`);
-      this.info = res.data;
+    getInfo() {
+      let url = `rest/admin/${this.id}`;
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.info = data;
+        }
+      });
     },
-    async save() {
-      if (this.id) {
-        await this.$.put(`rest/admin/${this.id}`, this.info);
+    //保存信息
+    save() {
+      let { id, info } = this;
+      let method;
+      let url = "rest/admin";
+
+      if (id) {
+        method = "put";
+        url = `${url}/${id}`;
       } else {
-        await this.$.post("rest/admin", this.info);
+        method = "post";
       }
-      this.$router.push("/admin/list");
+
+      this.$({
+        method,
+        url,
+        info
+      }).then(res => {
+        if (res.code === 1) {
+          this.$router.push("/admin/list");
+        }
+      });
     }
   }
 };

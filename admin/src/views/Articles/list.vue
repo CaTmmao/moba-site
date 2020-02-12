@@ -21,8 +21,8 @@ export default {
       //文章列表
       articleList: [
         {
-          title: '',
-          body: '',
+          title: "",
+          body: "",
           categories: []
         }
       ]
@@ -33,10 +33,14 @@ export default {
   },
   methods: {
     //获取文章列表
-    async getArticleList() {
-      let res = await this.$.get("rest/article");
-      this.articleList = res.data;
-      console.log(this.articleList)
+    getArticleList() {
+      let url = "rest/article";
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.articleList = data;
+        }
+      });
     },
     //编辑
     edit(id) {
@@ -48,13 +52,11 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      }).then(async () => {
-        await this.$.delete(`rest/article/${id}`);
-        this.$message({
-          type: "success",
-          message: "删除成功!"
+      }).then(() => {
+        let url = `rest/article/${id}`;
+        this.$.delete(url).then(res => {
+          res.code === 1 && this.getArticleList();
         });
-        this.getArticleList();
       });
     }
   }

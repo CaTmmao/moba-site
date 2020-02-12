@@ -48,17 +48,35 @@ export default {
   },
   methods: {
     //获取首页轮播图信息
-    async getCarousel() {
-      let res = await this.$.get(`rest/carousel/${this.id}`);
-      this.carousel = res.data;
+    getCarousel() {
+      let url = `rest/carousel/${this.id}`;
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.carousel = res.data;
+        }
+      });
     },
-    async save() {
-      if (this.id) {
-        await this.$.put(`rest/carousel/${this.id}`, this.carousel);
+    //保存
+    save() {
+      let { id, carousel } = this;
+      let url = "rest/carousel";
+      let method;
+
+      if (id) {
+        url = `${url}/${id}`;
+        method = "put";
       } else {
-        await this.$.post("rest/carousel", this.carousel);
+        method = "post";
       }
-      this.$router.push("/carousel/list");
+
+      this.$({
+        method,
+        url,
+        carousel
+      }).then(res => {
+        res.code === 1 && this.$router.push("/carousel/list");
+      });
     },
     //图片上传完成
     uploadSuccess(res) {

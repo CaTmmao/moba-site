@@ -32,9 +32,15 @@ export default {
   },
   methods: {
     //获取首页轮播图列表
-    async getCarouselList() {
-      let res = await this.$.get("rest/carousel");
-      this.list = res.data;
+    getCarouselList() {
+      let url = "rest/carousel";
+
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.list = data;
+        }
+      });
     },
     //编辑
     edit(id) {
@@ -46,13 +52,11 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      }).then(async () => {
-        await this.$.delete(`rest/carousel/${id}`);
-        this.$message({
-          type: "success",
-          message: "删除成功!"
+      }).then(() => {
+        let url = `rest/carousel/${id}`;
+        this.$.delete(url).then(res => {
+          res.code === 1 && this.getCarouselList();
         });
-        this.getCarouselList();
       });
     }
   }

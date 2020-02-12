@@ -38,7 +38,7 @@
           <el-form-item label="分类">
             <el-select v-model="info.categories" multiple>
               <el-option
-                v-for="(item, index) in categories"
+                v-for="(item, index) in categoryList"
                 :key="item._id"
                 :label="item.name"
                 :value="item._id"
@@ -60,7 +60,7 @@
           <el-form-item label="顺风出装">
             <el-select v-model="info.items1" multiple>
               <el-option
-                v-for="(item, index) in items"
+                v-for="(item, index) in itemList"
                 :key="item._id"
                 :label="item.name"
                 :value="item._id"
@@ -220,7 +220,10 @@ export default {
       //英雄分类
       categories: [],
       //装备（物品）列表
-      items: []
+      itemList: [],
+      //英雄列表
+      heroList: [],
+      //铭文列表
     };
   },
   created() {
@@ -232,27 +235,57 @@ export default {
   },
   methods: {
     //获取英雄信息
-    async getInfo() {
-      let res = await this.$.get(`rest/hero/${this.id}`);
-      this.info = Object.assign({}, this.info, res.data);
+    getInfo() {
+      let url = `rest/hero/${this.id}`;
+
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.info = data;
+        }
+      });
     },
     //获取英雄分类
-    async getCategories() {
-      let res = await this.$.get(`rest/category`);
-      this.categories = res.data;
+    getCategories() {
+      let url = "rest/category";
+
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.categoryList = data;
+        }
+      });
     },
     //获取装备（物品）
-    async getItemsList() {
-      let res = await this.$.get("rest/item");
-      this.items = res.data;
+    getItemsList() {
+      let url = "rest/item";
+
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.itemList = data;
+        }
+      });
     },
     async save() {
-      if (this.id) {
-        await this.$.put(`rest/hero/${this.id}`, this.info);
+      let { id, info } = this;
+      let url = "rest/hero";
+      let method;
+
+      if (id) {
+        url = `${url}/${id}`;
+        method = "put";
       } else {
-        await this.$.post("rest/hero", this.info);
+        method = "post";
       }
-      this.$router.push("/hero/list");
+
+      this.$({
+        url,
+        method,
+        info
+      }).then(res => {
+        res.code === 1 && this.$router.push("/hero/list");
+      });
     },
     //图片上传完成
     uploadSuccess(res) {
@@ -293,9 +326,13 @@ export default {
      * 获取英雄列表
      */
     getHeroesList() {
-      let url = this.API_CONFIG.getHeroesList;
+      let url = "rest/hero";
+
       this.$.get(url).then(res => {
-        this.heroList = res.data;
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.heroList = data;
+        }
       });
     }
   }

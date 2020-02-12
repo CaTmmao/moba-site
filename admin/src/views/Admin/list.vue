@@ -26,10 +26,15 @@ export default {
     this.getAdmin();
   },
   methods: {
-		//获取管理员列表
-    async getAdmin() {
-      let res = await this.$.get("rest/admin");
-      this.list = res.data;
+    //获取管理员列表
+    getAdmin() {
+      let url = "rest/admin";
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.list = data;
+        }
+      });
     },
     //编辑
     edit(id) {
@@ -41,13 +46,11 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      }).then(async () => {
-				await this.$.delete(`rest/admin/${id}`)
-				this.$message({
-          type: "success",
-          message: "删除成功!"
-				});
-				this.getAdmin()
+      }).then(() => {
+        let url = `rest/admin/${id}`;
+        this.$.delete(url).then(res => {
+          res.code === 1 && this.getAdmin();
+        });
       });
     }
   }

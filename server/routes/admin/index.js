@@ -24,42 +24,57 @@ module.exports = app => {
 
   //增加 
   router.post('/', async (req, res) => {
-
     //把客户端传递过来的数据存储在数据库中
-    const data = await req.Model.create(req.body)
-    res.send(data)
+    await req.Model.create(req.body).exec((err, success) => {
+      err && res.send({ code: 0 })
+      res.send({ code: 1 })
+    })
   })
 
   //删除
   router.delete('/:id', async (req, res) => {
-    const data = await req.Model.findByIdAndDelete(req.params.id)
-    res.send(data)
+    await req.Model.findByIdAndDelete(req.params.id).exec((err, data) => {
+      err && res.send({ code: 0 })
+      res.send({ code: 1 })
+    })
   })
 
 
   //更新
   router.put('/:id', async (req, res) => {
-    const data = await req.Model.findByIdAndUpdate(req.params.id, req.body)
-    res.send(data)
+    await req.Model.findByIdAndUpdate(req.params.id, req.body).exec((err, data) => {
+      err && res.send({ code: 0 })
+      res.send({ code: 1 })
+    })
   })
 
   router.get('/', async (req, res) => {
-    let queryOptions = {}
+    let queryOptions = {}, query
+    let parent = req.params.parentId
 
-    //检查模型名称
+    //检查模型名称是否是分类模型
     if (req.Model.modelName === 'Category') {
       queryOptions = {
         populate: 'parent'
       }
+
+      query = {
+        parent
+      }
     }
-    const list = await req.Model.find().setOptions(queryOptions).limit(100)
-    res.send(list)
+
+    await req.Model.find(query).setOptions(queryOptions).exec((err, data) => {
+      err && res.send({ code: 0 })
+      res.send({ code: 1, data })
+    })
   })
 
   //通过id获取详情
   router.get('/:id', async (req, res) => {
-    const data = await req.Model.findById(req.params.id)
-    res.send(data)
+    await req.Model.findById(req.params.id).exec((err, data) => {
+      err && res.send({ code: 0 })
+      res.send({ code: 1, data })
+    })
   })
 
   //登录

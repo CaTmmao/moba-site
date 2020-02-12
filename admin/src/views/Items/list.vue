@@ -31,9 +31,14 @@ export default {
   },
   methods: {
     //获取物品列表
-    async getItemsList() {
-      let res = await this.$.get("rest/item");
-      this.list = res.data;
+    getItemsList() {
+      let url = "rest/item";
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.list = data;
+        }
+      });
     },
     //编辑
     edit(id) {
@@ -45,13 +50,11 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      }).then(async () => {
-        await this.$.delete(`rest/item/${id}`);
-        this.$message({
-          type: "success",
-          message: "删除成功!"
+      }).then(() => {
+        let url = `rest/item/${id}`;
+        this.$.delete(url).then(res => {
+          res.code === 1 && this.getItemsList();
         });
-        this.getItemsList();
       });
     }
   }

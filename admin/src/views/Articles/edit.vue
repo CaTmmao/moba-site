@@ -57,22 +57,46 @@ export default {
   },
   methods: {
     //获取文章信息
-    async getInfo() {
-      let res = await this.$.get(`rest/article/${this.id}`);
-      this.article = res.data;
+    getInfo() {
+      let url = `rest/article/${this.id}`;
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.article = data;
+        }
+      });
     },
     //获取文章分类
-    async getCategories() {
-      let res = await this.$.get(`rest/category`);
-      this.categories = res.data;
+    getCategories() {
+      let url = "rest/category";
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.categories = data;
+        }
+      });
     },
-    async save() {
-      if (this.id) {
-        await this.$.put(`rest/article/${this.id}`, this.article);
+    //保存文章
+    save() {
+      let { id, article } = this;
+      let url = 'rest/article';
+      let method;
+
+      if (id) {
+        url = `${url}/${id}`;
+        method = "put";
       } else {
-        await this.$.post("rest/article", this.article);
+        method = "post";
       }
-      this.$router.push("/article/list");
+      this.$({
+        url,
+        method,
+        article
+      }).then(res => {
+        if (res.code === 1) {
+          this.$router.push("/article/list");
+        }
+      });
     },
     //富文本编辑器上传图片
     async handleImageAdded(file, Editor, cursorLocation, resetUploader) {

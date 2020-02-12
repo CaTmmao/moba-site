@@ -26,37 +26,60 @@ export default {
   data() {
     return {
       info: {
-        parent: '',
-        name: ''
+        parent: "",
+        name: ""
       },
       //上级分类
       parents: []
     };
   },
   created() {
-    this.getParents()
-    
+    this.getParents();
+
     //&&代表满足前面的条件之后才执行后面的函数
     this.id && this.getInfo();
   },
   methods: {
     //初始化上级分类
-    async getParents() {
-      let res = await this.$.get(`rest/category`);
-      this.parents = res.data;
+    getParents() {
+      let url = "rest/category";
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.parents = data;
+        }
+      });
     },
     //获取分类信息
-    async getInfo() {
-      let res = await this.$.get(`rest/category/${this.id}`);
-      this.info = res.data;
+    getInfo() {
+      let url = `rest/category/${this.id}`;
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.info = data;
+        }
+      });
     },
-    async save() {
-      if (this.id) {
-        await this.$.put(`rest/category/${this.id}`, this.info);
+    //保存
+    save() {
+      let { id, info } = this;
+      let url = "rest/category";
+      let method;
+
+      if (id) {
+        url = `${url}/${id}`;
+        method = "put";
       } else {
-        await this.$.post("rest/category", this.info);
+        method = "post";
       }
-      this.$router.push("/category/list");
+      
+      this.$({
+        url,
+        method,
+        info
+      }).then(res => {
+        res.code === 1 && this.$router.push("/category/list");
+      });
     }
   }
 };

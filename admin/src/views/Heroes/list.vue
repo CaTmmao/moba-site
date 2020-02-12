@@ -5,7 +5,7 @@
       <el-table-column prop="name" label="英雄名称"></el-table-column>
       <el-table-column prop="icon" label="头像">
         <template slot-scope="scope">
-          <img :src="scope.row.icon" />
+          <img :src="scope.row.avatar" />
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
@@ -31,9 +31,16 @@ export default {
   },
   methods: {
     //获取英雄列表
-    async getHeroList() {
-      let res = await this.$.get("rest/hero");
-      this.list = res.data;
+    getHeroList() {
+      let url = "rest/hero";
+
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.list = data;
+          console.log(this.list);
+        }
+      });
     },
     //编辑
     edit(id) {
@@ -45,13 +52,12 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      }).then(async () => {
-        await this.$.delete(`rest/hero/${id}`);
-        this.$message({
-          type: "success",
-          message: "删除成功!"
+      }).then(() => {
+        let url = `rest/hero/${id}`;
+
+        this.$.delete(url).then(res => {
+          res.code === 1 && this.getHeroList();
         });
-        this.getHeroList();
       });
     }
   }
