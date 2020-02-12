@@ -25,7 +25,7 @@ module.exports = app => {
   //增加 
   router.post('/', async (req, res) => {
     //把客户端传递过来的数据存储在数据库中
-    await req.Model.create(req.body).exec((err, success) => {
+    await req.Model.create(req.body, (err) => {
       err && res.send({ code: 0 })
       res.send({ code: 1 })
     })
