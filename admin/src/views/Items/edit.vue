@@ -58,7 +58,7 @@ export default {
       let { id, info } = this;
       let url = "rest/item";
       let method;
-      let data = info
+      let data = info;
 
       if (id) {
         url = `${url}/${id}`;
@@ -77,7 +77,10 @@ export default {
     },
     //图片上传完成
     uploadSuccess(res) {
-      this.info.icon = res.url;
+      let { code, data } = res;
+      if (code === 1) {
+        this.info.icon = data;
+      }
     }
   }
 };

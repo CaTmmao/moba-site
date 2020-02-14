@@ -118,25 +118,38 @@ module.exports = app => {
     })
   })
 
-  //上传图片
-  const multer = require('multer')
-  // 阿里云oss
-  const MAO = require('multer-aliyun-oss');
 
-  const upload = multer({
-    storage: MAO({
-      config: {
-        // oss 区域
-        region: 'oss-cn-chengdu',
-        accessKeyId: 'LTAI4Fo4m1YWfkrxyPwByE8E',
-        accessKeySecret: 'bIHgV933z0w5KGoRnSl59LGcVthXGB',
-        bucket: 'node-moba-site'
-      }
-    })
+  //上传图片
+  let multer = require('multer')
+  let upload = multer({
+    dest: './tmp/'
   })
+  // 腾讯云COS
+  let COS = require('cos-nodejs-sdk-v5');
+
+  let cos = new COS({
+    SecretId: 'AKIDBk6CtMEePxe8MKCewynOkqhKhpiNn4Yn',
+    SecretKey: 'DF2Y5OREn8E5h3D8qJYaMs8anob9SVO2'
+  });
+
   app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
     //之所以可以用req.file获取到文件数据，是因为用multer库的upload.single('file')将file参数赋值到req上
-    const file = req.file
-    res.send(file)
+    let file = req.file
+    //文件路径
+    let FilePath = file.path;
+    //文件名
+    let fileName = file.filename
+    var time = new Date().getTime();
+
+    //上传文件至腾讯云COS
+    cos.sliceUploadFile({
+      Bucket: 'moba-site-1257106288',
+      Region: 'ap-chengdu',
+      Key: `${fileName}${time}.jpg`,
+      FilePath
+    }, (err, data) => {
+      err && res.status(403).send({ code: 0, msg: err });
+      res.send({ code: 1, data: `https://${data.Location}` });
+    });
   })
 }
