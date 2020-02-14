@@ -128,8 +128,8 @@ module.exports = app => {
   let COS = require('cos-nodejs-sdk-v5');
 
   let cos = new COS({
-    SecretId: 'AKIDBk6CtMEePxe8MKCewynOkqhKhpiNn4Yn',
-    SecretKey: 'DF2Y5OREn8E5h3D8qJYaMs8anob9SVO2'
+    SecretId: 'AKIDELE3lL52vnX7ZroynRvFOMAas0IQf8i8',
+    SecretKey: 'TlIIBsOm8rPlwxnUzKUyKUeeWDlA6z42'
   });
 
   app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
