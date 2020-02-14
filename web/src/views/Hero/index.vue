@@ -127,7 +127,9 @@
         <div>
           <p>最佳搭档</p>
           <div v-for="item in data.partners">
-            <img :src="item.hero.avatar" />
+            <router-link :to="`/heroes/${item.hero._id}`">
+              <img :src="item.hero.avatar" />
+            </router-link>
             <p>{{item.description}}</p>
           </div>
         </div>
@@ -135,7 +137,9 @@
         <div>
           <p>被谁克制</p>
           <div v-for="item in data.controledBy">
-            <img :src="item.hero.avatar" />
+            <router-link :to="`/heroes/${item.hero._id}`">
+              <img :src="item.hero.avatar" />
+            </router-link>
             <p>{{item.description}}</p>
           </div>
         </div>
@@ -143,7 +147,9 @@
         <div>
           <p>克制谁</p>
           <div v-for="item in data.control">
-            <img :src="item.hero.avatar" />
+            <router-link :to="`/heroes/${item.hero._id}`">
+              <img :src="item.hero.avatar" />
+            </router-link>
             <p>{{item.description}}</p>
           </div>
         </div>
@@ -204,6 +210,12 @@ export default {
       });
       this.$refs.skillImg[index].classList.add("active");
       this.showSkillIndex = index;
+    }
+  },
+  watch: {
+    "$route.params.id": function(id) {
+      this.getHeroInfo();
+      
     }
   }
 };
