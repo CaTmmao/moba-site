@@ -47,7 +47,7 @@
             :src="item.icon"
             class="width-1d2"
             @click="switchSkill(index)"
-            :class="{'active': index === 0}"
+            :class="{'active': index === showSkillIndex}"
           />
         </div>
         <div
@@ -208,14 +208,12 @@ export default {
       this.$refs.skillImg.forEach(item => {
         item.classList.remove("active");
       });
-      this.$refs.skillImg[index].classList.add("active");
       this.showSkillIndex = index;
     }
   },
   watch: {
     "$route.params.id": function(id) {
       this.getHeroInfo();
-      
     }
   }
 };
