@@ -22,8 +22,10 @@ $spacing-sizes: (
   d25: 0.25,
   d3: 0.3,
   d34: 0.34,
+  d39: 0.39,
+  d4: 0.4,
   d6: 0.6,
-  d9: 0.9,
+  d9: 0.9
 );
 
 @each $typeKey, $type in $spacing-types {
