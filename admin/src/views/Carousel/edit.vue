@@ -53,7 +53,8 @@ export default {
       this.$.get(url).then(res => {
         let { code, data } = res.data;
         if (code === 1) {
-          this.carousel = res.data;
+          this.carousel.imgUrl = data.imgUrl;
+          this.carousel.path = data.path;
         }
       });
     },
@@ -62,7 +63,7 @@ export default {
       let { id, carousel } = this;
       let url = "rest/carousel";
       let method;
-      let data = info
+      let data = carousel;
 
       if (id) {
         url = `${url}/${id}`;
