@@ -161,10 +161,11 @@ router.beforeEach((to, from, next) => {
 
   // 未登录去登录页
   if (!token) {
-    next('/login')
-  } else if (to.path === '/login') {
-    //已登录禁止去首页
-    router.go(-1)
+    if (to.path !== '/login') {
+      next('/login')
+    } else {
+      next()
+    }
   } else {
     next()
   }
