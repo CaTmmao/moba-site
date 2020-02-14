@@ -10,6 +10,8 @@ module.exports = (app) => {
   const Hero = require('../../models/Hero')
   // 引入 Carousel 模型
   const Carousel = require('../../models/Carousel')
+  const Rune = require('../../models/Rune')
+  const Item = require('../../models/Item')
 
   // 获取首页轮播图
   router.get('/home/carousel', async (req, res) => {
@@ -174,7 +176,7 @@ module.exports = (app) => {
 
   // 获取英雄详细信息
   router.get('/heroes/info/:id', async (req, res) => {
-    const data = await Hero.findById(req.params.id).populate('categories')
+    const data = await Hero.findById(req.params.id).populate(['rune', 'items1', 'items2', 'partners.hero', 'control.hero', 'controledBy.hero'])
     res.send(data)
   })
 

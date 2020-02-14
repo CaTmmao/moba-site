@@ -63,9 +63,11 @@ const schema = new mongoose.Schema({
     }
   ],
   //出装装备（顺风出装）
-  items1: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Items' }],
+  items1: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Item' }],
   //逆风出装
-  items2: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Items' }],
+  items2: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Item' }],
+  //铭文推荐
+  rune: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Rune' }],
   //使用技巧 
   usageTips: { type: String },
   //对抗技巧
@@ -80,7 +82,25 @@ const schema = new mongoose.Schema({
       //描述
       description: { type: String }
     }
-  ]
+  ],
+  //被谁克制
+  controledBy: [
+    {
+      //关联英雄模型
+      hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Hero' },
+      //描述
+      description: { type: String }
+    }
+  ],
+  //克制谁
+  control: [
+    {
+      //关联英雄模型
+      hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Hero' },
+      //描述
+      description: { type: String }
+    }
+  ],
 },
   // 自动添加 创建时间 和 更新时间 字段 
   { timestamps: true })
