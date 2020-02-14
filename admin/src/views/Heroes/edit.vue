@@ -70,7 +70,17 @@
           <el-form-item label="逆风出装">
             <el-select v-model="info.items2" multiple>
               <el-option
-                v-for="(item, index) in items"
+                v-for="(item, index) in itemList"
+                :key="item._id"
+                :label="item.name"
+                :value="item._id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="铭文推荐">
+            <el-select v-model="info.rune" multiple>
+              <el-option
+                v-for="(item, index) in runeList"
                 :key="item._id"
                 :label="item.name"
                 :value="item._id"
@@ -124,9 +134,6 @@
               <el-form-item label="描述">
                 <el-input type="textarea" v-model="item.description"></el-input>
               </el-form-item>
-              <el-form-item label="小提示">
-                <el-input v-model="item.tips"></el-input>
-              </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="delSkill(index)">删除</el-button>
               </el-form-item>
@@ -165,7 +172,70 @@
             </el-col>
           </el-row>
         </el-tab-pane>
-        <el-tab-pane label="xx">x</el-tab-pane>
+
+        <!-- 被谁克制 -->
+        <el-tab-pane label="被谁克制">
+          <el-button type="text" @click="addControledBy">
+            <i class="el-icon-plus"></i> 添加
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col
+              style="margin-top: 20px;"
+              :md="12"
+              v-for="(item, index) in info.controledBy"
+              :key="index"
+            >
+              <el-form-item label="英雄">
+                <el-select v-model="item.hero" filterable placeholder="请选择英雄">
+                  <el-option
+                    v-for="item in heroList"
+                    :key="item._id"
+                    :label="item.name"
+                    :value="item._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="item.description"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" @click="delControledBy(index)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+
+        <!-- 克制英雄 -->
+        <el-tab-pane label="克制英雄">
+          <el-button type="text" @click="addControl">
+            <i class="el-icon-plus"></i> 添加
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col
+              style="margin-top: 20px;"
+              :md="12"
+              v-for="(item, index) in info.control"
+              :key="index"
+            >
+              <el-form-item label="英雄">
+                <el-select v-model="item.hero" filterable placeholder="请选择英雄">
+                  <el-option
+                    v-for="item in heroList"
+                    :key="item._id"
+                    :label="item.name"
+                    :value="item._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="item.description"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" @click="delControl(index)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
       </el-tabs>
 
       <el-form-item style="margin-top: 1rem;">
@@ -214,16 +284,23 @@ export default {
         teamTips: "",
         //技能
         skills: [],
-        // 最佳搭档
-        partners: []
+        //铭文推荐
+        rune: [],
+        //最佳搭档
+        partners: [],
+        //被谁克制
+        controledBy: [],
+        //克制谁
+        control: []
       },
       //英雄分类
-      categories: [],
+      categoryList: [],
       //装备（物品）列表
       itemList: [],
       //英雄列表
       heroList: [],
       //铭文列表
+      runeList: []
     };
   },
   created() {
@@ -232,6 +309,7 @@ export default {
     //&&代表满足前面的条件之后才执行后面的函数
     this.id && this.getInfo();
     this.getHeroesList();
+    this.getRuneList();
   },
   methods: {
     //获取英雄信息
@@ -267,10 +345,23 @@ export default {
         }
       });
     },
-    async save() {
+    //获取铭文列表
+    getRuneList() {
+      let url = "rest/rune";
+
+      this.$.get(url).then(res => {
+        let { code, data } = res.data;
+        if (code === 1) {
+          this.runeList = data;
+        }
+      });
+    },
+    //保存信息
+    save() {
       let { id, info } = this;
       let url = "rest/hero";
       let method;
+      let data = info;
 
       if (id) {
         url = `${url}/${id}`;
@@ -282,14 +373,17 @@ export default {
       this.$({
         url,
         method,
-        info
+        data
       }).then(res => {
-        res.code === 1 && this.$router.push("/hero/list");
+        res.data.code === 1 && this.$router.push("/hero/list");
       });
     },
     //图片上传完成
     uploadSuccess(res) {
-      this.info.avatar = res.url;
+      let { code, data } = res;
+      if (code === 1) {
+        this.info.avatar = data;
+      }
     },
     //添加技能
     addSkill() {
@@ -320,6 +414,36 @@ export default {
         type: "error"
       }).then(() => {
         this.info.partners.splice(index, 1);
+      });
+    },
+    //添加被克制英雄
+    addControledBy() {
+      this.info.controledBy.push({});
+    },
+    /**
+     * 删除被克制英雄
+     * @param {number} index 删除对象所在索引
+     */
+    delControledBy(index) {
+      this.$confirm("请确认是否删除？", "提示", {
+        type: "error"
+      }).then(() => {
+        this.info.controledBy.splice(index, 1);
+      });
+    },
+    //添加克制英雄
+    addControl() {
+      this.info.control.push({});
+    },
+    /**
+     * 删除克制英雄
+     * @param {number} index 删除对象所在索引
+     */
+    delControl(index) {
+      this.$confirm("请确认是否删除？", "提示", {
+        type: "error"
+      }).then(() => {
+        this.info.control.splice(index, 1);
       });
     },
     /**
