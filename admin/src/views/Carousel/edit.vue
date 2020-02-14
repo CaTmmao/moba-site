@@ -81,7 +81,11 @@ export default {
     },
     //图片上传完成
     uploadSuccess(res) {
-      this.carousel.imgUrl = res.url;
+      let { code, data } = res;
+
+      if (code === 1) {
+        this.carousel.imgUrl = data;
+      }
     }
   }
 };

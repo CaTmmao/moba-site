@@ -95,7 +95,10 @@ export default {
     },
     //图片上传完成
     uploadSuccess(res) {
-      this.info.icon = res.url;
+      let { code, data } = res;
+      if (code === 1) {
+        this.info.icon = data;
+      }
     },
     //添加描述
     addDesc() {
