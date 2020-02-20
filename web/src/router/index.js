@@ -20,6 +20,13 @@ const routes = [
         name: 'articles',
         component: () => import('@/views/Main/Article/index'),
         props: true
+      },
+      // 全部英雄展示页面
+      {
+        path: '/all-hero',
+        name: 'allHeroes',
+        component: () => import('@/views/Main/Home/components/allHeroes'),
+      },
       }
     ]
   },

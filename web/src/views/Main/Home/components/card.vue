@@ -3,32 +3,34 @@
     <div class="card-wrapper px-d34 bg-white mt-d25">
       <div class="card-header flex ai-center jc-between">
         <p class="fs-d32 py-d3">{{title}}</p>
-        <svg
-          t="1576241587951"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="4158"
-          width="20"
-          height="20"
-        >
-          <path
-            d="M102.4 512m-102.4 0a102.4 102.4 0 1 0 204.8 0 102.4 102.4 0 1 0-204.8 0Z"
-            p-id="4159"
-            fill="#333"
-          />
-          <path
-            d="M512 512m-102.4 0a102.4 102.4 0 1 0 204.8 0 102.4 102.4 0 1 0-204.8 0Z"
-            p-id="4160"
-            fill="#333"
-          />
-          <path
-            d="M921.6 512m-102.4 0a102.4 102.4 0 1 0 204.8 0 102.4 102.4 0 1 0-204.8 0Z"
-            p-id="4161"
-            fill="#333"
-          />
-        </svg>
+        <router-link :to="allPath" class="flex ai-center">
+          <svg
+            t="1576241587951"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4158"
+            width="20"
+            height="20"
+          >
+            <path
+              d="M102.4 512m-102.4 0a102.4 102.4 0 1 0 204.8 0 102.4 102.4 0 1 0-204.8 0Z"
+              p-id="4159"
+              fill="#333"
+            />
+            <path
+              d="M512 512m-102.4 0a102.4 102.4 0 1 0 204.8 0 102.4 102.4 0 1 0-204.8 0Z"
+              p-id="4160"
+              fill="#333"
+            />
+            <path
+              d="M921.6 512m-102.4 0a102.4 102.4 0 1 0 204.8 0 102.4 102.4 0 1 0-204.8 0Z"
+              p-id="4161"
+              fill="#333"
+            />
+          </svg>
+        </router-link>
       </div>
       <slot name="header"></slot>
 
@@ -71,6 +73,10 @@ export default {
     categories: {
       type: Array,
       required: true
+    },
+    // 查看模块全部内容的跳转地址
+    allPath: {
+      type: String
     }
   },
   data() {

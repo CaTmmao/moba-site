@@ -164,12 +164,17 @@ module.exports = (app) => {
     ])
 
     const subCategories = categories.map(item => item._id)
-    categories.unshift({
-      name: '热门',
-      heroList: await Hero.find().where({
-        categories: { $in: subCategories }
-      }).limit(10).lean()
-    })
+    categories.unshift(
+      {
+        name: '热门',
+        heroList: await Hero.find().where({
+          categories: { $in: subCategories }
+        }).limit(10).lean()
+      },
+      {
+        name: '全部',
+        heroList: await Hero.find()
+      })
 
     res.send(categories)
   })

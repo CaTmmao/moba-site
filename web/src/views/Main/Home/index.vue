@@ -29,7 +29,7 @@
     </siteCard>
 
     <!-- 英雄列表模块 -->
-    <siteCard class="hero" title="英雄列表" :categories="heroList">
+    <siteCard class="hero" title="英雄列表" :categories="heroList" allPath="/all-hero">
       <template v-slot:header>
         <router-link :to="`/heroes/${newestHero._id}`">
           <div class="newestHero width-100p position-re pb-d3 mb-d24 height-2d3">
@@ -111,7 +111,14 @@ export default {
     getHeroList() {
       let url = this.API_CONFIG.getHeroList;
       this.$.get(url).then(res => {
-        this.heroList = res.data;
+        let { data } = res;
+        data.forEach((item, index) => {
+          if (item.name === "全部") {
+            data.splice(index, 1);
+            this.heroList = data;
+            return;
+          }
+        });
       });
     },
     // 获取轮播图
