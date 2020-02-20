@@ -15,6 +15,14 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="total"
+      :pageSize="10"
+      :current-page.sync="currentPage"
+      @current-change="getHeroList"
+    ></el-pagination>
   </div>
 </template>
 
@@ -23,7 +31,11 @@ export default {
   name: "heroList",
   data() {
     return {
-      list: []
+      list: [],
+      // 总条数
+      total: 0,
+      // 当前页数
+      currentPage: 1
     };
   },
   created() {
@@ -35,10 +47,10 @@ export default {
       let url = "rest/hero";
 
       this.$.get(url).then(res => {
-        let { code, data } = res.data;
+        let { code, data, totalCount } = res.data;
         if (code === 1) {
           this.list = data;
-          console.log(this.list);
+          this.total = totalCount;
         }
       });
     },

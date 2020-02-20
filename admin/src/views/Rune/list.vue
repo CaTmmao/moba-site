@@ -14,6 +14,14 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="total"
+      :pageSize="10"
+      :current-page.sync="currentPage"
+      @current-change="getRuneList"
+    ></el-pagination>
   </div>
 </template>
 
@@ -22,7 +30,11 @@ export default {
   name: "runeList",
   data() {
     return {
-      list: []
+      list: [],
+      // 总条数
+      total: 0,
+      // 当前页数
+      currentPage: 1
     };
   },
   created() {
@@ -33,9 +45,10 @@ export default {
     getRuneList() {
       let url = "rest/rune";
       this.$.get(url).then(res => {
-        let { code, data } = res.data;
+        let { code, data, totalCount } = res.data;
         if (code === 1) {
           this.list = data;
+          this.total = totalCount;
         }
       });
     },

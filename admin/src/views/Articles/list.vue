@@ -10,6 +10,14 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="total"
+      :pageSize="10"
+      :current-page.sync="currentPage"
+      @current-change="getArticleList"
+    ></el-pagination>
   </div>
 </template>
 
@@ -25,7 +33,11 @@ export default {
           body: "",
           categories: []
         }
-      ]
+      ],
+      // 总条数
+      total: 0,
+      // 当前页数
+      currentPage: 1
     };
   },
   created() {
@@ -36,9 +48,10 @@ export default {
     getArticleList() {
       let url = "rest/article";
       this.$.get(url).then(res => {
-        let { code, data } = res.data;
+        let { code, data, totalCount } = res.data;
         if (code === 1) {
           this.articleList = data;
+          this.total = totalCount;
         }
       });
     },

@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import {
-    Button, Container, Aside, Menu, Submenu, MenuItemGroup, MenuItem,
-    Header, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Main,
-    Form, FormItem, Input, MessageBox, Message, Select, Option, Upload, Rate, Tabs,
-    TabPane, Row, Col, Card
+  Button, Container, Aside, Menu, Submenu, MenuItemGroup, MenuItem,
+  Header, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Main,
+  Form, FormItem, Input, MessageBox, Message, Select, Option, Upload, Rate, Tabs,
+  TabPane, Row, Col, Card, pagination
 } from 'element-ui'
 
 Vue.prototype.$message = Message
@@ -34,3 +34,4 @@ Vue.use(TabPane)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Card)
+Vue.use(pagination)
