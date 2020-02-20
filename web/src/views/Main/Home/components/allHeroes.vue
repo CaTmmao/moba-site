@@ -58,6 +58,8 @@ export default {
     },
     // 查看其他分类
     switchSection(index) {
+      if (this.showHeroIndex === index) return;
+
       this.$refs.heroSection.forEach(item => {
         item.classList.remove("active");
       });

@@ -211,6 +211,8 @@ export default {
      * @param {number} index 索引
      */
     switchSkill(index) {
+      if (this.showHeroIndex === index) return;
+      
       this.$refs.skillImg.forEach(item => {
         item.classList.remove("active");
       });
