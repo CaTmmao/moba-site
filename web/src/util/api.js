@@ -7,7 +7,7 @@ const API_CONFIG = {
   // 获取英雄分类列表 GET
   getHeroList: 'heroes/list',
   // 获取文章详情信息 GET
-  getArticleDetail: 'articles',
+  getArticleDetail: 'news',
   // 获取英雄详细信息 GET
   getHeroDetail: 'heroes/info',
   // 获取首页轮播图 GET

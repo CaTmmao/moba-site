@@ -71,6 +71,19 @@ module.exports = (app) => {
     res.send(categories)
   })
 
+  // 获取文章详情
+  router.get('/news/:id', async (req, res) => {
+    let data = await Article.findById(req.params.id)
+    // 查找两条分类一样的文章作为推荐文章
+    let related = await Article.find().where({
+      categories: { $in: data.categories }
+    }).limit(2)
+    res.send({
+      data,
+      related
+    })
+  })
+
   // 获取最新英雄
   router.get('/heroes/newest', async (req, res) => {
     const data = await Hero.find().populate('categories').sort({ createdAt: -1 }).limit(1)
@@ -123,19 +136,6 @@ module.exports = (app) => {
   router.get('/heroes/info/:id', async (req, res) => {
     const data = await Hero.findById(req.params.id).populate(['rune', 'items1', 'items2', 'partners.hero', 'control.hero', 'controledBy.hero'])
     res.send(data)
-  })
-
-  // 获取文章详情
-  router.get('/articles/:id', async (req, res) => {
-    let data = await Article.findById(req.params.id)
-    // 查找两条分类一样的文章作为推荐文章
-    let related = await Article.find().where({
-      categories: { $in: data.categories }
-    }).limit(2)
-    res.send({
-      data,
-      related
-    })
   })
 
   // 接口通用前缀
