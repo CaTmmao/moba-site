@@ -48,9 +48,13 @@ module.exports = app => {
     })
   })
 
+  // 查询数据
   router.get('/', async (req, res) => {
-    let queryOptions = {}, query
-    let parent = req.params.parentId
+    let totalCount, pages, query, queryOptions
+    let { parentId } = req.params
+    let { page, pageSize } = req.query // 数据当前页数 & 每页数据条数
+    page = parseInt(page) || 1;
+    pageSize = parseInt(pageSize) || 10
 
     //检查模型名称是否是分类模型
     if (req.Model.modelName === 'Category') {
@@ -59,14 +63,30 @@ module.exports = app => {
       }
 
       query = {
-        parent
+        parent: parentId
       }
     }
 
-    await req.Model.find(query).setOptions(queryOptions).exec((err, data) => {
-      err && res.send({ code: 0 })
-      res.send({ code: 1, data })
+    // 数据总条数
+    await req.Model.countDocuments().then((count) => {
+      totalCount = count
     })
+
+    // 数据总页数
+    pages = Math.ceil(totalCount / pageSize)
+
+    // 根据条件查询数据
+    await req.Model
+      .find(query)
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+      .setOptions(queryOptions)
+      .exec((err, data) => {
+        // 出错
+        err && res.send({ code: 0, msg: err })
+        // 查询成功
+        res.send({ code: 1, page, totalCount, pages, pageSize, data })
+      })
   })
 
   //通过id获取详情
