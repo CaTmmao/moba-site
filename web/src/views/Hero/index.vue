@@ -1,12 +1,18 @@
 <template>
   <div class="hero-detail">
     <!-- 顶部 -->
-    <div class="topbar text-white flex bg-black ai-center height-d9 fs-d26">
-      <router-link to="/home" class="width-d7 flex ai-center mx-d2">
-        <img src="@/assets/logo.png" class="width-100p" />
+    <div class="topbar text-white flex bg-black ai-center jc-between height-d9 fs-d26">
+      <div class="flex ai-center">
+        <router-link to="/home" class="width-d7 flex ai-center mx-d2">
+          <img src="@/assets/logo.png" class="width-100p" />
+        </router-link>
+        <p class="mr-d2">王者荣耀</p>
+        <p>攻略战</p>
+      </div>
+      <router-link tag="div" to="/all-hero" class="fs-d4 mr-d3 flex ai-center">
+        <span class="fs-d22 mr-d2">更多英雄</span>
+        >
       </router-link>
-      <p class="mr-d2">王者荣耀</p>
-      <p>攻略战</p>
     </div>
 
     <!-- banner -->
