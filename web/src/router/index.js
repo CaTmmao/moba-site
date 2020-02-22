@@ -27,6 +27,11 @@ const routes = [
         name: 'allHeroes',
         component: () => import('@/views/Main/Home/components/allHeroes'),
       },
+      // 全部新闻展示页面
+      {
+        path: '/all-news',
+        name: 'allnews',
+        component: () => import('@/views/Main/Home/components/allNews'),
       }
     ]
   },

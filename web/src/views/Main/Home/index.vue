@@ -11,7 +11,7 @@
     </swiper>
 
     <!-- 新闻资讯模块 -->
-    <siteCard title="新闻资讯" :categories="newsList">
+    <siteCard title="新闻资讯" :categories="newsList" allPath="/all-news">
       <template #items="{category}">
         <router-link
           tag="div"
@@ -156,7 +156,7 @@ export default {
   .swiper-wrapper {
     height: auto !important;
   }
-  
+
   .swiper-pagination {
     display: flex;
     justify-content: flex-end;
