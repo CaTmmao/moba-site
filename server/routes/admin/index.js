@@ -148,8 +148,8 @@ module.exports = app => {
   let COS = require('cos-nodejs-sdk-v5');
 
   let cos = new COS({
-    SecretId: 'AKIDELE3lL52vnX7ZroynRvFOMAas0IQf8i8',
-    SecretKey: 'TlIIBsOm8rPlwxnUzKUyKUeeWDlA6z42'
+    SecretId: 'xxx',
+    SecretKey: 'xxx'
   });
 
   app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
@@ -163,8 +163,8 @@ module.exports = app => {
 
     //上传文件至腾讯云COS
     cos.sliceUploadFile({
-      Bucket: 'moba-site-1257106288',
-      Region: 'ap-chengdu',
+      Bucket: 'xxx',
+      Region: 'xxx',
       Key: `${fileName}${time}.jpg`,
       FilePath
     }, (err, data) => {
