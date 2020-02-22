@@ -71,6 +71,34 @@ module.exports = (app) => {
     res.send(categories)
   })
 
+  // 获取指定分类的文章列表
+  router.get('/news/category/list', async (req, res) => {
+    // 分类 id, 当前页, 每页条数
+    let { id, page, pageSize } = req.query
+    // 总条数, 总页数
+    let totalCount, pages, query
+    page = parseInt(page) || 1
+    pageSize = parseInt(pageSize) || 15
+    query = { categories: id }
+    totalCount = await Article.countDocuments(query)
+    pages = Math.ceil(totalCount / pageSize)
+
+    let data = await Article
+      .find(query)
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+
+    res.send({ code: 1, page, totalCount, pages, pageSize, data })
+  })
+
+  // 获取新闻资讯子分类列表
+  router.get('/news/categories', async (req, res) => {
+    // 上级分类
+    let parent = await Category.findOne({ name: '新闻资讯' })
+    let data = await Category.find({ parent: parent._id })
+    res.send(data)
+  })
+
   // 获取文章详情
   router.get('/news/:id', async (req, res) => {
     let data = await Article.findById(req.params.id)
