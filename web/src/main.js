@@ -27,7 +27,6 @@ Vue.prototype.$ = axios.create({
 import utils from './util/common'
 Vue.prototype.$utils = utils
 
-
 Vue.config.productionTip = false
 
 new Vue({

@@ -6,6 +6,12 @@
 @import "../../../../web/src/assets/scss/util/border.scss";
 @import "../../../../web/src/assets/scss/util/position.scss";
 
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
 .container {
   .avatar-uploader {
     .el-upload {
