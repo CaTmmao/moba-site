@@ -19,9 +19,9 @@ module.exports = (app) => {
     res.send(data)
   })
 
-  // 获取新闻资讯分类列表
-  router.get('/news/list', async (req, res) => {
-    // 顶级分类
+  // 获取首页新闻资讯分类列表
+  router.get('/news/home/list', async (req, res) => {
+    // 上级分类
     const parent = await Category.findOne({
       name: '新闻资讯'
     })
@@ -52,6 +52,7 @@ module.exports = (app) => {
       }
     ])
 
+    // 提取数组内每个元素的 id
     const subCategories = categories.map(item => item._id)
     categories.unshift({
       name: '热门',
@@ -60,6 +61,7 @@ module.exports = (app) => {
       }).populate('categories').limit(5).lean()
     })
 
+    // 文章指定一个分类
     categories.map(category => {
       category.newsList.map(item => {
         item.categoryName = category.name === '热门' ? item.categories[0].name : category.name
