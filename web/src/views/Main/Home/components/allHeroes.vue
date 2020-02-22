@@ -1,16 +1,16 @@
 <template>
-  <div class="px-d24 pt-d15">
-    <div class="flex jc-between nav">
+  <div class=" pt-d15">
+    <div class="flex jc-between nav height-d7">
       <span
         v-for="(item, index) in heroList"
         :class="{'active': index === showHeroIndex}"
         v-if="item.name !== '热门'"
-        class="fs-d26 nav-item"
+        class="fs-d26 nav-item fg-1 flex jc-center ai-center"
         @click="switchSection(index)"
         ref="heroSection"
       >{{item.name}}</span>
     </div>
-    <div>
+    <div class="px-d24">
       <div v-for="(item, index) in heroList" v-if="index === showHeroIndex" class="mt-d32 flex">
         <router-link
           tag="div"
