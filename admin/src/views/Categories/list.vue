@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>分类列表</h1>
     <el-table
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       :data="list"
+      row-key="_id"
       style="width: 100%"
     >
       <el-table-column prop="name" label="名称"></el-table-column>
@@ -41,9 +41,11 @@ export default {
     this.getCategoryList();
   },
   methods: {
-    //获取分类列表
+    /**
+     * 获取分类列表
+     */
     getCategoryList() {
-      let url = "rest/category";
+      let url = `rest/category?page=${this.currentPage}`;
       this.$.get(url).then(res => {
         let { code, data, totalCount } = res.data;
         if (code === 1) {

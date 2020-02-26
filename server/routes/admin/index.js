@@ -24,6 +24,9 @@ module.exports = app => {
 
   //增加 
   router.post('/', async (req, res) => {
+    //增加一级分类，删除 parent 字段
+    !req.body.parent && delete req.body.parent
+
     //把客户端传递过来的数据存储在数据库中
     await req.Model.create(req.body, (err) => {
       err && res.send({ code: 0 })
@@ -50,25 +53,22 @@ module.exports = app => {
 
   // 查询数据
   router.get('/', async (req, res) => {
-    let totalCount, pages, query, queryOptions
-    let { parentId } = req.params
+    let totalCount, pages, query
+    let { parentId } = req.query
+
     let { page, pageSize } = req.query // 数据当前页数 & 每页数据条数
     page = parseInt(page) || 1;
     pageSize = parseInt(pageSize) || 10
 
     //检查模型名称是否是分类模型
     if (req.Model.modelName === 'Category') {
-      queryOptions = {
-        populate: 'parent'
-      }
-
       query = {
         parent: parentId
       }
     }
 
     // 数据总条数
-    await req.Model.countDocuments().then((count) => {
+    await req.Model.countDocuments(query).then((count) => {
       totalCount = count
     })
 
@@ -77,14 +77,30 @@ module.exports = app => {
 
     // 根据条件查询数据
     await req.Model
-      .find(query)
-      .skip((page - 1) * pageSize)
-      .limit(pageSize)
-      .setOptions(queryOptions)
-      .exec((err, data) => {
+      .aggregate([
+        {
+          $match: {
+            parent: parentId
+          }
+        },
+        {
+          $skip: (page - 1) * pageSize
+        },
+        { $limit: pageSize },
+        {
+          //递归查询，并添加 children 字段
+          $graphLookup: {
+            from: "categories",
+            startWith: "$_id",
+            connectFromField: "_id",
+            connectToField: "parent",
+            as: "children"
+          }
+        }
+      ]).exec((err, data) => {
         // 出错
         err && res.send({ code: 0, msg: err })
-        // 查询成功
+
         res.send({ code: 1, page, totalCount, pages, pageSize, data })
       })
   })

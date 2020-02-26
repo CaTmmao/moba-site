@@ -34,12 +34,23 @@ export default {
     };
   },
   created() {
-    this.getParents();
-
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getInfo();
+    this.init();
   },
   methods: {
+    /**
+     * 数据初始化
+     */
+    init() {
+      this.getParents();
+
+      // 是否填充数据到表单
+      if (this.id) {
+        this.getInfo();
+      } else {
+        this.info.name = "";
+        this.info.parent = "";
+      }
+    },
     //初始化上级分类
     getParents() {
       let url = "rest/category";
@@ -65,7 +76,7 @@ export default {
       let { id, info } = this;
       let url = "rest/category";
       let method;
-      let data = info
+      let data = info;
 
       if (id) {
         url = `${url}/${id}`;
@@ -73,7 +84,7 @@ export default {
       } else {
         method = "post";
       }
-      
+
       this.$({
         url,
         method,
