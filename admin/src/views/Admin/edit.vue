@@ -6,7 +6,7 @@
         <el-input v-model="info.username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="info.password" placeholder="密码不会以明文显示，如需修改，直接输入内容保存"></el-input>
+        <el-input show-password v-model="info.password" placeholder="密码不会以明文显示，如需修改，直接输入内容保存"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -51,13 +51,14 @@ export default {
       let { id, info } = this;
       let method;
       let url = "rest/admin";
-      let data = info
+      let data = info;
 
       if (id) {
         method = "put";
         url = `${url}/${id}`;
       } else {
         method = "post";
+        url = "admin/api/register";
       }
 
       this.$({
