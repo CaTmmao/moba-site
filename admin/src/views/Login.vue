@@ -6,10 +6,11 @@
           <el-input v-model="info.username" @keyup.enter.native="login"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="info.password" @keyup.enter.native="login"></el-input>
+          <el-input show-password v-model="info.password" @keyup.enter.native="login"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="login">登录</el-button>
+          <el-button @click="register">注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -38,13 +39,24 @@ export default {
       }
 
       this.$.post("login", this.info).then(res => {
-        const { code } = res.data;
+        const { code, token } = res.data;
         if (code === 1) {
-          const { token } = res.data;
           localStorage.token = token;
-          this.$message.success("登录成功");
           this.$router.push("/");
         }
+      });
+    },
+    //注册
+    register() {
+      let { info } = this;
+
+      if (!info.username || !info.password) {
+        this.$message.warning("请填写完整");
+        return;
+      }
+
+      this.$.post("register", info).then(res => {
+        res.data.code === 1 && this.$message.success("注册成功");
       });
     }
   }

@@ -97,6 +97,23 @@ module.exports = app => {
     })
   })
 
+  //注册
+  app.post('/admin/api/register', async (req, res) => {
+    const user = await Admin.findOne({ username: req.body.username })
+    if (user) {
+      res.send({
+        code: 0,
+        msg: '已存在该用户名'
+      })
+    } else {
+      //把客户端传递过来的数据存储在数据库中
+      await Admin.create(req.body, (err) => {
+        err && res.send({ code: 0, msg: '请求出错，请稍后再试' })
+        res.send({ code: 1 })
+      })
+    }
+  })
+
   //登录
   app.post('/admin/api/login', async (req, res) => {
     const { username, password } = req.body
@@ -110,7 +127,7 @@ module.exports = app => {
     if (!user) {
       res.send({
         code: 0,
-        msg: '该用户不存在'
+        msg: '该用户不存在，请先注册'
       })
     }
 
