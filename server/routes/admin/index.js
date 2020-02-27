@@ -159,7 +159,7 @@ module.exports = app => {
   //通过id获取详情
   router.get('/:id', async (req, res) => {
     await req.Model.findById(req.params.id).exec((err, data) => {
-      err && res.send({ code: 0 })
+      err && res.send({ code: 0, msg: err })
       res.send({ code: 1, data })
     })
   })
