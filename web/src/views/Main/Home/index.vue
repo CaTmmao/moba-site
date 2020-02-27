@@ -22,7 +22,7 @@
         >
           <span class="text-grey ws-nowrap">[{{item.categoryName}}]</span>
           <span>|</span>
-          <span class="ws-nowrap overflow-ellipsis">{{item.title}}</span>
+          <span class="ws-nowrap overflow-ellipsis fg-1">{{item.title}}</span>
           <span class="text-666 fs-d26">{{item.createdAt | convertDate}}</span>
         </router-link>
       </template>
