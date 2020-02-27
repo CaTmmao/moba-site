@@ -62,7 +62,7 @@ module.exports = app => {
     let totalCount, pages
     let { page, pageSize } = req.query
 
-    totalCount = await req.Model.countDocuments(query)
+    totalCount = await req.Model.countDocuments()
     pages = Math.ceil(totalCount / pageSize)
     page = parseInt(page) || 1;
     pageSize = parseInt(pageSize) || 10
