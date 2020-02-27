@@ -79,9 +79,9 @@ export default {
     //保存文章
     save() {
       let { id, article } = this;
-      let url = 'rest/article';
+      let url = "rest/article";
       let method;
-      let data = info
+      let data = article;
 
       if (id) {
         url = `${url}/${id}`;
