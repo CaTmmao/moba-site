@@ -68,7 +68,7 @@ export default {
     },
     //获取文章分类
     getCategories() {
-      let url = "rest/category";
+      let url = "rest/category/category/subList?parentName=新闻资讯";
       this.$.get(url).then(res => {
         let { code, data } = res.data;
         if (code === 1) {

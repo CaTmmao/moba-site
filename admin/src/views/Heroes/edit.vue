@@ -325,7 +325,7 @@ export default {
     },
     //获取英雄分类
     getCategories() {
-      let url = "rest/category";
+      let url = "rest/category/category/subList?parentName=英雄列表";
 
       this.$.get(url).then(res => {
         let { code, data } = res.data;

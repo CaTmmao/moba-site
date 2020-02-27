@@ -53,7 +53,7 @@ export default {
     },
     //初始化上级分类
     getParents() {
-      let url = "rest/category";
+      let url = "rest/category/category/subList";
       this.$.get(url).then(res => {
         let { code, data } = res.data;
         if (code === 1) {

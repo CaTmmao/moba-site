@@ -45,7 +45,7 @@ export default {
      * 获取分类列表
      */
     getCategoryList() {
-      let url = `rest/category?page=${this.currentPage}`;
+      let url = `rest/category/category/treeList?page=${this.currentPage}&parentName=新闻资讯`;
       this.$.get(url).then(res => {
         let { code, data, totalCount } = res.data;
         if (code === 1) {

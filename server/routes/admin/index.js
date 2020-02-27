@@ -51,37 +51,85 @@ module.exports = app => {
     })
   })
 
-  // 查询数据
+  /**
+   * 查询数据
+   * @param {number} page 当前页码
+   * @param {number} pageSize 每页数据条数
+   * @returns {arr} 数据列表
+   */
   router.get('/', async (req, res) => {
-    let totalCount, pages, query
-    let { parentId } = req.query
+    // 总条数 & 总页数 
+    let totalCount, pages
+    let { page, pageSize } = req.query
 
-    let { page, pageSize } = req.query // 数据当前页数 & 每页数据条数
+    totalCount = await req.Model.countDocuments(query)
+    pages = Math.ceil(totalCount / pageSize)
     page = parseInt(page) || 1;
     pageSize = parseInt(pageSize) || 10
 
-    //检查模型名称是否是分类模型
-    if (req.Model.modelName === 'Category') {
+    await req.Model
+      .find()
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+      .exec((err, data) => {
+        // 出错
+        err && res.send({ code: 0, msg: err })
+        res.send({ code: 1, page, totalCount, pages, pageSize, data })
+      })
+  })
+
+  /**
+   * 根据父级分类名查询子分类集合
+   * @param {string} parentName 父级分类名
+   * @returns {arr} 子分类数组
+   */
+  router.get('/category/subList', async (req, res) => {
+    // 父级分类id & 查询参数
+    let parentId, query
+    // 父级分类名
+    let { parentName } = req.query
+
+    // 通过名称查询父级分类 id
+    await req.Model.find({ name: parentName }).then(data => {
+      parentId = data[0]._id
       query = {
         parent: parentId
       }
-    }
-
-    // 数据总条数
-    await req.Model.countDocuments(query).then((count) => {
-      totalCount = count
     })
 
-    // 数据总页数
+    await req.Model
+      .find(query)
+      .exec((err, data) => {
+        err && res.send({ code: 0, msg: err })
+        res.send({ code: 1, data })
+      })
+  })
+
+  /**
+   * 以树形结构返回所有分类列表   
+   * @param {number} page 当前页码
+   * @param {number} pageSize 每页数据条数
+   * @returns {arr} 树形结构分类集合
+   */
+  router.get('/category/treeList', async (req, res) => {
+    // 总条数 & 总页数 & 查询参数
+    let totalCount, pages, query
+    let { page, pageSize } = req.query
+
+    query = {
+      parent: undefined
+    }
+
+    totalCount = await req.Model.countDocuments(query)
     pages = Math.ceil(totalCount / pageSize)
+    page = parseInt(page) || 1;
+    pageSize = parseInt(pageSize) || 10
 
     // 根据条件查询数据
     await req.Model
       .aggregate([
         {
-          $match: {
-            parent: parentId
-          }
+          $match: query
         },
         {
           $skip: (page - 1) * pageSize
