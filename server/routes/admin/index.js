@@ -91,7 +91,10 @@ module.exports = app => {
 
     // 通过名称查询父级分类 id
     await req.Model.find({ name: parentName }).then(data => {
-      parentId = data[0]._id
+      if (data.length) {
+        parentId = data[0]._id
+      }
+      
       query = {
         parent: parentId
       }
