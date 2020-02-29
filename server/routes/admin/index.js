@@ -28,7 +28,7 @@ module.exports = app => {
 
     //把客户端传递过来的数据存储在数据库中
     await req.Model.create(req.body, (err) => {
-      err && res.send({ code: 0 })
+      err && res.send({ code: 0, msg: err.errmsg })
       res.send({ code: 1 })
     })
   })
@@ -36,7 +36,7 @@ module.exports = app => {
   //删除
   router.delete('/:id', async (req, res) => {
     await req.Model.findByIdAndDelete(req.params.id).exec((err, data) => {
-      err && res.send({ code: 0 })
+      err && res.send({ code: 0, msg: err.errmsg })
       res.send({ code: 1 })
     })
   })
@@ -44,7 +44,7 @@ module.exports = app => {
   //更新
   router.put('/:id', async (req, res) => {
     await req.Model.findByIdAndUpdate(req.params.id, req.body).exec((err, data) => {
-      err && res.send({ code: 0 })
+      err && res.send({ code: 0, msg: err.errmsg })
       res.send({ code: 1 })
     })
   })
@@ -71,7 +71,7 @@ module.exports = app => {
       .limit(pageSize)
       .exec((err, data) => {
         // 出错
-        err && res.send({ code: 0, msg: err })
+        err && res.send({ code: 0, msg: err.errmsg })
         res.send({ code: 1, page, totalCount, pages, pageSize, data })
       })
   })
@@ -101,7 +101,7 @@ module.exports = app => {
     await req.Model
       .find(query)
       .exec((err, data) => {
-        err && res.send({ code: 0, msg: err })
+        err && res.send({ code: 0, msg: err.errmsg })
         res.send({ code: 1, data })
       })
   })
@@ -148,7 +148,7 @@ module.exports = app => {
         }
       ]).exec((err, data) => {
         // 出错
-        err && res.send({ code: 0, msg: err })
+        err && res.send({ code: 0, msg: err.errmsg })
         res.send({ code: 1, page, totalCount, pages, pageSize, data })
       })
   })
@@ -156,7 +156,7 @@ module.exports = app => {
   //通过id获取详情
   router.get('/:id', async (req, res) => {
     await req.Model.findById(req.params.id).exec((err, data) => {
-      err && res.send({ code: 0, msg: err })
+      err && res.send({ code: 0, msg: err.errmsg })
       res.send({ code: 1, data })
     })
   })
@@ -240,7 +240,7 @@ module.exports = app => {
       Key: `${fileName}${time}.jpg`,
       FilePath
     }, (err, data) => {
-      err && res.status(403).send({ code: 0, msg: err });
+      err && res.status(403).send({ code: 0, msg: err.errmsg });
       res.send({ code: 1, data: `https://${data.Location}` });
     });
   })
