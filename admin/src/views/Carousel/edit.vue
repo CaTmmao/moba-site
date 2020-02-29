@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="carousel-container">
-      <h1>{{id ? '编辑' : '新建'}}首页轮播图</h1>
+      <h1>{{id ? '编辑' : '新建'}}轮播图</h1>
       <el-form label-width="120px" @submit.native.prevent="save">
         <el-form-item label="跳转链接">
           <el-input v-model="carousel.path"></el-input>

@@ -3,13 +3,15 @@ import {
   Button, Container, Aside, Menu, Submenu, MenuItemGroup, MenuItem,
   Header, Dropdown, DropdownMenu, DropdownItem, Table, TableColumn, Main,
   Form, FormItem, Input, MessageBox, Message, Select, Option, Upload, Rate, Tabs,
-  TabPane, Row, Col, Card, pagination
+  TabPane, Row, Col, Card, pagination, scrollbar, tag
 } from 'element-ui'
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.use(Button)
+Vue.use(tag)
 Vue.use(Option)
+Vue.use(scrollbar)
 Vue.use(Select)
 Vue.use(Container)
 Vue.use(Aside)

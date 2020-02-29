@@ -10,7 +10,7 @@
     <div v-html="data.body" class="fs-d32 article"></div>
     <div class="border-top-grey relevant my-d3">
       <strong class="fs-d26">相关资讯</strong>
-      <router-link :to="`/article/${item._id}`" v-for="item in related" class="flex jc-between">
+      <router-link :to="`/article/${item._id}`" v-for="item in related" class="flex jc-between ai-center">
         <span class="text-dark-1 overflow-ellipsis fs-d26">{{item.title}}</span>
         <span class="text-grey fs-d22">{{item.createdAt | convertDate}}</span>
       </router-link>

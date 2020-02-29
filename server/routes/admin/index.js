@@ -18,7 +18,6 @@ module.exports = app => {
   //资源中间件
   const resourceMiddleware = require('../../middleware/resource')
 
-
   //把子路由挂载上去 (rest代表的是通用的接口；resource用来动态获取接口地址，如category)
   app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
 
@@ -41,7 +40,6 @@ module.exports = app => {
       res.send({ code: 1 })
     })
   })
-
 
   //更新
   router.put('/:id', async (req, res) => {
@@ -94,7 +92,7 @@ module.exports = app => {
       if (data.length) {
         parentId = data[0]._id
       }
-      
+
       query = {
         parent: parentId
       }
@@ -151,7 +149,6 @@ module.exports = app => {
       ]).exec((err, data) => {
         // 出错
         err && res.send({ code: 0, msg: err })
-
         res.send({ code: 1, page, totalCount, pages, pageSize, data })
       })
   })
@@ -166,19 +163,11 @@ module.exports = app => {
 
   //注册
   app.post('/admin/api/register', async (req, res) => {
-    const user = await Admin.findOne({ username: req.body.username })
-    if (user) {
-      res.send({
-        code: 0,
-        msg: '已存在该用户名'
-      })
-    } else {
-      //把客户端传递过来的数据存储在数据库中
-      await Admin.create(req.body, (err) => {
-        err && res.send({ code: 0, msg: '请求出错，请稍后再试' })
-        res.send({ code: 1 })
-      })
-    }
+    //把客户端传递过来的数据存储在数据库中
+    await Admin.create(req.body, (err) => {
+      err && res.send({ code: 0, msg: '请求出错，请稍后再试' })
+      res.send({ code: 1 })
+    })
   })
 
   //登录
@@ -193,8 +182,7 @@ module.exports = app => {
     //1.查询不到用户
     if (!user) {
       res.send({
-        code: 0,
-        msg: '该用户不存在，请先注册'
+        code: 101,
       })
     }
 

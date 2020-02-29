@@ -14,7 +14,12 @@ const schema = new mongoose.Schema({
       //使用bcrypt库的散列（同步）方法对值进行加密后再存入数据库
       return bcrypt.hashSync(val, salt)
     }
-  }
-})
+  },
+  remark: String
+},
+  {
+    // 自动添加 createdAt & updatedAt 字段
+    timestamps: true
+  })
 
 module.exports = mongoose.model('Admin', schema)

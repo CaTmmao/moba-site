@@ -1,16 +1,18 @@
 <template>
-  <div>
+  <div class="container">
     <el-table
+      stripe
+      border
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       :data="list"
       row-key="_id"
       style="width: 100%"
     >
       <el-table-column prop="name" label="名称"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="100">
+      <el-table-column fixed="right" label="操作" width="350px">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="edit(scope.row._id)">编辑</el-button>
-          <el-button type="text" size="small" @click="del(scope.row._id)">删除</el-button>
+          <el-button type="primary" icon="el-icon-edit" size="mini" @click="edit(scope.row._id)">编辑</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="del(scope.row._id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

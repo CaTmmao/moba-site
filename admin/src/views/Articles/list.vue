@@ -1,15 +1,30 @@
 <template>
-  <div>
-    <h1>文章列表</h1>
-    <el-table :data="articleList" style="width: 100%">
-      <el-table-column prop="title" label="标题"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="100">
-        <template slot-scope="scope">
-          <el-button type="text" size="small" @click="edit(scope.row._id)">编辑</el-button>
-          <el-button type="text" size="small" @click="del(scope.row._id)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+  <div class="container">
+    <div>
+      <el-tag>
+        已发布文章共计
+        <strong>{{total}}</strong> 篇
+      </el-tag>
+      <el-table stripe border :data="articleList" style="width: 100%">
+        <el-table-column prop="title" label="标题"></el-table-column>
+        <el-table-column fixed="right" label="操作" width="350px">
+          <template slot-scope="scope">
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="edit(scope.row._id)"
+            >编辑</el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="del(scope.row._id)"
+            >删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
     <el-pagination
       background
       layout="prev, pager, next"

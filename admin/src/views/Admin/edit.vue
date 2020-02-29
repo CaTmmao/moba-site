@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1>{{id ? '编辑' : '新建'}}管理员</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="用户名">
@@ -7,6 +7,9 @@
       </el-form-item>
       <el-form-item label="密码">
         <el-input show-password v-model="info.password" placeholder="密码不会以明文显示，如需修改，直接输入内容保存"></el-input>
+      </el-form-item>
+      <el-form-item label="备注">
+        <el-input v-model="info.remark"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -27,7 +30,9 @@ export default {
         //用户名
         username: "",
         //密码
-        password: ""
+        password: "",
+        //备注
+        remark: ""
       }
     };
   },

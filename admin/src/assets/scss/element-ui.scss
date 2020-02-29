@@ -1,0 +1,55 @@
+// 分页
+.el-pagination {
+  margin-top: 20px;
+  text-align: right;
+}
+
+// 表格
+.el-table {
+  th {
+    height: 44px;
+    background-color: #fafafa;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  tr {
+    height: 60px;
+  }
+}
+
+// 侧边栏
+.el-aside {
+  margin-top: 50px;
+  width: $sideBarWidth !important;
+
+  .sidebar-title-wrapper {
+    width: $sideBarWidth;
+    position: fixed;
+    top: 0;
+    cursor: pointer;
+    .sidebar-title {
+      font-size: 18px;
+    }
+  }
+}
+
+.el-submenu__title {
+  &:hover {
+    background-color: $menuHover !important;
+    color: $menuHoverText !important;
+  }
+}
+
+.is-active > .el-submenu__title {
+  color: $subMenuActiveText !important;
+}
+
+.el-submenu .el-menu-item {
+  background-color: $subMenuBg !important;
+  text-align: center;
+
+  &:hover {
+    background-color: $subMenuHover !important;
+    color: $menuHoverText !important;
+  }
+}
