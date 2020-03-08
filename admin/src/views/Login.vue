@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login text-white">
       <h3 class="title flex jc-center">王者荣耀后台</h3>
-      <el-input v-model="info.username" placeholder="账号" />
+      <el-input v-model="info.name" placeholder="账号" />
       <el-input show-password v-model="info.password" placeholder="密码" @keyup.enter.native="login" />
 
       <div class="login-btn">
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       info: {
-        username: "",
+        name: "",
         password: ""
       },
       loading: false
@@ -36,8 +36,8 @@ export default {
   computed: {
     // 是否可以登录
     ifCanLogin() {
-      let { username, password } = this.info;
-      return username && password;
+      let { name, password } = this.info;
+      return name && password;
     }
   },
   methods: {

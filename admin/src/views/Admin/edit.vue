@@ -3,7 +3,7 @@
     <h1>{{id ? '编辑' : '新建'}}管理员</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="用户名">
-        <el-input v-model="info.username"></el-input>
+        <el-input v-model="info.name"></el-input>
       </el-form-item>
       <el-form-item label="密码">
         <el-input show-password v-model="info.password" placeholder="密码不会以明文显示，如需修改，直接输入内容保存"></el-input>
@@ -28,7 +28,7 @@ export default {
     return {
       info: {
         //用户名
-        username: "",
+        name: "",
         //密码
         password: "",
         //备注

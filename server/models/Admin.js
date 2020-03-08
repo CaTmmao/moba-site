@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
-  username: { type: String },
+  name: { type: String },
   password: {
     type: String,
     //查询这个模型的时候不查询password这个字段

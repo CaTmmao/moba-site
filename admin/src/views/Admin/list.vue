@@ -7,7 +7,7 @@
       </el-tag>
 
       <el-table stripe border :data="list" style="width: 100%">
-        <el-table-column prop="username" label="用户名" width="200"></el-table-column>
+        <el-table-column prop="name" label="用户名" width="200"></el-table-column>
         <el-table-column prop="createdAt" label="注册时间" width="200">
           <template slot-scope="scope">
             <p>{{scope.row.createdAt | dealDate}}</p>

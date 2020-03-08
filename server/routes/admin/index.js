@@ -200,13 +200,13 @@ module.exports = app => {
 
   //登录
   app.post('/admin/api/login', async (req, res) => {
-    const { username, password } = req.body
+    const { name, password } = req.body
 
     /**
      * 由于在Admin模型中设置了password字段默认不被查出来（select:false），如果想要查询
      * password这个字段，用select('+password')表示增加查询password这个字段
      */
-    const user = await Admin.findOne({ username }).select('+password')
+    const user = await Admin.findOne({ name }).select('+password')
     //1.查询不到用户
     if (!user) {
       res.send({
