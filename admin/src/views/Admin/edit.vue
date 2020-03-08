@@ -63,7 +63,7 @@ export default {
         url = `${url}/${id}`;
       } else {
         method = "post";
-        url = "admin/api/register";
+        url = "/register";
       }
 
       this.$({
