@@ -16,7 +16,7 @@
               class="avatar-uploader banner"
               :action="uploadUrl"
               :headers="getAuthorization()"
-              :on-success="res => $set(info, 'banner', res.url)"
+              :on-success="res => $set(info, 'banner', res.data)"
               :show-file-list="false"
             >
               <img v-if="info.banner" :src="info.banner" class="icon" />
@@ -28,7 +28,7 @@
               class="avatar-uploader"
               :action="uploadUrl"
               :headers="getAuthorization()"
-              :on-success="uploadSuccess"
+              :on-success="res => $set(info, 'avatar', res.data)"
               :show-file-list="false"
             >
               <img v-if="info.avatar" :src="info.avatar" class="icon" />
@@ -124,7 +124,7 @@
                   class="avatar-uploader"
                   :action="uploadUrl"
                   :headers="getAuthorization()"
-                  :on-success="res => $set(item, 'icon', res.url)"
+                  :on-success="res => $set(item, 'icon', res.data)"
                   :show-file-list="false"
                 >
                   <img v-if="item.icon" :src="item.icon" class="icon" />
@@ -377,13 +377,6 @@ export default {
       }).then(res => {
         res.data.code === 1 && this.$router.push("/hero/list");
       });
-    },
-    //图片上传完成
-    uploadSuccess(res) {
-      let { code, data } = res;
-      if (code === 1) {
-        this.info.avatar = data;
-      }
     },
     //添加技能
     addSkill() {
