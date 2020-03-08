@@ -96,7 +96,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        let url = `rest/admin/${id}`;
+        let url = `rest/admin/delet/${id}`;
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getAdmin();
         });

@@ -67,7 +67,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-        let url = `rest/category/${id}`;
+        let url = `rest/category/delet/${id}`;
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getCategoryList();
         });

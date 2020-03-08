@@ -94,7 +94,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        let url = `rest/hero/${id}`;
+        let url = `rest/hero/delet/${id}`;
 
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getHeroList();

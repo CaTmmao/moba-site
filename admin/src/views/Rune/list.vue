@@ -94,7 +94,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-        let url = `rest/rune/${id}`;
+        let url = `rest/rune/delet/${id}`;
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getRuneList();
         });

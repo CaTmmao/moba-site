@@ -34,7 +34,7 @@ module.exports = app => {
   })
 
   //删除
-  router.delete('/:id', async (req, res) => {
+  router.delete('/delet/:id', async (req, res) => {
     await req.Model.findByIdAndDelete(req.params.id).exec((err, data) => {
       err && res.send({ code: 0, msg: err.errmsg })
       res.send({ code: 1 })
