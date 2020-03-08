@@ -13,7 +13,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="标题">
-        <el-input v-model="article.title"></el-input>
+        <el-input v-model.trim="article.title"></el-input>
       </el-form-item>
       <el-form-item label="正文">
         <tinymce v-model="article.body" :defaultContent="article.body" />

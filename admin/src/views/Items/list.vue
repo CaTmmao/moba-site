@@ -8,7 +8,7 @@
             placeholder="物品名称"
             clearable
             size="middle"
-            v-model="searchName"
+            v-model.trim="searchName"
           ></el-input>
         </el-col>
         <el-button type="primary" icon="el-icon-search" @click="searchItem(searchName)">搜索</el-button>

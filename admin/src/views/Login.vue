@@ -2,8 +2,8 @@
   <div class="login-container">
     <div class="login text-white">
       <h3 class="title flex jc-center">王者荣耀后台</h3>
-      <el-input v-model="info.name" placeholder="账号" />
-      <el-input show-password v-model="info.password" placeholder="密码" @keyup.enter.native="login" />
+      <el-input v-model.trim="info.name" placeholder="账号" />
+      <el-input show-password v-model.trim="info.password" placeholder="密码" @keyup.enter.native="login" />
 
       <div class="login-btn">
         <el-button v-if="!ifCanLogin" title="填写完整再提交" type="primary" disabled class="width-100p">登录</el-button>

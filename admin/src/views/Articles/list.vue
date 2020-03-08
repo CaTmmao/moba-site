@@ -8,7 +8,7 @@
             placeholder="文章标题"
             clearable
             size="middle"
-            v-model="searchTitle"
+            v-model.trim="searchTitle"
           ></el-input>
         </el-col>
         <el-button type="primary" icon="el-icon-search" @click="searchArticle(searchTitle)">搜索</el-button>

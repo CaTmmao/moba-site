@@ -6,10 +6,10 @@
         <!-- 基本信息 -->
         <el-tab-pane label="基本信息">
           <el-form-item label="名称">
-            <el-input v-model="info.name"></el-input>
+            <el-input v-model.trim="info.name"></el-input>
           </el-form-item>
           <el-form-item label="称号">
-            <el-input v-model="info.title"></el-input>
+            <el-input v-model.trim="info.title"></el-input>
           </el-form-item>
           <el-form-item label="背景图">
             <el-upload
@@ -88,13 +88,13 @@
             </el-select>
           </el-form-item>
           <el-form-item label="使用技巧">
-            <el-input type="textarea" v-model="info.usageTips"></el-input>
+            <el-input type="textarea" v-model.trim="info.usageTips"></el-input>
           </el-form-item>
           <el-form-item label="对抗技巧">
-            <el-input type="textarea" v-model="info.battleTips"></el-input>
+            <el-input type="textarea" v-model.trim="info.battleTips"></el-input>
           </el-form-item>
           <el-form-item label="团战思路">
-            <el-input type="textarea" v-model="info.teamTips"></el-input>
+            <el-input type="textarea" v-model.trim="info.teamTips"></el-input>
           </el-form-item>
         </el-tab-pane>
 
@@ -111,13 +111,13 @@
               :key="index"
             >
               <el-form-item label="名称">
-                <el-input v-model="item.name"></el-input>
+                <el-input v-model.trim="item.name"></el-input>
               </el-form-item>
               <el-form-item label="冷却值">
-                <el-input v-model="item.delay"></el-input>
+                <el-input v-model.trim="item.delay"></el-input>
               </el-form-item>
               <el-form-item label="消耗">
-                <el-input v-model="item.cost"></el-input>
+                <el-input v-model.trim="item.cost"></el-input>
               </el-form-item>
               <el-form-item label="图标">
                 <el-upload
@@ -132,7 +132,7 @@
                 </el-upload>
               </el-form-item>
               <el-form-item label="描述">
-                <el-input type="textarea" v-model="item.description"></el-input>
+                <el-input type="textarea" v-model.trim="item.description"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="delSkill(index)">删除</el-button>
@@ -164,7 +164,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="描述">
-                <el-input v-model="item.description"></el-input>
+                <el-input v-model.trim="item.description"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="delPartners(index)">删除</el-button>
@@ -196,7 +196,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="描述">
-                <el-input v-model="item.description"></el-input>
+                <el-input v-model.trim="item.description"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="delControledBy(index)">删除</el-button>
@@ -228,7 +228,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="描述">
-                <el-input v-model="item.description"></el-input>
+                <el-input v-model.trim="item.description"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="delControl(index)">删除</el-button>

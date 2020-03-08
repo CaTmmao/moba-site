@@ -8,7 +8,7 @@
             placeholder="英雄名称"
             clearable
             size="middle"
-            v-model="searchName"
+            v-model.trim="searchName"
           ></el-input>
         </el-col>
         <el-button type="primary" icon="el-icon-search" @click="searchHero(searchName)">搜索</el-button>

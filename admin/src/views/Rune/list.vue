@@ -8,7 +8,7 @@
             @keyup.native.enter="searchRune(searchName)"
             clearable
             size="middle"
-            v-model="searchName"
+            v-model.trim="searchName"
           ></el-input>
         </el-col>
         <el-button type="primary" icon="el-icon-search" @click="searchRune(searchName)">搜索</el-button>

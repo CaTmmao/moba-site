@@ -3,7 +3,7 @@
     <h1>{{id ? '编辑' : '新建'}}铭文</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="名称">
-        <el-input v-model="info.name"></el-input>
+        <el-input v-model.trim="info.name"></el-input>
       </el-form-item>
       <el-form-item label="图标">
         <el-upload
@@ -23,7 +23,7 @@
       <el-row type="flex" style="flex-wrap: wrap">
         <el-col style="margin-top: 20px;" :md="12" v-for="(item, index) in info.desc" :key="index">
           <el-form-item label="描述">
-            <el-input v-model="item.text"></el-input>
+            <el-input v-model.trim="item.text"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="danger" @click="delDesc(index)">删除</el-button>
