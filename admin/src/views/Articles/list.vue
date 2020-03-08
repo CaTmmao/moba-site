@@ -1,6 +1,18 @@
 <template>
   <div class="container">
     <div>
+      <div class="flex jc-end">
+        <el-col :span="4" class="mr-d2">
+          <el-input
+            @keyup.native.enter="searchArticle(searchTitle)"
+            placeholder="文章标题"
+            clearable
+            size="middle"
+            v-model="searchTitle"
+          ></el-input>
+        </el-col>
+        <el-button type="primary" icon="el-icon-search" @click="searchArticle(searchTitle)">搜索</el-button>
+      </div>
       <el-tag>
         已发布文章共计
         <strong>{{total}}</strong> 篇
@@ -52,7 +64,9 @@ export default {
       // 总条数
       total: 0,
       // 当前页数
-      currentPage: 1
+      currentPage: 1,
+      // 搜索内容
+      searchTitle: ""
     };
   },
   created() {
@@ -85,6 +99,25 @@ export default {
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getArticleList();
         });
+      });
+    },
+    /**
+     * 搜索
+     * @param {string} title 文章标题
+     */
+    searchArticle(title) {
+      if (!title) {
+        this.getArticleList();
+        return;
+      }
+
+      let url = `rest/article/search?title=${title}`;
+      this.$.get(url).then(res => {
+        let { code, data, total } = res.data;
+        if (code === 1) {
+          this.total = total;
+          this.articleList = data;
+        }
       });
     }
   }

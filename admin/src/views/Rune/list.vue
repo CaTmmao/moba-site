@@ -1,6 +1,18 @@
 <template>
   <div class="container">
     <div>
+      <div class="flex jc-end">
+        <el-col :span="4" class="mr-d2">
+          <el-input
+            placeholder="铭文名称"
+            @keyup.native.enter="searchRune(searchName)"
+            clearable
+            size="middle"
+            v-model="searchName"
+          ></el-input>
+        </el-col>
+        <el-button type="primary" icon="el-icon-search" @click="searchRune(searchName)">搜索</el-button>
+      </div>
       <el-tag>
         当前铭文共计
         <strong>{{list.length}}</strong> 种
@@ -51,7 +63,9 @@ export default {
       // 总条数
       total: 0,
       // 当前页数
-      currentPage: 1
+      currentPage: 1,
+      // 搜索内容
+      searchName: ""
     };
   },
   created() {
@@ -84,6 +98,25 @@ export default {
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getRuneList();
         });
+      });
+    },
+    /**
+     * 搜索
+     * @param {string} name 铭文名称
+     */
+    searchRune(name) {
+      if (!name) {
+        this.getRuneList();
+        return;
+      }
+
+      let url = `rest/rune/search?name=${name}`;
+      this.$.get(url).then(res => {
+        let { code, data, total } = res.data;
+        if (code === 1) {
+          this.total = total;
+          this.list = data;
+        }
       });
     }
   }

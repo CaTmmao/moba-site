@@ -1,6 +1,18 @@
 <template>
   <div class="container">
     <div>
+      <div class="flex jc-end">
+        <el-col :span="4" class="mr-d2">
+          <el-input
+            @keyup.native.enter="searchHero(searchName)"
+            placeholder="英雄名称"
+            clearable
+            size="middle"
+            v-model="searchName"
+          ></el-input>
+        </el-col>
+        <el-button type="primary" icon="el-icon-search" @click="searchHero(searchName)">搜索</el-button>
+      </div>
       <el-tag>
         当前英雄共计
         <strong>{{total}}</strong> 个
@@ -50,7 +62,9 @@ export default {
       // 总条数
       total: 0,
       // 当前页数
-      currentPage: 1
+      currentPage: 1,
+      // 搜索内容
+      searchName: ""
     };
   },
   created() {
@@ -85,6 +99,25 @@ export default {
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getHeroList();
         });
+      });
+    },
+    /**
+     * 搜索
+     * @param {string} name 铭文名称
+     */
+    searchHero(name) {
+      if (!name) {
+        this.getHeroList();
+        return;
+      }
+
+      let url = `rest/hero/search?name=${name}`;
+      this.$.get(url).then(res => {
+        let { code, data, total } = res.data;
+        if (code === 1) {
+          this.total = total;
+          this.list = data;
+        }
       });
     }
   }

@@ -1,6 +1,18 @@
 <template>
   <div class="container">
     <div>
+      <div class="flex jc-end">
+        <el-col :span="4" class="mr-d2">
+          <el-input
+            placeholder="管理员姓名"
+            @keyup.native.enter="searchAdmin(searchName)"
+            clearable
+            size="middle"
+            v-model="searchName"
+          ></el-input>
+        </el-col>
+        <el-button type="primary" icon="el-icon-search" @click="searchAdmin(searchName)">搜索</el-button>
+      </div>
       <el-tag>
         当前终端用户共计
         <strong>{{list.length}}</strong> 人
@@ -53,7 +65,9 @@ export default {
       // 总条数
       total: 0,
       // 当前页数
-      currentPage: 1
+      currentPage: 1,
+      // 搜索内容
+      searchName: ""
     };
   },
   created() {
@@ -86,6 +100,25 @@ export default {
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getAdmin();
         });
+      });
+    },
+    /**
+     * 搜索
+     * @param {string} name 管理员姓名
+     */
+    searchAdmin(name) {
+      if (!name) {
+        this.getAdmin();
+        return;
+      }
+
+      let url = `rest/admin/search?name=${name}`;
+      this.$.get(url).then(res => {
+        let { code, data, total } = res.data;
+        if (code === 1) {
+          this.total = total;
+          this.list = data;
+        }
       });
     }
   },

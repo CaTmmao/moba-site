@@ -1,6 +1,18 @@
 <template>
   <div class="container">
     <div>
+      <div class="flex jc-end">
+        <el-col :span="4" class="mr-d2">
+          <el-input
+            @keyup.native.enter="searchItem(searchName)"
+            placeholder="物品名称"
+            clearable
+            size="middle"
+            v-model="searchName"
+          ></el-input>
+        </el-col>
+        <el-button type="primary" icon="el-icon-search" @click="searchItem(searchName)">搜索</el-button>
+      </div>
       <el-tag>
         当前物品共计
         <strong>{{total}}</strong> 个
@@ -50,7 +62,9 @@ export default {
       // 总条数
       total: 0,
       // 当前页数
-      currentPage: 1
+      currentPage: 1,
+      // 搜索内容
+      searchName: ""
     };
   },
   created() {
@@ -83,6 +97,25 @@ export default {
         this.$.delete(url).then(res => {
           res.data.code === 1 && this.getItemsList();
         });
+      });
+    },
+    /**
+     * 搜索
+     * @param {string} name 物品名称
+     */
+    searchItem(name) {
+      if (!name) {
+        this.getItemsList();
+        return;
+      }
+
+      let url = `rest/item/search?name=${name}`;
+      this.$.get(url).then(res => {
+        let { code, data, total } = res.data;
+        if (code === 1) {
+          this.total = total;
+          this.list = data;
+        }
       });
     }
   }
