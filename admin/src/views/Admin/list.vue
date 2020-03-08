@@ -1,24 +1,26 @@
 <template>
   <div class="container">
     <div>
-      <div class="flex jc-end">
-        <el-col :span="4" class="mr-d2">
-          <el-input
-            placeholder="管理员姓名"
-            @keyup.native.enter="searchAdmin(searchName)"
-            clearable
-            size="middle"
-            v-model.trim="searchName"
-          ></el-input>
-        </el-col>
-        <el-button type="primary" icon="el-icon-search" @click="searchAdmin(searchName)">搜索</el-button>
+      <div class="flex jc-between">
+        <el-button type="danger" icon="el-icon-close" @click="delMultiple">删除</el-button>
+        <div class="flex jc-end">
+          <el-col :span="12" class="mr-d2">
+            <el-input
+              @keyup.native.enter="searchAdmin(searchName)"
+              placeholder="管理员姓名"
+              clearable
+              v-model.trim="searchName"
+            ></el-input>
+          </el-col>
+          <el-button type="primary" icon="el-icon-search" @click="searchAdmin(searchName)">搜索</el-button>
+        </div>
       </div>
       <el-tag>
         当前终端用户共计
         <strong>{{list.length}}</strong> 人
       </el-tag>
-
-      <el-table stripe border :data="list" style="width: 100%">
+      <el-table @selection-change="getCheckedItems" stripe border :data="list" style="width: 100%">
+        <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="name" label="用户名" width="200"></el-table-column>
         <el-table-column prop="createdAt" label="注册时间" width="200">
           <template slot-scope="scope">
@@ -67,13 +69,35 @@ export default {
       // 当前页数
       currentPage: 1,
       // 搜索内容
-      searchName: ""
+      searchName: "",
+      // 已勾选文章的 id 集合
+      CheckedIds: []
     };
   },
   created() {
     this.getAdmin();
   },
   methods: {
+    //批量删除
+    delMultiple() {
+      this.$confirm("确认批量删除已选项吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        let url = "rest/admin/deleteMany";
+        this.$.delete(url, { data: { ids: this.CheckedIds } }).then(res => {
+          res.data.code === 1 && this.getAdmin();
+        });
+      });
+    },
+    //获取已勾选项
+    getCheckedItems(data) {
+      this.CheckedIds = [];
+      data.forEach(item => {
+        this.CheckedIds.push(item._id);
+      });
+    },
     //获取管理员列表
     getAdmin() {
       let url = "rest/admin";

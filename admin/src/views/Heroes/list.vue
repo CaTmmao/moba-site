@@ -1,27 +1,30 @@
 <template>
   <div class="container">
     <div>
-      <div class="flex jc-end">
-        <el-col :span="4" class="mr-d2">
-          <el-input
-            @keyup.native.enter="searchHero(searchName)"
-            placeholder="英雄名称"
-            clearable
-            size="middle"
-            v-model.trim="searchName"
-          ></el-input>
-        </el-col>
-        <el-button type="primary" icon="el-icon-search" @click="searchHero(searchName)">搜索</el-button>
+      <div class="flex jc-between">
+        <el-button type="danger" icon="el-icon-close" @click="delMultiple">删除</el-button>
+        <div class="flex jc-end">
+          <el-col :span="12" class="mr-d2">
+            <el-input
+              @keyup.native.enter="searchHero(searchName)"
+              placeholder="英雄名称"
+              clearable
+              v-model.trim="searchName"
+            ></el-input>
+          </el-col>
+          <el-button type="primary" icon="el-icon-search" @click="searchHero(searchName)">搜索</el-button>
+        </div>
       </div>
       <el-tag>
         当前英雄共计
         <strong>{{total}}</strong> 个
       </el-tag>
-      <el-table stripe border :data="list" style="width: 100%">
+      <el-table @selection-change="getCheckedItems" stripe border :data="list" style="width: 100%">
+        <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="name" label="英雄名称" width="200"></el-table-column>
         <el-table-column prop="icon" label="头像">
           <template slot-scope="scope">
-            <img :src="scope.row.avatar" style="width:50px"/>
+            <img :src="scope.row.avatar" style="width:50px" />
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="350px">
@@ -64,13 +67,35 @@ export default {
       // 当前页数
       currentPage: 1,
       // 搜索内容
-      searchName: ""
+      searchName: "",
+      // 已勾选文章的 id 集合
+      CheckedIds: []
     };
   },
   created() {
     this.getHeroList();
   },
   methods: {
+    //批量删除
+    delMultiple() {
+      this.$confirm("确认批量删除已选项吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        let url = "rest/hero/deleteMany";
+        this.$.delete(url, { data: { ids: this.CheckedIds } }).then(res => {
+          res.data.code === 1 && this.getHeroList();
+        });
+      });
+    },
+    //获取已勾选项
+    getCheckedItems(data) {
+      this.CheckedIds = [];
+      data.forEach(item => {
+        this.CheckedIds.push(item._id);
+      });
+    },
     //获取英雄列表
     getHeroList() {
       let url = "rest/hero";

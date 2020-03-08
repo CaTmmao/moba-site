@@ -1,23 +1,26 @@
 <template>
   <div class="container">
     <div>
-      <div class="flex jc-end">
-        <el-col :span="4" class="mr-d2">
-          <el-input
-            @keyup.native.enter="searchItem(searchName)"
-            placeholder="物品名称"
-            clearable
-            size="middle"
-            v-model.trim="searchName"
-          ></el-input>
-        </el-col>
-        <el-button type="primary" icon="el-icon-search" @click="searchItem(searchName)">搜索</el-button>
+      <div class="flex jc-between">
+        <el-button type="danger" icon="el-icon-close" @click="delMultiple">删除</el-button>
+        <div class="flex jc-end">
+          <el-col :span="12" class="mr-d2">
+            <el-input
+              @keyup.native.enter="searchItem(searchName)"
+              placeholder="物品名称"
+              clearable
+              v-model.trim="searchName"
+            ></el-input>
+          </el-col>
+          <el-button type="primary" icon="el-icon-search" @click="searchItem(searchName)">搜索</el-button>
+        </div>
       </div>
       <el-tag>
         当前物品共计
         <strong>{{total}}</strong> 个
       </el-tag>
-      <el-table stripe border :data="list" style="width: 100%">
+      <el-table @selection-change="getCheckedItems" stripe border :data="list" style="width: 100%">
+        <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="name" label="物品名称" width="200"></el-table-column>
         <el-table-column prop="icon" label="图标">
           <template slot-scope="scope">
@@ -64,13 +67,35 @@ export default {
       // 当前页数
       currentPage: 1,
       // 搜索内容
-      searchName: ""
+      searchName: "",
+      // 已勾选文章的 id 集合
+      CheckedIds: []
     };
   },
   created() {
     this.getItemsList();
   },
   methods: {
+    //批量删除
+    delMultiple() {
+      this.$confirm("确认批量删除已选项吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        let url = "rest/item/deleteMany";
+        this.$.delete(url, { data: { ids: this.CheckedIds } }).then(res => {
+          res.data.code === 1 && this.getItemsList();
+        });
+      });
+    },
+    //获取已勾选项
+    getCheckedItems(data) {
+      this.CheckedIds = [];
+      data.forEach(item => {
+        this.CheckedIds.push(item._id);
+      });
+    },
     //获取物品列表
     getItemsList() {
       let url = `rest/item?page=${this.currentPage}`;
