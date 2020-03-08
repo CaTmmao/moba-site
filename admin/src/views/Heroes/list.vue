@@ -21,7 +21,7 @@
         <el-table-column prop="name" label="英雄名称" width="200"></el-table-column>
         <el-table-column prop="icon" label="头像">
           <template slot-scope="scope">
-            <img :src="scope.row.avatar" />
+            <img :src="scope.row.avatar" style="width:50px"/>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="350px">
