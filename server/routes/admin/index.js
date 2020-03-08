@@ -41,6 +41,17 @@ module.exports = app => {
     })
   })
 
+  /**
+   * 批量删除
+   * @param {array} ids 包含多个 id 字段的集合
+   */
+  router.delete('/deleteMany', async (req, res) => {
+    await req.Model.remove({ _id: { $in: [...req.body.ids] } }).exec((err, data) => {
+      err && res.send({ code: 0, msg: err.errmsg })
+      res.send({ code: 1 })
+    })
+  })
+
   //更新
   router.put('/:id', async (req, res) => {
     await req.Model.findByIdAndUpdate(req.params.id, req.body).exec((err, data) => {
