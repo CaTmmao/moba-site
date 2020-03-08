@@ -77,6 +77,34 @@ module.exports = app => {
   })
 
   /**
+   * 搜索
+   * @param {string} name 名称
+   * @param {string} title 标题
+   */
+  router.get('/search', async (req, res) => {
+    let query = {}
+
+    let { title, name } = req.query
+
+    if (title) {
+      //适用文章模型用标题字段搜索文章
+      query = { title }
+    } else {
+      //适用其他模型用名称字段搜索内容
+      query = { name }
+    }
+
+    await req.Model
+      .find(query)
+      .exec((err, data) => {
+        err && res.send({ code: 0, msg: err.errmsg })
+
+        let total = data.length
+        res.send({ code: 1, data, total })
+      })
+  })
+
+  /**
    * 根据父级分类名查询子分类集合
    * @param {string} parentName 父级分类名
    * @returns {arr} 子分类数组
