@@ -104,7 +104,6 @@ export default {
       let url = this.API_CONFIG.getNewestHero;
       this.$.get(url).then(res => {
         this.newestHero = res.data;
-        console.log(this.newestHero);
       });
     },
     // 获取英雄列表
@@ -116,7 +115,6 @@ export default {
           if (item.name === "全部") {
             data.splice(index, 1);
             this.heroList = data;
-            return;
           }
         });
       });
