@@ -36,7 +36,7 @@
             </el-upload>
           </el-form-item>
           <el-form-item label="分类">
-            <el-select v-model="info.categories" multiple>
+            <el-select filterable v-model="info.categories" multiple>
               <el-option
                 v-for="(item, index) in categoryList"
                 :key="item._id"
@@ -58,7 +58,7 @@
             <el-rate style="margin-top: 0.6rem" :max="9" show-score v-model="info.scores.survive"></el-rate>
           </el-form-item>
           <el-form-item label="顺风出装">
-            <el-select v-model="info.items1" multiple>
+            <el-select filterable v-model="info.items1" multiple>
               <el-option
                 v-for="(item, index) in itemList"
                 :key="item._id"
@@ -68,7 +68,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="逆风出装">
-            <el-select v-model="info.items2" multiple>
+            <el-select filterable v-model="info.items2" multiple>
               <el-option
                 v-for="(item, index) in itemList"
                 :key="item._id"
@@ -78,7 +78,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="铭文推荐">
-            <el-select v-model="info.rune" multiple>
+            <el-select filterable v-model="info.rune" multiple>
               <el-option
                 v-for="(item, index) in runeList"
                 :key="item._id"
