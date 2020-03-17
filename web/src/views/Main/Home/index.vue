@@ -49,7 +49,7 @@
             :to="`/heroes/${hero._id}`"
             v-for="(hero, index) in category.heroList"
             :key="index"
-            class="width-1d16 height-1d74 mr-d25 flex fd-column"
+            class="width-1d16 height-1d74 mr-d25 flex fd-column hero-item"
           >
             <img :src="hero.avatar" class="width-98p" />
             <p class="flex jc-center fs-d24 mt-d1">{{hero.name}}</p>
@@ -146,6 +146,10 @@ export default {
       > div {
         opacity: 0.8;
       }
+    }
+
+    .hero-item:nth-child(5n) {
+      margin-right: 0;
     }
   }
 }
