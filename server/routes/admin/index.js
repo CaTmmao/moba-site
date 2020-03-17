@@ -26,6 +26,16 @@ module.exports = app => {
     //增加一级分类，删除 parent 字段
     !req.body.parent && delete req.body.parent
 
+    //针对有 name 字段的模型（如铭文rune，英雄hero，item装备等模型），检测增加的铭文/英雄等是否重名
+    let { name } = req.body
+    if (name) {
+      let data = await req.Model.find({ name })
+      if (data.length) {
+        res.send({ code: 0, msg: '名称重复' })
+        return
+      }
+    }
+
     //把客户端传递过来的数据存储在数据库中
     await req.Model.create(req.body, (err) => {
       err && res.send({ code: 0, msg: err.errmsg })
