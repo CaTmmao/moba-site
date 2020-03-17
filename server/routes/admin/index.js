@@ -82,9 +82,13 @@ module.exports = app => {
     let { page, pageSize } = req.query
 
     totalCount = await req.Model.countDocuments()
-    pages = Math.ceil(totalCount / pageSize)
+    pages = Math.ceil(totalCount / pageSize) || 1
     page = parseInt(page) || 1;
-    pageSize = parseInt(pageSize) || 10
+    if (pageSize === 'all') {
+      pageSize = totalCount
+    } else {
+      pageSize = parseInt(pageSize) || 10
+    }
 
     await req.Model
       .find()

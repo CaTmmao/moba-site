@@ -344,7 +344,7 @@ export default {
     },
     //获取装备（物品）
     getItemsList() {
-      let url = "rest/item";
+      let url = "rest/item?pageSize=all";
 
       this.$.get(url).then(res => {
         let { code, data } = res.data;
@@ -355,7 +355,7 @@ export default {
     },
     //获取铭文列表
     getRuneList() {
-      let url = "rest/rune";
+      let url = "rest/rune?pageSize=all";
 
       this.$.get(url).then(res => {
         let { code, data } = res.data;
@@ -451,7 +451,7 @@ export default {
      * 获取英雄列表
      */
     getHeroesList() {
-      let url = "rest/hero";
+      let url = "rest/hero?pageSize=all";
 
       this.$.get(url).then(res => {
         let { code, data } = res.data;
