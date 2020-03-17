@@ -164,7 +164,7 @@ module.exports = (app) => {
 
   // 获取英雄详细信息
   router.get('/heroes/info/:id', async (req, res) => {
-    const data = await Hero.findById(req.params.id).populate(['rune', 'items1', 'items2', 'partners.hero', 'control.hero', 'controledBy.hero'])
+    const data = await Hero.findById(req.params.id).populate(['rune', 'items1', 'items2', 'partners.hero', 'control.hero', 'controledBy.hero', 'categories'])
     res.send(data)
   })
 
