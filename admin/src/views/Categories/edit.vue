@@ -51,8 +51,8 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.info = info;
-        this.parents = parents;
+        this.info = Object.assign({}, info);
+        this.parents = Object.assign({}, parents);
       }
     },
     //初始化上级分类

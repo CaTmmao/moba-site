@@ -52,7 +52,7 @@ export default {
       if (this.id) {
         this.getCarousel();
       } else {
-        this.carousel = carousel;
+        this.carousel = Object.assign({}, carousel);
       }
     },
     //获取首页轮播图信息
@@ -61,7 +61,7 @@ export default {
       this.$.get(url).then(res => {
         let { code, data } = res.data;
         if (code === 1) {
-          this.carousel = data
+          this.carousel = data;
         }
       });
     },

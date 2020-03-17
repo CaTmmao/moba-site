@@ -61,8 +61,8 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.article = article;
-        this.categories = categories;
+        this.article = Object.assign({}, article);
+        this.categories = Object.assign({}, categories);
       }
     },
     //获取文章信息
