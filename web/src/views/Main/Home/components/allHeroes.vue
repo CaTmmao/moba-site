@@ -1,5 +1,5 @@
 <template>
-  <div class=" pt-d15">
+  <div class="pt-d15">
     <div class="flex jc-between nav height-d7">
       <span
         v-for="(item, index) in heroList"
@@ -51,7 +51,6 @@ export default {
           if (item.name === "热门") {
             data.splice(index, 1);
             this.heroList = data;
-            return;
           }
         });
       });
