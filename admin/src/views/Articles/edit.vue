@@ -26,6 +26,13 @@
 </template>
 
 <script>
+let article = {
+  title: "",
+  body: "",
+  categories: []
+};
+let categories = [];
+
 // 富文本编辑器
 import Tinymce from "./components/Tinymce";
 
@@ -40,22 +47,24 @@ export default {
   data() {
     return {
       //文章信息
-      article: {
-        title: "",
-        body: "",
-        categories: []
-      },
+      article,
       //文章分类
-      categories: []
+      categories
     };
   },
   created() {
     this.getCategories();
-
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getInfo();
+    this.init();
   },
   methods: {
+    init() {
+      if (this.id) {
+        this.getInfo();
+      } else {
+        this.article = article;
+        this.categories = categories;
+      }
+    },
     //获取文章信息
     getInfo() {
       let url = `rest/article/${this.id}`;
@@ -99,6 +108,9 @@ export default {
         }
       });
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>

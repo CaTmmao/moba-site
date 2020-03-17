@@ -18,6 +18,13 @@
 </template>
 
 <script>
+let info = {
+  parent: "",
+  name: ""
+};
+//上级分类
+let parents = [];
+
 export default {
   name: "categoryCreate",
   props: {
@@ -25,12 +32,9 @@ export default {
   },
   data() {
     return {
-      info: {
-        parent: "",
-        name: ""
-      },
+      info,
       //上级分类
-      parents: []
+      parents
     };
   },
   created() {
@@ -47,8 +51,8 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.info.name = "";
-        this.info.parent = "";
+        this.info = info;
+        this.parents = parents;
       }
     },
     //初始化上级分类
@@ -93,6 +97,9 @@ export default {
         res.data.code === 1 && this.$router.push("/category/list");
       });
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>

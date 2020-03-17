@@ -25,6 +25,11 @@
 </template>
 
 <script>
+let info = {
+  name: "",
+  icon: ""
+};
+
 export default {
   name: "itemCreate",
   props: {
@@ -32,17 +37,20 @@ export default {
   },
   data() {
     return {
-      info: {
-        name: "",
-        icon: ""
-      }
+      info
     };
   },
   created() {
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getInfo();
+    this.init();
   },
   methods: {
+    init() {
+      if (this.id) {
+        this.getInfo();
+      } else {
+        this.info = info;
+      }
+    },
     //获取物品信息
     getInfo() {
       let url = `rest/item/${this.id}`;
@@ -82,6 +90,9 @@ export default {
         this.info.icon = data;
       }
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>

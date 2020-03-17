@@ -38,6 +38,15 @@
 </template>
 
 <script>
+let info = {
+  //铭文名称
+  name: "",
+  //图标
+  icon: "",
+  //描述
+  desc: []
+};
+
 export default {
   name: "runeCreate",
   props: {
@@ -45,21 +54,20 @@ export default {
   },
   data() {
     return {
-      info: {
-        //铭文名称
-        name: "",
-        //图标
-        icon: "",
-        //描述
-        desc: []
-      }
+      info
     };
   },
   created() {
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getInfo();
+    this.init();
   },
   methods: {
+    init() {
+      if (this.id) {
+        this.getInfo();
+      } else {
+        this.info = info;
+      }
+    },
     //获取铭文信息
     getInfo() {
       let url = `rest/rune/${this.id}`;
@@ -67,7 +75,6 @@ export default {
         let { code, data } = res.data;
         if (code === 1) {
           this.info = data;
-          console.log(data);
         }
       });
     },
@@ -115,6 +122,9 @@ export default {
         this.info.desc.splice(index, 1);
       });
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>

@@ -19,6 +19,15 @@
 </template>
 
 <script>
+let info = {
+  //用户名
+  name: "",
+  //密码
+  password: "",
+  //备注
+  remark: ""
+};
+
 export default {
   name: "adminCreate",
   props: {
@@ -26,21 +35,20 @@ export default {
   },
   data() {
     return {
-      info: {
-        //用户名
-        name: "",
-        //密码
-        password: "",
-        //备注
-        remark: ""
-      }
+      info
     };
   },
   created() {
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getInfo();
+    this.init();
   },
   methods: {
+    init() {
+      if (this.id) {
+        this.getInfo();
+      } else {
+        this.info = info;
+      }
+    },
     //获取管理员信息
     getInfo() {
       let url = `rest/admin/${this.id}`;
@@ -76,6 +84,9 @@ export default {
         }
       });
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>

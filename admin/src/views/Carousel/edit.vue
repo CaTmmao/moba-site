@@ -27,6 +27,13 @@
 </template>
 
 <script>
+let carousel = {
+  //跳转链接
+  path: "",
+  //图片地址
+  imgUrl: ""
+};
+
 export default {
   name: "carouselCreate",
   props: {
@@ -34,27 +41,27 @@ export default {
   },
   data() {
     return {
-      carousel: {
-        //跳转链接
-        path: "",
-        //图片地址
-        imgUrl: ""
-      }
+      carousel
     };
   },
   created() {
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getCarousel();
+    this.init();
   },
   methods: {
+    init() {
+      if (this.id) {
+        this.getCarousel();
+      } else {
+        this.carousel = carousel;
+      }
+    },
     //获取首页轮播图信息
     getCarousel() {
       let url = `rest/carousel/${this.id}`;
       this.$.get(url).then(res => {
         let { code, data } = res.data;
         if (code === 1) {
-          this.carousel.imgUrl = data.imgUrl;
-          this.carousel.path = data.path;
+          this.carousel = data
         }
       });
     },
@@ -88,6 +95,9 @@ export default {
         this.carousel.imgUrl = data;
       }
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>

@@ -246,6 +246,46 @@
 </template>
 
 <script>
+let info = {
+  //名称
+  name: "",
+  //称号
+  title: "",
+  // 背景图
+  banner: "",
+  //头像
+  avatar: "",
+  //分类
+  categories: [],
+  //顺风出装
+  items1: [],
+  //逆风出装
+  items2: [],
+  //评分
+  scores: {
+    difficult: 0,
+    skills: 0,
+    attach: 0,
+    survive: 0
+  },
+  //使用技巧
+  usageTips: "",
+  //对抗技巧
+  battleTips: "",
+  //团战思路
+  teamTips: "",
+  //技能
+  skills: [],
+  //铭文推荐
+  rune: [],
+  //最佳搭档
+  partners: [],
+  //被谁克制
+  controledBy: [],
+  //克制谁
+  control: []
+};
+
 export default {
   name: "heroCreate",
   props: {
@@ -254,45 +294,7 @@ export default {
   data() {
     return {
       //英雄信息
-      info: {
-        //名称
-        name: "",
-        //称号
-        title: "",
-        // 背景图
-        banner: "",
-        //头像
-        avatar: "",
-        //分类
-        categories: [],
-        //顺风出装
-        items1: [],
-        //逆风出装
-        items2: [],
-        //评分
-        scores: {
-          difficult: 0,
-          skills: 0,
-          attach: 0,
-          survive: 0
-        },
-        //使用技巧
-        usageTips: "",
-        //对抗技巧
-        battleTips: "",
-        //团战思路
-        teamTips: "",
-        //技能
-        skills: [],
-        //铭文推荐
-        rune: [],
-        //最佳搭档
-        partners: [],
-        //被谁克制
-        controledBy: [],
-        //克制谁
-        control: []
-      },
+      info,
       //英雄分类
       categoryList: [],
       //装备（物品）列表
@@ -306,12 +308,18 @@ export default {
   created() {
     this.getItemsList();
     this.getCategories();
-    //&&代表满足前面的条件之后才执行后面的函数
-    this.id && this.getInfo();
+    this.init();
     this.getHeroesList();
     this.getRuneList();
   },
   methods: {
+    init() {
+      if (this.id) {
+        this.getInfo();
+      } else {
+        this.info = info;
+      }
+    },
     //获取英雄信息
     getInfo() {
       let url = `rest/hero/${this.id}`;
@@ -452,6 +460,9 @@ export default {
         }
       });
     }
+  },
+  watch: {
+    $route: "init"
   }
 };
 </script>
