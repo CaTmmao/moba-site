@@ -52,7 +52,7 @@
             <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.skills"></el-rate>
           </el-form-item>
           <el-form-item label="攻击">
-            <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.attach"></el-rate>
+            <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.attack"></el-rate>
           </el-form-item>
           <el-form-item label="生存">
             <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.survive"></el-rate>
@@ -265,7 +265,7 @@ let info = {
   scores: {
     difficult: 0,
     skills: 0,
-    attach: 0,
+    attack: 0,
     survive: 0
   },
   //使用技巧
