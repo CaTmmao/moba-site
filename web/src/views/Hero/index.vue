@@ -51,7 +51,7 @@
             ref="skillImg"
             v-for="(item, index) in data.skills"
             :src="item.icon"
-            class="width-1d2"
+            class="width-1d2 height-1d2"
             @click="switchSkill(index)"
             :class="{'active': index === showSkillIndex}"
           />
