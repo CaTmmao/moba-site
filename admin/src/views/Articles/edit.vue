@@ -61,8 +61,8 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.article = Object.assign({}, article);
-        this.categories = Object.assign({}, categories);
+        this.article = JSON.parse(JSON.stringify(article));
+        this.categories = JSON.parse(JSON.stringify(categories))
       }
     },
     //获取文章信息

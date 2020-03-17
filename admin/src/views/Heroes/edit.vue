@@ -317,7 +317,7 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.info = Object.assign({}, info);
+        this.info = JSON.parse(JSON.stringify(info));
       }
     },
     //获取英雄信息

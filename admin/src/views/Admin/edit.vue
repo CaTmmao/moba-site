@@ -46,7 +46,7 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.info = Object.assign({}, info);
+        this.info = JSON.parse(JSON.stringify(info));
       }
     },
     //获取管理员信息

@@ -48,7 +48,7 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.info = Object.assign({}, info);
+        this.info = JSON.parse(JSON.stringify(info));
       }
     },
     //获取物品信息

@@ -52,7 +52,7 @@ export default {
       if (this.id) {
         this.getCarousel();
       } else {
-        this.carousel = Object.assign({}, carousel);
+        this.carousel = JSON.parse(JSON.stringify(carousel))
       }
     },
     //获取首页轮播图信息

@@ -51,8 +51,8 @@ export default {
       if (this.id) {
         this.getInfo();
       } else {
-        this.info = Object.assign({}, info);
-        this.parents = Object.assign({}, parents);
+        this.info = JSON.parse(JSON.stringify(info))
+        this.parents = JSON.parse(JSON.stringify(parents))
       }
     },
     //初始化上级分类
