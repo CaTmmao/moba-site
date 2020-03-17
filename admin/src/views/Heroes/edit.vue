@@ -46,16 +46,16 @@
             </el-select>
           </el-form-item>
           <el-form-item label="难度">
-            <el-rate style="margin-top: 0.6rem" :max="9" show-score v-model="info.scores.difficult"></el-rate>
+            <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.difficult"></el-rate>
           </el-form-item>
           <el-form-item label="技能">
-            <el-rate style="margin-top: 0.6rem" :max="9" show-score v-model="info.scores.skills"></el-rate>
+            <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.skills"></el-rate>
           </el-form-item>
           <el-form-item label="攻击">
-            <el-rate style="margin-top: 0.6rem" :max="9" show-score v-model="info.scores.attach"></el-rate>
+            <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.attach"></el-rate>
           </el-form-item>
           <el-form-item label="生存">
-            <el-rate style="margin-top: 0.6rem" :max="9" show-score v-model="info.scores.survive"></el-rate>
+            <el-rate style="margin-top: 0.6rem" :max="10" show-score v-model="info.scores.survive"></el-rate>
           </el-form-item>
           <el-form-item label="顺风出装">
             <el-select filterable v-model="info.items1" multiple>
