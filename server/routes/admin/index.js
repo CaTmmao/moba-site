@@ -109,10 +109,10 @@ module.exports = app => {
 
     if (title) {
       //适用文章模型用标题字段搜索文章
-      query = { title }
+      query = { title: { $regex: title } }
     } else {
       //适用其他模型用名称字段搜索内容
-      query = { name }
+      query = { name: { $regex: name } }
     }
 
     await req.Model
